@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import ISA.BloodBank.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface IUserRepository extends JpaRepository<User, Long> {
 
 }

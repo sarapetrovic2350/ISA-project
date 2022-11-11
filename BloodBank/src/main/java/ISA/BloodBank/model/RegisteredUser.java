@@ -12,6 +12,14 @@ public class RegisteredUser extends User {
 	public RegisteredUser() {
 		super();
 	}
+
+	public Integer getPenalties() {
+		return penalties;
+	}
+
+	public void setPenalties(Integer penalties) {
+		this.penalties = penalties;
+	}
 	
 	
 }

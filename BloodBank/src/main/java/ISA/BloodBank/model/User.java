@@ -20,17 +20,26 @@ public class User {
 	@Column(name = "userId", unique = true, nullable = false)
 	private Long userId;
 	
+	@Column(name = "jmbg",  unique = true, nullable = false)
+	private Long jmbg;
+	
 	@Column(name = "name", nullable = false)
 	private String name;
 	
 	@Column(name = "surname", nullable = false)
 	private String surname;
-	
+
 	@Column(name = "password", nullable = false)
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	
+	@Enumerated(EnumType.STRING)
+	private Occupation occupation;
+	
+	@Column(name = "occupationInfo", nullable = false)
+	private String occupationInfo;
 	
 	@Column(name = "email", nullable = false)
 	private String email;
@@ -47,23 +56,33 @@ public class User {
 
 	public User() {
 	}
-	
-	public User(String name, String surname, String password, Gender gender, String email, String phoneNumber,
-			Address address, ISA.BloodBank.model.UserType userType) {
+
+	public User(Long jmbg, String name, String surname, String password, Gender gender, Occupation occupation,
+			String occupationInfo, String email, String phoneNumber, Address address, UserType userType) {
 		super();
+		this.jmbg = jmbg;
 		this.name = name;
 		this.surname = surname;
 		this.password = password;
 		this.gender = gender;
+		this.occupation = occupation;
+		this.occupationInfo = occupationInfo;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.userType = userType;
 	}
 
-
 	public Long getUserId() {
 		return userId;
+	}
+
+	public Long getJmbg() {
+		return jmbg;
+	}
+
+	public void setJmbg(Long jmbg) {
+		this.jmbg = jmbg;
 	}
 
 	public void setUserId(Long userId) {
@@ -100,6 +119,22 @@ public class User {
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public Occupation getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(Occupation occupation) {
+		this.occupation = occupation;
+	}
+
+	public String getOccupationInfo() {
+		return occupationInfo;
+	}
+
+	public void setOccupationInfo(String occupationInfo) {
+		this.occupationInfo = occupationInfo;
 	}
 
 	public String getEmail() {
