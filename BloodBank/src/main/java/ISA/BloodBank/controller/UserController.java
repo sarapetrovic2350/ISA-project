@@ -32,7 +32,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@PostMapping("/registerUser")
+	@PostMapping(value = "/registerUser")
 	public ResponseEntity<?> registerUser(@RequestBody UserRegistrationDTO userRegistrationDTO,
 			UriComponentsBuilder uriComponentsBuilder) {
 		try {
@@ -43,7 +43,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/getAll")
+	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<User>> findAll() {
 		return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}

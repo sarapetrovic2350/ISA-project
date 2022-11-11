@@ -12,9 +12,11 @@ public class CenterAdministrator extends User {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "medicalCenterId", referencedColumnName = "centerId")
 	private MedicalCenter medicalCenter;
-
-	public CenterAdministrator(MedicalCenter medicalCenter) {
-		super();
-		this.medicalCenter = medicalCenter;
+	
+	
+	public CenterAdministrator() {
+		super();	
 	}
+	
+	
 }
