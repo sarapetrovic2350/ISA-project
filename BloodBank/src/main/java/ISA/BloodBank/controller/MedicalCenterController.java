@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
+import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.service.MedicalCenterService;
 
@@ -48,14 +52,8 @@ public class MedicalCenterController {
 		return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.getAll(), HttpStatus.OK);
 	}
 	
-//	@PutMapping(value = "/updateCenter")
-//	public ResponseEntity<?> updateCenter(@RequestBody MedicalCenter medicalCenter,
-//			UriComponentsBuilder uriComponentsBuilder) {
-//		try {
-//			// add validations
-//			return new ResponseEntity<>(medicalCenterService.update(medicalCenter), HttpStatus.CREATED);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//		}
-//	}
+	 @RequestMapping(value="/updateCenter", method = RequestMethod.PUT)
+	 public @ResponseBody MedicalCenterUpdateDTO update(@RequestBody MedicalCenterUpdateDTO medCenterDto) {
+		 return medicalCenterService.update(medCenterDto);
+	 }
 }

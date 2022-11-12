@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
 import ISA.BloodBank.iservice.IMedicalCenterService; 
 import ISA.BloodBank.repository.IMedicalCenterRepository;
 import ISA.BloodBank.model.MedicalCenter; 
@@ -42,24 +43,20 @@ private IMedicalCenterRepository medicalCenterRepository;
 		return medicalCenterRepository.findAll();
 	}
 
-//	@Override
-//	public MedicalCenter update(MedicalCenter medicalCenter) {
-//		MedicalCenter medCenter = medicalCenterRepository.findMedCenterById(medicalCenter.getCenterId());
-//		
-//		if(medCenter == null) {
-//			return null;
-//		}
-//		medCenter.setCenterId(medicalCenter.getCenterId()); 
-//		medCenter.setName(medicalCenter.getName());
-//		medCenter.setDescription(medicalCenter.getDescription());
-//		medCenter.setAverageGrade(medicalCenter.getAverageGrade());
-//		medCenter.setName(medicalCenter.getName());
-//		medCenter.setAddress(medicalCenter.getAddress());
-//		medCenter.setCenterAdministrators(medicalCenter.getCenterAdministrators());
-//		
-//		medicalCenterRepository.save(medCenter);
-//		return medCenter;
-//	}
+	public MedicalCenterUpdateDTO update(MedicalCenterUpdateDTO medCenterDto) {
+		
+		MedicalCenter medCenter = (MedicalCenter) medicalCenterRepository.findById(medCenterDto.getCenterId()).get();
+		medCenter.setCenterId(medCenterDto.getCenterId()); 
+		medCenter.setName(medCenterDto.getName());
+		medCenter.setDescription(medCenterDto.getDescription());
+		medCenter.setAverageGrade(medCenterDto.getAverageGrade());
+		medCenter.setName(medCenterDto.getName());
+		medCenter.setAddress(medCenterDto.getAdress());
+		//medCenter.setCenterAdministrators(medCenterDto.getCenterAdministrators());
+		medicalCenterRepository.save(medCenter);
+		
+		return medCenterDto; 
+	}
 	
 
 }
