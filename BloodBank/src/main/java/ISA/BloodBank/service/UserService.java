@@ -1,11 +1,13 @@
 package ISA.BloodBank.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.UserRegistrationDTO;
+import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.iservice.IUserService;
 import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.model.User;
@@ -47,4 +49,22 @@ public class UserService implements IUserService{
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
+	
+	public UserUpdateDTO updateUser(UserUpdateDTO user) {
+		RegisteredUser u = (RegisteredUser) userRepository.findById(user.getUserId()).get();
+		u.setName(user.getName());
+		u.setSurname(user.getSurname());
+		u.setEmail(user.getEmail());
+		u.setPassword(user.getPassword());
+		u.setAddress(user.getAddress());
+		u.setPhoneNumber(user.getPhoneNumber());
+		u.setJmbg(user.getJmbg());
+		u.setGender(user.getGender());
+		u.setOccupation(user.getOccupation());
+		u.setOccupationInfo(user.getOccupationInfo());
+		u.setPenalties(user.getPenalties());
+		u = this.userRepository.save(u);
+		return user;
+    }
+
 }
