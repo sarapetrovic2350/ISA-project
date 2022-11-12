@@ -35,6 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		web.ignoring().antMatchers(HttpMethod.POST, "/medicalCenter/createCenter");
 		web.ignoring().antMatchers(HttpMethod.GET, "/","/medicalCenter/getAll", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
 				"/**/*.css", "/**/*.js");
+		web.ignoring().antMatchers(HttpMethod.POST, "/centerAdministrator/registerCenterAdministrator");
+		web.ignoring().antMatchers(HttpMethod.GET, "/","/centerAdministrator/getAll", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
+				"/**/*.css", "/**/*.js");
 		//web.ignoring().antMatchers(HttpMethod.PUT, "/medicalCenter/updateCenter");
 	}
 }
