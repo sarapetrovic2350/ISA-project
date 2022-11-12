@@ -22,7 +22,7 @@ import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.UserService;
 	
 
-//@CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
