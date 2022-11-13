@@ -3,12 +3,14 @@ package ISA.BloodBank.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
 import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
 import ISA.BloodBank.iservice.ICenterAdministratorService;
 import ISA.BloodBank.model.CenterAdministrator;
+import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
 import ISA.BloodBank.repository.ICenterAdministratorRepository;
 
@@ -65,5 +67,10 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		
 		return centerAdmDto; 
 		
+	}
+	
+	public CenterAdministrator findById(Long id) throws AccessDeniedException {
+		CenterAdministrator centerAdministrator = centerAdministratorRepository.findById(id).orElseGet(null);
+		return centerAdministrator;
 	}
 }
