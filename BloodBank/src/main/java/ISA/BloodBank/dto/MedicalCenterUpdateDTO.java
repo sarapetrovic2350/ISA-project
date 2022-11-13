@@ -4,14 +4,15 @@ import ISA.BloodBank.model.Address;
 
 public class MedicalCenterUpdateDTO {
 
-	private long centerId; 
-	private String name; 
-	private String description; 
-	private Double averageGrade; 
+	private long centerId;
+	private String name;
+	private String description;
+	private Double averageGrade;
 	private Address adress;
-	
-	public MedicalCenterUpdateDTO() {}
-	
+
+	public MedicalCenterUpdateDTO() {
+	}
+
 	public MedicalCenterUpdateDTO(long centerId, String name, String description, Double averageGrade, Address adress) {
 		super();
 		this.centerId = centerId;
@@ -59,6 +60,6 @@ public class MedicalCenterUpdateDTO {
 
 	public void setAdress(Address adress) {
 		this.adress = adress;
-	} 
-	
+	}
+
 }

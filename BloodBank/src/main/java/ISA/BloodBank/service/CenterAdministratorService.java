@@ -48,7 +48,7 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	}
 	
 	public CenterAdministratorUpdateDTO update(CenterAdministratorUpdateDTO centerAdmDto) {
-		
+		System.out.println("nesto"); 
 		CenterAdministrator centAdm = (CenterAdministrator) centerAdministratorRepository.findById(centerAdmDto.getUserId()).get();
 		centAdm.setEmail(centerAdmDto.getEmail());
 		centAdm.setPassword(centerAdmDto.getPassword());

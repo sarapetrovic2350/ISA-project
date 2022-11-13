@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import ISA.BloodBank.model.MedicalCenter;
 
-//@Repository
+@Repository
 public interface IMedicalCenterRepository extends JpaRepository<MedicalCenter, Long> {
 	
 	//MedicalCenter findMedCenterById(Long centerId); 

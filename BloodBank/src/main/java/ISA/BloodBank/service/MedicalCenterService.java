@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
 import ISA.BloodBank.iservice.IMedicalCenterService; 
 import ISA.BloodBank.repository.IMedicalCenterRepository;
-import ISA.BloodBank.model.MedicalCenter; 
+import ISA.BloodBank.model.MedicalCenter;
 
 @Service
 public class MedicalCenterService implements IMedicalCenterService{
@@ -43,7 +44,7 @@ private IMedicalCenterRepository medicalCenterRepository;
 		return medicalCenterRepository.findAll();
 	}
 
-	public MedicalCenterUpdateDTO update(MedicalCenterUpdateDTO medCenterDto) {
+	public MedicalCenter update(MedicalCenter medCenterDto) {
 		
 		MedicalCenter medCenter = (MedicalCenter) medicalCenterRepository.findById(medCenterDto.getCenterId()).get();
 		medCenter.setCenterId(medCenterDto.getCenterId()); 
@@ -51,13 +52,15 @@ private IMedicalCenterRepository medicalCenterRepository;
 		medCenter.setDescription(medCenterDto.getDescription());
 		medCenter.setAverageGrade(medCenterDto.getAverageGrade());
 		medCenter.setName(medCenterDto.getName());
-		medCenter.setAddress(medCenterDto.getAdress());
+		//System.out.println(medCenterDto.getAdress());
+		medCenter.setAddress(medCenterDto.getAddress());
+		//System.out.println(medCenter.getAddress()); 
 		//medCenter.setCenterAdministrators(medCenterDto.getCenterAdministrators());
 		medicalCenterRepository.save(medCenter);
 		
 		return medCenterDto; 
 	}
-	
+
 	 public List<MedicalCenter> findMedicalCenterByNameAndPlace(String name, String place) {	
 			List<MedicalCenter> medicalCentersFind = new ArrayList<MedicalCenter>();
 	        if(name.equals("null") && !place.equals("null"))
@@ -70,5 +73,8 @@ private IMedicalCenterRepository medicalCenterRepository;
 			return medicalCentersFind;
 		}
 	
-
+	public MedicalCenter findById(Long id) throws AccessDeniedException {
+		MedicalCenter u = medicalCenterRepository.findById(id).orElseGet(null);
+		return u;
+	}
 }

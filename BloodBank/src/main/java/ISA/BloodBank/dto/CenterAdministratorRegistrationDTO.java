@@ -8,33 +8,34 @@ import ISA.BloodBank.model.Occupation;
 public class CenterAdministratorRegistrationDTO {
 
 	private String email;
-	
+
 	private String password;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String surname;
-	
+
 	private Address address;
-	
+
 	private String phoneNumber;
-	
+
 	private Gender gender;
-	
+
 	private Long jmbg;
-	
+
 	private Occupation occupation;
-	
+
 	private String occupationInfo;
-	
+
 	private MedicalCenter medicalCenter;
-	
+
 	public CenterAdministratorRegistrationDTO() {
-		
+
 	}
-	
-	public CenterAdministratorRegistrationDTO(String email, String password, String name, String surname, Address address,
-			String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo, MedicalCenter medicalCenter) {
+
+	public CenterAdministratorRegistrationDTO(String email, String password, String name, String surname,
+			Address address, String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo,
+			MedicalCenter medicalCenter) {
 		super();
 		this.email = email;
 		this.password = password;

@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ISA.BloodBank.dto.MedicalCenterSearchDTO;
 import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
 import ISA.BloodBank.model.MedicalCenter;
+import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.MedicalCenterService;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -29,13 +30,13 @@ import ISA.BloodBank.service.MedicalCenterService;
 public class MedicalCenterController {
 
 	private MedicalCenterService medicalCenterService;
-	
+
 	@Autowired
 	public MedicalCenterController(MedicalCenterService medicalCenterService) {
 		super();
 		this.medicalCenterService = medicalCenterService;
 	}
-	
+
 	@PostMapping(value = "/createCenter")
 	public ResponseEntity<?> createCenter(@RequestBody MedicalCenter medicalCenter,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -46,15 +47,24 @@ public class MedicalCenterController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<MedicalCenter>> findAll() {
 		return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.getAll(), HttpStatus.OK);
 	}
 	
 	 @RequestMapping(value="/updateCenter", method = RequestMethod.PUT)
-	 public @ResponseBody MedicalCenterUpdateDTO update(@RequestBody MedicalCenterUpdateDTO medCenterDto) {
+	 public @ResponseBody MedicalCenter update(@RequestBody MedicalCenter medCenterDto) {
+		 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"); 
+		 System.out.println(medCenterDto); 
 		 return medicalCenterService.update(medCenterDto);
+
+		 //return null;
+	 }
+	 
+	 @GetMapping(value="/getMedicalCenterById/{centerId}")
+	 public MedicalCenter loadById(@PathVariable Long centerId) {
+		return this.medicalCenterService.findById(centerId);
 	 }
 	 
 	 @GetMapping(value = "/searchMedicalCenterByNameAndPlace/{name}/{place}")
