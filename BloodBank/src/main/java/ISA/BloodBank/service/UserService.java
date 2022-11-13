@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.UserRegistrationDTO;
@@ -106,6 +107,11 @@ public class UserService implements IUserService{
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+	
+	public User findById(Long id) throws AccessDeniedException {
+		User u = userRepository.findById(id).orElseGet(null);
+		return u;
 	}
 	
 	public UserUpdateDTO updateUser(UserUpdateDTO user) {

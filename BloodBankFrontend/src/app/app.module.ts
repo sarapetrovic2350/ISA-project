@@ -10,13 +10,15 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { LoginComponent } from './components/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

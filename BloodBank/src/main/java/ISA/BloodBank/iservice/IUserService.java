@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.model.JwtAuthenticationRequest;
+import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.User;
 
 @Service
@@ -17,4 +18,8 @@ public interface IUserService {
 	List<User> getAllUsers();
 
 	User findLoggedInUser();
+
+	User findById(Long id);
+	
+	UserUpdateDTO updateUser(UserUpdateDTO user);
 }
