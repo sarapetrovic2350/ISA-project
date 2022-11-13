@@ -72,6 +72,18 @@ private IMedicalCenterRepository medicalCenterRepository;
 	        }
 			return medicalCentersFind;
 		}
+	 
+	 public List<MedicalCenter> filterMedicalCenter(String name, String place, Double grade) {
+		 List<MedicalCenter> medicalCentersFind = findMedicalCenterByNameAndPlace(name, place);
+		 List<MedicalCenter> filteredMedicalCenters = new ArrayList<MedicalCenter>();
+		 for(MedicalCenter medicalCenter : medicalCentersFind) {
+			 if(Double.compare(medicalCenter.getAverageGrade() , grade) == 0) {
+				 filteredMedicalCenters.add(medicalCenter);
+			 }
+		 }
+		 return filteredMedicalCenters;
+		 
+	 }
 	
 	public MedicalCenter findById(Long id) throws AccessDeniedException {
 		MedicalCenter u = medicalCenterRepository.findById(id).orElseGet(null);
