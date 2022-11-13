@@ -4,7 +4,7 @@
     </mat-card-title>
     <mat-card-content>
         <p></p>
-        <form>
+        <form (ngSubmit)="onSubmit()" *ngIf="!submitted">
             <div class="row">
                 <div>
                     <mat-form-field>
@@ -35,9 +35,8 @@
                         <label>Repeat password: </label>
                         <input name ="repeatedPassword" [(ngModel)]="passwordRepeated" matInput required type="password" required>
                     </mat-form-field>  
-
                 </div>
-            <div>
+                <div>
                     <mat-form-field>
                         <label>Street: </label>
                         <input name ="street" [(ngModel)]="street" matInput required>
@@ -74,14 +73,14 @@
                         <label>Occupation information:</label>
                         <input name ="occupationInfo" [(ngModel)]="user.occupationInfo" matInput required>
                     </mat-form-field>
-
-                </div>
-                   
-            </div><br>
-
-            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="onSubmit()" mat-raised-button type="submit">Sign up</button><br>
-            <a style="color:blueviolet" href="/login">Already have an account? Log in</a> 
+                </div>                   
+            </div>
+            <label *ngIf="message != ''" style="color: red;">{{message}}</label>
+            <br><br>
+            <button color="primary" style="width: 86%; margin-left: 7%;" mat-raised-button type="submit">Sign up</button><br>
+            <a style="color:blueviolet" href="/login">Already have an account? Log in</a>
         </form> 
+        <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner> 
     </mat-card-content>       
 </mat-card>
 
