@@ -21,44 +21,43 @@ import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.UserService;
-	
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	public UserController(UserService userService) {
 		super();
 		this.userService = userService;
 	}
-	
+
 	@PostMapping(value = "/registerUser")
 	public ResponseEntity<?> registerUser(@RequestBody UserRegistrationDTO userRegistrationDTO,
 			UriComponentsBuilder uriComponentsBuilder) {
 		User existUser = this.userService.findByEmail(userRegistrationDTO.getEmail());
-        if (existUser != null) {
-            throw new ResourceConflictException(userRegistrationDTO.getEmail(), "Email already exists");
-        }
-		try {		
+		if (existUser != null) {
+			throw new ResourceConflictException(userRegistrationDTO.getEmail(), "Email already exists");
+		}
+		try {
 			return new ResponseEntity<>(userService.registerUser(userRegistrationDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<User>> findAll() {
 		return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}
-	
-	 @RequestMapping(value="/update", method = RequestMethod.PUT)
-	 public @ResponseBody UserUpdateDTO update(@RequestBody UserUpdateDTO u) {
-		 return userService.updateUser(u);
-	 }
-	
+
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	public @ResponseBody UserUpdateDTO update(@RequestBody UserUpdateDTO u) {
+		return userService.updateUser(u);
+	}
+
 }

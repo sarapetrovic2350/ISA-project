@@ -9,25 +9,25 @@ public class UserUpdateDTO {
 	private long userId;
 
 	private String email;
-	
+
 	private String password;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String surname;
-	
+
 	private Address address;
-	
+
 	private String phoneNumber;
-	
+
 	private Gender gender;
-	
+
 	private Long jmbg;
-	
+
 	private Occupation occupation;
-	
+
 	private String occupationInfo;
-	
+
 	private Integer penalties;
 
 	public UserUpdateDTO() {
@@ -128,7 +128,7 @@ public class UserUpdateDTO {
 	public void setOccupationInfo(String occupationInfo) {
 		this.occupationInfo = occupationInfo;
 	}
-	
+
 	public long getUserId() {
 		return userId;
 	}
@@ -144,6 +144,5 @@ public class UserUpdateDTO {
 	public void setPenalties(Integer penalties) {
 		this.penalties = penalties;
 	}
-	
-	
+
 }

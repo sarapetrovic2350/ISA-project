@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Address {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "addressId", unique = true, nullable = false)
@@ -31,7 +31,7 @@ public class Address {
 
 	@Column(name = "latitude")
 	private Double latitude;
-	
+
 	public Address() {
 	}
 
@@ -55,7 +55,7 @@ public class Address {
 
 	public String getStreet() {
 		return street;
-		
+
 	}
 
 	public void setStreet(String street) {
