@@ -76,4 +76,14 @@ public class MedicalCenterController {
 			}
 			return medicalCentersDTO == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(medicalCentersDTO);
 		}
+	 
+	 @GetMapping(value = "/filterMedicalCenter/{name}/{place}/{grade}")
+		public ResponseEntity<List<MedicalCenterSearchDTO>> getFilteredMedicalCenters(@PathVariable String name,@PathVariable String place, @PathVariable Double grade){
+			List<MedicalCenterSearchDTO> medicalCentersDTO = new ArrayList<MedicalCenterSearchDTO>();
+			List<MedicalCenter> medicalCenters = medicalCenterService.filterMedicalCenter(name, place, grade);
+			for (MedicalCenter medicalCenter : medicalCenters) {
+				medicalCentersDTO.add(new MedicalCenterSearchDTO(medicalCenter));
+			}
+			return medicalCentersDTO == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(medicalCentersDTO);
+		}
 }
