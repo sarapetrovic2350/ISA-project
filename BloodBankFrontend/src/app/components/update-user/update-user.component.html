@@ -4,8 +4,8 @@
     </mat-card-title>
     <mat-card-content>
         <p></p>
-        <form (ngSubmit)="onSubmit()" *ngIf="!submitted">
-            <div class="row">
+        <form>
+            <div class="row" *ngIf="user">
                 <div>
                     <mat-form-field>
                         <label>First Name: </label>
@@ -21,7 +21,7 @@
                     </mat-form-field>
                     <mat-form-field>
                         <label>Email: </label>
-                        <input name ="email" [(ngModel)]="user.email" matInput required>
+                        <input name ="email" [(ngModel)]="user.email" matInput disabled>
                     </mat-form-field> 
                     <mat-form-field>
                         <label>Phone number: </label>
@@ -31,27 +31,24 @@
                         <label>Password: </label>
                         <input name ="password" [(ngModel)]="user.password" matInput required type="password" required>
                     </mat-form-field> 
-                    <mat-form-field>
-                        <label>Repeat password: </label>
-                        <input name ="repeatedPassword" [(ngModel)]="passwordRepeated" matInput required type="password" required>
-                    </mat-form-field>  
+
                 </div>
-                <div>
+            <div>
                     <mat-form-field>
                         <label>Street: </label>
-                        <input name ="street" [(ngModel)]="street" matInput required>
+                        <input name ="street" [(ngModel)]="user.address.street" matInput required>
                     </mat-form-field>
                     <mat-form-field>
                         <label>Street number: </label>
-                        <input name ="streetNumber" [(ngModel)]="streetNumber" matInput required>
+                        <input name ="streetNumber" [(ngModel)]="user.address.streetNumber" matInput required>
                     </mat-form-field>
                     <mat-form-field>
                         <label>City: </label>
-                        <input name ="city" [(ngModel)]="city" matInput required>
+                        <input name ="city" [(ngModel)]="user.address.city" matInput required>
                     </mat-form-field>  
                     <mat-form-field>
                         <label>Country: </label>
-                        <input name ="country" [(ngModel)]="country" matInput required>
+                        <input name ="country" [(ngModel)]="user.address.country" matInput required>
                     </mat-form-field>
                     <mat-form-field>
                         <label>Gender</label>
@@ -73,14 +70,13 @@
                         <label>Occupation information:</label>
                         <input name ="occupationInfo" [(ngModel)]="user.occupationInfo" matInput required>
                     </mat-form-field>
-                </div>                   
-            </div>
-            <label *ngIf="message != ''" style="color: red;">{{message}}</label>
-            <br><br>
-            <button color="primary" style="width: 86%; margin-left: 7%;" mat-raised-button type="submit">Sign up</button><br>
-            <a style="color:blueviolet" href="/login">Already have an account? Log in</a>
+
+                </div>
+                   
+            </div><br>
+
+            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="updateUser()" mat-raised-button type="submit">Submit</button>
         </form> 
-        <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner> 
     </mat-card-content>       
 </mat-card>
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RegisterUserService } from 'src/app/service/register-user.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,10 +19,11 @@ export class UserRegistrationComponent implements OnInit {
   streetNumber: string = "";
   city: string= "";
   country: string="";
+  message: string="";
+  submitted = false;
 
   constructor(
     private router: Router,
-    private toastr: ToastrService,
     private registerUserService: RegisterUserService
   ) { }
 
@@ -30,11 +31,13 @@ export class UserRegistrationComponent implements OnInit {
    
   }
 
-  showError(message: string, title: string) {
-    this.toastr.error(message, title);
-  }
-
   onSubmit() {
+
+     if(this.passwordRepeated != this.user.password) {
+      this.message = "Passwords do not match!";
+      return
+    }
+
     this.user.address.street = this.street;
     this.user.address.streetNumber = this.streetNumber;
     this.user.address.city = this.city;
@@ -43,17 +46,25 @@ export class UserRegistrationComponent implements OnInit {
       {
         next: (res) => {
           this.router.navigate(['/']);
-          this.showSuccess();
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Sucessfully registred!',
+          })   
          
         },
         error: (e) => {
-          console.log(e);}
+          this.submitted = false;
+          console.log(e);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Email already exists.',
+          })   
+        
+        }
 
     });
-  }
-
-  showSuccess() {
-    this.toastr.success('Sucessfully registred!', 'Blood Bank Application');
   }
 
 }

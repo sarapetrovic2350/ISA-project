@@ -1,9 +1,9 @@
 package ISA.BloodBank.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.UserRegistrationDTO;
@@ -50,6 +50,11 @@ public class UserService implements IUserService{
 		return userRepository.findAll();
 	}
 	
+	public User findById(Long id) throws AccessDeniedException {
+		User u = userRepository.findById(id).orElseGet(null);
+		return u;
+	}
+	
 	public UserUpdateDTO updateUser(UserUpdateDTO user) {
 		RegisteredUser u = (RegisteredUser) userRepository.findById(user.getUserId()).get();
 		u.setName(user.getName());
@@ -66,5 +71,9 @@ public class UserService implements IUserService{
 		u = this.userRepository.save(u);
 		return user;
     }
+	
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 }

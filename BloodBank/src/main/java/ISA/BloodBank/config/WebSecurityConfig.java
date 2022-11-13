@@ -40,5 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/**/*.css", "/**/*.js");
 		web.ignoring().antMatchers(HttpMethod.PUT, "/medicalCenter/updateCenter");
 		web.ignoring().antMatchers(HttpMethod.PUT, "/centerAdministrator/update");
+		web.ignoring().antMatchers(HttpMethod.GET, "/user/getUserById/{userId}");
 	}
 }
