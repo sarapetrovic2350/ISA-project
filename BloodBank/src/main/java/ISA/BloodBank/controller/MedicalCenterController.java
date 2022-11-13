@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.MedicalCenter;
+import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.MedicalCenterService;
 
 
@@ -53,7 +55,16 @@ public class MedicalCenterController {
 	}
 	
 	 @RequestMapping(value="/updateCenter", method = RequestMethod.PUT)
-	 public @ResponseBody MedicalCenterUpdateDTO update(@RequestBody MedicalCenterUpdateDTO medCenterDto) {
+	 public @ResponseBody MedicalCenter update(@RequestBody MedicalCenter medCenterDto) {
+		 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"); 
+		 System.out.println(medCenterDto); 
 		 return medicalCenterService.update(medCenterDto);
+
+		 //return null;
+	 }
+	 
+	 @GetMapping(value="/getMedicalCenterById/{centerId}")
+	 public MedicalCenter loadById(@PathVariable Long centerId) {
+		return this.medicalCenterService.findById(centerId);
 	 }
 }

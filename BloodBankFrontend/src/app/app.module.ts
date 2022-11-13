@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { UpdateMedicalCenntarComponent } from './components/update-medical-cenntar/update-medical-cenntar.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     AppComponent,
     UserRegistrationComponent,
     LoginComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    UpdateMedicalCenntarComponent
   ],
   imports: [
     BrowserModule,

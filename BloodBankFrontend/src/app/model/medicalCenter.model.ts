@@ -4,7 +4,7 @@ export class medicalCenter{
     constructor(
         public id:number = 0,
         public name:string ='',
-        public descritpion:string ='',
+        public description:string ='',
         public averageGrade:number=0,
         public address:Address = new Address()
     ){}
