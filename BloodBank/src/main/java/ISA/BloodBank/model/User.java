@@ -53,6 +53,10 @@ public class User {
 	
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "authorityId", referencedColumnName = "authorityId")
+	private Authority authority;
 
 	public User() {
 	}
