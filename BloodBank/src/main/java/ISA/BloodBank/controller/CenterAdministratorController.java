@@ -40,6 +40,7 @@ public class CenterAdministratorController {
 			UriComponentsBuilder uriComponentsBuilder) {
 		try {
 			// add validations
+			System.out.println("asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"); 
 			return new ResponseEntity<>(centerAdministratorService.registerCenterAdministrator(centerAdministratorRegistrationDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -53,6 +54,7 @@ public class CenterAdministratorController {
 	
 	@RequestMapping(value="/update", method = RequestMethod.PUT)
 	 public @ResponseBody CenterAdministratorUpdateDTO update(@RequestBody CenterAdministratorUpdateDTO c) {
+		 System.out.println(c);
 		 return centerAdministratorService.update(c);
 	 }
 }
