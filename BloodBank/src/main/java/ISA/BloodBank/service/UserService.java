@@ -1,6 +1,5 @@
 package ISA.BloodBank.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +71,9 @@ public class UserService implements IUserService{
 		u = this.userRepository.save(u);
 		return user;
     }
+	
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 }
