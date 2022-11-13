@@ -7,23 +7,23 @@ import ISA.BloodBank.model.Occupation;
 public class UserRegistrationDTO {
 
 	private String email;
-	
+
 	private String password;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String surname;
-	
+
 	private Address address;
-	
+
 	private String phoneNumber;
-	
+
 	private Gender gender;
-	
+
 	private Long jmbg;
-	
+
 	private Occupation occupation;
-	
+
 	private String occupationInfo;
 
 	public UserRegistrationDTO() {

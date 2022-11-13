@@ -14,8 +14,7 @@ public class CenterAdministrator extends User {
 	private MedicalCenter medicalCenter;
 
 	public CenterAdministrator() {
-		super();	
+		super();
 	}
-	
-	
+
 }

@@ -1,1 +1,23 @@
-<p>login works!</p>
+<mat-card elevation="5" fxFlex class="content" style="margin-top:150px;">
+
+    <mat-card-title>
+        <h2>{{title}}</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+        <form (ngSubmit)="onSubmit()" *ngIf="!submitted">
+            <mat-form-field>
+                <input name="username" [(ngModel)]="username" matInput placeholder="email" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input name="password" [(ngModel)]="password" matInput placeholder="password" required type="password">
+            </mat-form-field>
+            <button color="primary" mat-raised-button
+                type="submit">Login</button>
+        </form>
+        <br>
+        <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+        <br>
+    </mat-card-content>
+
+</mat-card>

@@ -8,26 +8,27 @@ public class CenterAdministratorUpdateDTO {
 	private long userId;
 
 	private String email;
-	
+
 	private String password;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String surname;
-	
+
 	private Address address;
-	
+
 	private String phoneNumber;
-	
+
 	private Gender gender;
-	
+
 	private Long jmbg;
-	
+
 	private Occupation occupation;
-	
+
 	private String occupationInfo;
-	
-	public CenterAdministratorUpdateDTO() {}
+
+	public CenterAdministratorUpdateDTO() {
+	}
 
 	public CenterAdministratorUpdateDTO(long userId, String email, String password, String name, String surname,
 			Address address, String phoneNumber, Gender gender, Long jmbg, Occupation occupation,
@@ -133,5 +134,5 @@ public class CenterAdministratorUpdateDTO {
 	public void setOccupationInfo(String occupationInfo) {
 		this.occupationInfo = occupationInfo;
 	}
-	
+
 }

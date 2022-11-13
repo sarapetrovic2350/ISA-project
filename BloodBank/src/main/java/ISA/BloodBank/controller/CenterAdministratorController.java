@@ -21,35 +21,37 @@ import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.service.CenterAdministratorService;
 
-
 //@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping(value = "/centerAdministrator", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CenterAdministratorController {
 
 	private CenterAdministratorService centerAdministratorService;
-	
+
 	@Autowired
 	public CenterAdministratorController(CenterAdministratorService centerAdministratorService) {
 		super();
 		this.centerAdministratorService = centerAdministratorService;
 	}
-	
+
 	@PostMapping(value = "/registerCenterAdministrator")
-	public ResponseEntity<?> registerCenterAdministrator(@RequestBody CenterAdministratorRegistrationDTO centerAdministratorRegistrationDTO,
+	public ResponseEntity<?> registerCenterAdministrator(
+			@RequestBody CenterAdministratorRegistrationDTO centerAdministratorRegistrationDTO,
 			UriComponentsBuilder uriComponentsBuilder) {
 		try {
 			// add validations
-			System.out.println("asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"); 
-			return new ResponseEntity<>(centerAdministratorService.registerCenterAdministrator(centerAdministratorRegistrationDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(
+					centerAdministratorService.registerCenterAdministrator(centerAdministratorRegistrationDTO),
+					HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<CenterAdministrator>> findAll() {
-		return new ResponseEntity<List<CenterAdministrator>>(centerAdministratorService.getAllCenterAdministrator(), HttpStatus.OK);
+		return new ResponseEntity<List<CenterAdministrator>>(centerAdministratorService.getAllCenterAdministrator(),
+				HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/update", method = RequestMethod.PUT)
@@ -57,4 +59,5 @@ public class CenterAdministratorController {
 		 System.out.println(c);
 		 return centerAdministratorService.update(c);
 	 }
+
 }

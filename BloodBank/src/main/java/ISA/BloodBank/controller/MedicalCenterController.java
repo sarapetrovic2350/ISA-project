@@ -24,20 +24,19 @@ import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.MedicalCenterService;
 
-
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping(value = "/medicalCenter", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MedicalCenterController {
 
 	private MedicalCenterService medicalCenterService;
-	
+
 	@Autowired
 	public MedicalCenterController(MedicalCenterService medicalCenterService) {
 		super();
 		this.medicalCenterService = medicalCenterService;
 	}
-	
+
 	@PostMapping(value = "/createCenter")
 	public ResponseEntity<?> createCenter(@RequestBody MedicalCenter medicalCenter,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -48,7 +47,7 @@ public class MedicalCenterController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<MedicalCenter>> findAll() {
 		return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.getAll(), HttpStatus.OK);
