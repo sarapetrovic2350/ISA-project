@@ -20,20 +20,20 @@ public class MedicalCenter {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "centerId", unique = true, nullable = false)
 	private Long centerId;
-	
+
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
 	@Column(name = "description", nullable = false)
 	private String description;
-	
+
 	@Column(name = "averageGrade", nullable = false)
 	private Double averageGrade;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
-	
+
 	@OneToMany(mappedBy = "medicalCenter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<CenterAdministrator> centerAdministrators;
 
@@ -98,5 +98,4 @@ public class MedicalCenter {
 		this.centerAdministrators = centerAdministrators;
 	}
 
-	
 }

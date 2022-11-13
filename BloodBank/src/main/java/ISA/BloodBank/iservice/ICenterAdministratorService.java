@@ -10,6 +10,8 @@ import ISA.BloodBank.model.CenterAdministrator;
 @Service
 public interface ICenterAdministratorService {
 
-	CenterAdministrator registerCenterAdministrator(CenterAdministratorRegistrationDTO centerAdministratorRegistrationDTO);
+	CenterAdministrator registerCenterAdministrator(
+			CenterAdministratorRegistrationDTO centerAdministratorRegistrationDTO);
+
 	List<CenterAdministrator> getAllCenterAdministrator();
 }

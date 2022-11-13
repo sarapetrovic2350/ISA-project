@@ -7,6 +7,6 @@ import ISA.BloodBank.model.MedicalCenter;
 
 @Repository
 public interface IMedicalCenterRepository extends JpaRepository<MedicalCenter, Long> {
-	
-	//MedicalCenter findMedCenterById(Long centerId); 
+
+	// MedicalCenter findMedCenterById(Long centerId);
 }
