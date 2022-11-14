@@ -18,7 +18,7 @@ export class UpdateCentAdministratorComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    let b = "1";
+    let b = "4";
     if (b != null) {
       this.centerAdministratorService.getCenterAdministratorById(b).subscribe(res => {
         this.administrator = res;

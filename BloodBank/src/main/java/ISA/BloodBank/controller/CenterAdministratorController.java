@@ -62,7 +62,7 @@ public class CenterAdministratorController {
 		 return centerAdministratorService.update(c);
 	 }
 	
-	 @GetMapping(value="/getCenterAdministratorById/{userId}")
+	 @GetMapping(value="/getCenterAdministratorById/{adminId}")
 	 public CenterAdministrator loadById(@PathVariable Long adminId) {
 		return this.centerAdministratorService.findById(adminId);
 	 }
