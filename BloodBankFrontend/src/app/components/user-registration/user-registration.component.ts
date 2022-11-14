@@ -45,11 +45,11 @@ export class UserRegistrationComponent implements OnInit {
     this.registerUserService.registerUser(this.user).subscribe(
       {
         next: (res) => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
           Swal.fire({
             icon: 'success',
             title: 'Success!',
-            text: 'Sucessfully registred!',
+            text: 'Sucessfully registered!',
           })   
          
         },

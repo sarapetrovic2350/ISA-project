@@ -12,9 +12,7 @@ export class RegisterUserService {
   url = this.apiHost + 'user/registerUser';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(
-    private http: HttpClient
-    ) {}
+  constructor(private http: HttpClient) {}
 
     registerUser(user: User) {
       return this.http.post<any>(this.url, user);

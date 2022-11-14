@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { AuthRequest } from 'src/app/model/user.model';
+import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +12,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent implements OnInit{
 
   title = 'Login to Blood Bank';
-  username: string = "";
-  password: string = "";
+  request = new AuthRequest();
   submitted = false;
+  message: string= "";
+  role:string = "";
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthService
 
   ) { }
 
@@ -24,8 +29,39 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit() {
-    this.submitted = true;
- 
+    
+    if (this.request.email == '' || this.request.password == '') {
+      this.message = 'Email or password missing.';
+    } else {
+      this.submitted = true;
+      this.authService.login(this.request).subscribe(
+        {
+          next: (res) => {
+            this.router.navigate(['/']);
+            this.successfulLogin(res);
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: 'Sucessfully logged in!',
+            })   
+           
+          },
+          error: (e) => {
+            this.submitted = false;
+            console.log(e);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid email or password.',
+            })   
+          
+          }
+        });
+    
+    }
   }
-
+  successfulLogin(data: any) {
+    this.authService.setLoggedUser(data);
+  }
 }
+
