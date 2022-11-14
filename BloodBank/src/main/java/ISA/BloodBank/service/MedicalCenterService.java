@@ -1,7 +1,7 @@
 package ISA.BloodBank.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -60,10 +60,33 @@ private IMedicalCenterRepository medicalCenterRepository;
 		
 		return medCenterDto; 
 	}
+
+	 public List<MedicalCenter> findMedicalCenterByNameAndPlace(String name, String place) {	
+			List<MedicalCenter> medicalCentersFind = new ArrayList<MedicalCenter>();
+	        if(name.equals("null") && !place.equals("null"))
+	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByAddressCity(place);
+	        else if(!name.equals("null") && place.equals("null"))
+	        	medicalCentersFind = medicalCenterRepository.findByName(name);
+	        else {
+	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByNameAndAddressCity(name, place);
+	        }
+			return medicalCentersFind;
+		}
+	 
+	 public List<MedicalCenter> filterMedicalCenter(String name, String place, Double grade) {
+		 List<MedicalCenter> medicalCentersFind = findMedicalCenterByNameAndPlace(name, place);
+		 List<MedicalCenter> filteredMedicalCenters = new ArrayList<MedicalCenter>();
+		 for(MedicalCenter medicalCenter : medicalCentersFind) {
+			 if(Double.compare(medicalCenter.getAverageGrade() , grade) == 0) {
+				 filteredMedicalCenters.add(medicalCenter);
+			 }
+		 }
+		 return filteredMedicalCenters;
+		 
+	 }
 	
 	public MedicalCenter findById(Long id) throws AccessDeniedException {
 		MedicalCenter u = medicalCenterRepository.findById(id).orElseGet(null);
 		return u;
 	}
-	
 }

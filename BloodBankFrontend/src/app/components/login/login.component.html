@@ -7,11 +7,14 @@
     <mat-card-content>
         <form (ngSubmit)="onSubmit()" *ngIf="!submitted">
             <mat-form-field>
-                <input name="username" [(ngModel)]="username" matInput placeholder="email" required>
+                <input name="email" [(ngModel)]="request.email" matInput placeholder="email" required>
             </mat-form-field>
             <mat-form-field>
-                <input name="password" [(ngModel)]="password" matInput placeholder="password" required type="password">
+                <input name="password" [(ngModel)]="request.password" matInput placeholder="password" required type="password">
             </mat-form-field>
+            <br>
+            <label *ngIf="message != ''" style="color: red;">{{message}}</label>
+            <br>
             <button color="primary" mat-raised-button
                 type="submit">Login</button>
         </form>

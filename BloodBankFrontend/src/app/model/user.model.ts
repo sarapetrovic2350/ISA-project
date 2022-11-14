@@ -15,3 +15,8 @@ export class User {
         public occupationInfo: string= ''
       ) {}
 }
+
+export class AuthRequest {
+  constructor(public email: string = '', public password: string = '') {}
+}
+
