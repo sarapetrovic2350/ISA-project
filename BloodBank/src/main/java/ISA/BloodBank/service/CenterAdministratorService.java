@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
+import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
 import ISA.BloodBank.iservice.ICenterAdministratorService;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.UserType;
@@ -45,5 +46,25 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	@Override
 	public List<CenterAdministrator> getAllCenterAdministrator() {
 		return centerAdministratorRepository.findAll();
+	}
+	
+	public CenterAdministratorUpdateDTO update(CenterAdministratorUpdateDTO centerAdmDto) {
+		System.out.println("nesto"); 
+		CenterAdministrator centAdm = (CenterAdministrator) centerAdministratorRepository.findById(centerAdmDto.getUserId()).get();
+		centAdm.setEmail(centerAdmDto.getEmail());
+		centAdm.setPassword(centerAdmDto.getPassword());
+		centAdm.setName(centerAdmDto.getName());
+		centAdm.setSurname(centerAdmDto.getSurname());
+		centAdm.setAddress(centerAdmDto.getAddress());
+		centAdm.setPhoneNumber(centerAdmDto.getPhoneNumber());
+		centAdm.setJmbg(centerAdmDto.getJmbg());
+		centAdm.setGender(centerAdmDto.getGender());
+		centAdm.setOccupation(centerAdmDto.getOccupation());
+		centAdm.setOccupationInfo(centerAdmDto.getOccupationInfo());
+		
+		centerAdministratorRepository.save(centAdm);
+		
+		return centerAdmDto; 
+		
 	}
 }

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 public class RegisteredUser extends User {
 
 	@Column(name = "penalties")
-    private Integer penalties = 0;
+	private Integer penalties = 0;
 
 	public RegisteredUser() {
 		super();
@@ -20,6 +20,5 @@ public class RegisteredUser extends User {
 	public void setPenalties(Integer penalties) {
 		this.penalties = penalties;
 	}
-	
-	
+
 }

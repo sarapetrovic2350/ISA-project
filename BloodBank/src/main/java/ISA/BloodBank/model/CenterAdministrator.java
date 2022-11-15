@@ -28,8 +28,7 @@ public class CenterAdministrator extends User {
 
 
 	public CenterAdministrator() {
-		super();	
+		super();
 	}
-	
-	
+
 }

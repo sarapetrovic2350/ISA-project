@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import ISA.BloodBank.model.Address;
 
 @Repository
-public interface IAddressRepository extends JpaRepository<Address, Long>{
+public interface IAddressRepository extends JpaRepository<Address, Long> {
 
 }
