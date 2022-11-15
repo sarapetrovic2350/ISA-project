@@ -7,6 +7,7 @@ import { CenterAdministrator } from 'src/app/model/center-administrator.model';
 import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { CenterAdministratorService } from 'src/app/service/center-administrator.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-update-medical-cenntar',
@@ -21,24 +22,37 @@ export class UpdateMedicalCenntarComponent implements OnInit {
   public medCenter: medicalCenter | undefined = undefined;
   public user: User= new User() ; 
   public administrator: CenterAdministrator | undefined = undefined;
+  public dataSource = new MatTableDataSource<CenterAdministrator>();
+  public centerAdministrators: CenterAdministrator[] = [];
+
+  public displayedColumns = ['Name', 'Surname'];
 
   constructor(private toastr: ToastrService,private medicalCenterService: MedicalCenterServiceService, private route: ActivatedRoute,
     private router: Router, private centerAdministratorService: CenterAdministratorService, 
     private authService: AuthService) { }
 
   ngOnInit(): void {
-    let b = "2";
     this.user = this.authService.getCurrentUser();
 
     if (this.user != null) {
       this.centerAdministratorService.findByEmail(this.user.email).subscribe(res => {
         this.administrator = res;
+
         if (this.administrator != null) {
           this.centerAdministratorService.findCenterByAdminEmail(String(this.administrator.email)).subscribe(res => {
             this.medCenter = res;
             console.log(this.medCenter);
+
+            if (this.medCenter != null) {
+              this.centerAdministratorService.findAdministratorsByCenterId(String(this.medCenter.id)).subscribe(res => {
+                this.centerAdministrators = res;
+                this.dataSource.data = this.centerAdministrators;
+              })
+            }
+
           })
         }
+        
       })
     }
 

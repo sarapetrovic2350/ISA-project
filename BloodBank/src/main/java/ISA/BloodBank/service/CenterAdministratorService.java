@@ -1,6 +1,7 @@
 package ISA.BloodBank.service;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -118,5 +119,18 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		
 		return centAdmin.getMedicalCenter(); 
 		
+	}
+	
+	public ArrayList<CenterAdministrator> getAllAdministratorsByCenterId(Long id){
+		ArrayList<CenterAdministrator> list = (ArrayList<CenterAdministrator>) getAllCenterAdministrator();	
+		ArrayList<CenterAdministrator> retList = new ArrayList<CenterAdministrator>(); 
+		
+		for(int i =0; i < list.size();  i++) {
+			if(list.get(i).getMedicalCenter().getCenterId().equals(id)) {
+				retList.add(list.get(i));
+			}
+		}
+		
+		return retList; 
 	}
 }

@@ -1,5 +1,6 @@
 package ISA.BloodBank.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,11 @@ public class CenterAdministratorController {
 	 @GetMapping(value="/getMedicalCenterByAdminEmail/{email}")
 	 public MedicalCenter findCenterByAdminEmail(@PathVariable String email) {
 		return this.centerAdministratorService.getMedicalCenter(email);
+	 }
+	 
+	 @GetMapping(value="/getCenterAdministratorsByCenterId/{centerId}")
+	 public ArrayList<CenterAdministrator> getAdministratorsByCenterId(@PathVariable Long centerId) {
+		return this.centerAdministratorService.getAllAdministratorsByCenterId(centerId);
 	 }
 
 }

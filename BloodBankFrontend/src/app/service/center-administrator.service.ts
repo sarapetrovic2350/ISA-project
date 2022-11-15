@@ -29,4 +29,8 @@ export class CenterAdministratorService {
     return this.http.get<medicalCenter>(this.apiHost + 'centerAdministrator/getMedicalCenterByAdminEmail/' + email, {headers: this.headers});
   }
 
+  findAdministratorsByCenterId(id: string): Observable<CenterAdministrator[]>{
+    return this.http.get<CenterAdministrator[]>(this.apiHost + 'centerAdministrator/getCenterAdministratorsByCenterId/' + id, {headers: this.headers});
+  }
+
 }
