@@ -3,7 +3,7 @@
         <button mat-button mat-ripple routerLink="/">
             <span>Home</span>
         </button>
-        <button *ngIf="isLoggedIn" mat-button mat-ripple routerLink="/update-user">
+        <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/update-user">
           <span>My informations</span>
       </button>
       <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-medical-cenntar">
