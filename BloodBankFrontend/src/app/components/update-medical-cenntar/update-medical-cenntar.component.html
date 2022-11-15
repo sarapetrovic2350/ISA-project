@@ -37,9 +37,8 @@
                 </div>
                 <div>
                     <h4>Administrators</h4>
-                         <ul *ngFor="let group of centerAdministrators"> (1)
-                            <li>{{ group.name }}</li>
-                            <li>{{ group.surname }}</li>
+                         <ul *ngFor="let group of centerAdministrators">
+                            <li>{{ group.name }} {{ group.surname }}</li>
                         </ul>
                 </div>
                 <div>

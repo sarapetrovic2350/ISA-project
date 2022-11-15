@@ -44,8 +44,8 @@ export class UpdateMedicalCenntarComponent implements OnInit {
             console.log(this.medCenter);
 
             if (this.medCenter != null) {
-              this.centerAdministratorService.findAdministratorsByCenterId(String(this.medCenter.id)).subscribe(res => {
-                this.centerAdministrators = res;
+              this.centerAdministratorService.findAdministratorsByCenterId(String(this.medCenter.centerId)).subscribe((data: any) => {
+                this.centerAdministrators = data;
                 this.dataSource.data = this.centerAdministrators;
               })
             }
