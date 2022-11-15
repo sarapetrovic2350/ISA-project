@@ -18,8 +18,8 @@ export class RegisterUserService {
       return this.http.post<any>(this.url, user);
     }
 
-    getUserById(id: string): Observable<User> {
-      return this.http.get<User>(this.apiHost + 'user/getUserById/' + id, {headers: this.headers});
+    getUserByEmail(email: string): Observable<User> {
+      return this.http.get<User>(this.apiHost + 'user/getUserByEmail/' + email, {headers: this.headers});
     }
 
     updateUser(user: any): Observable<any> {

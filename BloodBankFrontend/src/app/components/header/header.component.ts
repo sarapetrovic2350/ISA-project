@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService) { }
   isLoggedIn: boolean = false;
   isCenterAdministrator: boolean = false;
+  isRegisteredUser: boolean = false;
 
   ngOnInit(): void {
     this.refreshUser();
@@ -30,6 +31,9 @@ export class HeaderComponent implements OnInit {
     }
     if(role == "ROLE_CENTER_ADMINISTRATOR") {
       this.isCenterAdministrator = true;
+    }
+    if(role == "ROLE_REGISTERED_USER"){
+      this.isRegisteredUser = true;
     }
   }
 

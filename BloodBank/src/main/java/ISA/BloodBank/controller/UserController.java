@@ -66,5 +66,10 @@ public class UserController {
 	 public User loadById(@PathVariable Long userId) {
 		return this.userService.findById(userId);
 	 }
+	 
+	 @GetMapping(value="/getUserByEmail/{email}")
+	 public User findById(@PathVariable String email) {
+		return this.userService.findByEmail(email);
+	 }
 	
 }
