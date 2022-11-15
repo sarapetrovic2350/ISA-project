@@ -22,4 +22,8 @@ export class MedicalCenterServiceService {
     return this.http.put<any>(this.apiHost + 'medicalCenter/updateCenter' , medicalCenter, {headers: this.headers});
   }
 
+  getAll(): Observable<medicalCenter[]> {
+    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/getAll');
+  }
+
 }

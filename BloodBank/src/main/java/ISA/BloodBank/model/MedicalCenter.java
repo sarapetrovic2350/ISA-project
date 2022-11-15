@@ -37,7 +37,9 @@ public class MedicalCenter {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
-
+	
+	@Column(name = "image")
+	private String image;
 	
 	//@OneToMany(mappedBy = "medicalCenter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	//@JoinColumn(name = "centerAdministrators", referencedColumnName = "userId")
@@ -56,6 +58,16 @@ public class MedicalCenter {
 		this.averageGrade = averageGrade;
 		this.address = address;
 		//this.centerAdministrators = centerAdministrators;
+	}
+	
+	
+	public MedicalCenter(String name, String description, Double averageGrade, Address address, String image) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.averageGrade = averageGrade;
+		this.address = address;
+		this.image = image;
 	}
 
 	public Long getCenterId() {
@@ -97,6 +109,16 @@ public class MedicalCenter {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 //	public Set<CenterAdministrator> getCenterAdministrators() {
 //		return centerAdministrators;

@@ -1,0 +1,22 @@
+<div>
+    <div class="row"> 
+            <div class="card"  *ngFor="let mc of medicalCenters">
+              <img :src="../assets/images/{{mc.image}}" class="card-img-top" sty alt="Missing image">
+              <ul class="list-group list-group-flush">
+                <li class = "list-group-item">
+                  <strong>Name: </strong><br>{{mc.name}}
+                </li>
+                <li style="height: 70px;" class="list-group-item"><strong>Address:</strong><br>
+                    {{mc.address.street}} {{mc.address.streetNumber}}<br>
+                    {{mc.address.city}}, {{mc.address.country}}
+                </li>
+                <li style="height: 70px;" *ngIf="mc.averageGrade != 0.0" class="list-group-item"><strong>Average grade:</strong><br> {{mc.averageGrade}}</li>
+                <li style="height: 70px;" *ngIf="mc.averageGrade == 0.0" class="list-group-item">The medical center currently does not have any ratings.</li>  
+                <li  *ngIf="mc.description !== null" style="height: 70px;" class="list-group-item"><strong>Description:</strong><br> {{mc.description}}</li> 
+                <li  *ngIf="mc.description == null" style="height: 70px;" class="list-group-item">The medical center currently does not have decription.</li> 
+              </ul> 
+        </div>
+    </div>
+    
+    </div>
+
