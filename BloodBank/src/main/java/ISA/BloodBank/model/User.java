@@ -59,7 +59,7 @@ public class User implements UserDetails {
 	@Column(name = "phoneNumber", nullable = false)
 	private String phoneNumber;
 	
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
 

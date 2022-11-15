@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class CenterAdministrator extends User {
 
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "medicalCenterId", referencedColumnName = "centerId")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private MedicalCenter medicalCenter;

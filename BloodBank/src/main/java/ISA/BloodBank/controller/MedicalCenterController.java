@@ -54,12 +54,10 @@ public class MedicalCenterController {
 	}
 	
 	 @RequestMapping(value="/updateCenter", method = RequestMethod.PUT)
-	 public @ResponseBody MedicalCenter update(@RequestBody MedicalCenter medCenterDto) {
-		 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"); 
+	 public @ResponseBody MedicalCenter update(@RequestBody MedicalCenter medCenterDto) { 
 		 System.out.println(medCenterDto); 
 		 return medicalCenterService.update(medCenterDto);
-
-		 //return null;
+		 
 	 }
 	 
 	 @GetMapping(value="/getMedicalCenterById/{centerId}")
