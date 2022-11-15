@@ -48,7 +48,7 @@ public class MedicalCenterController {
 		}
 	}
 
-	@GetMapping(value = "/getAll")
+	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public ResponseEntity<List<MedicalCenter>> findAll() {
 		return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.getAll(), HttpStatus.OK);
 	}

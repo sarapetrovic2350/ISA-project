@@ -9,9 +9,9 @@ INSERT INTO public.address (city, country, street, street_number) VALUES ('Beogr
 INSERT INTO public.address (city, country, street, street_number) VALUES ('Beograd', 'Srbija', 'Nikole Tesle', '85');
 INSERT INTO public.address (city, country, street, street_number) VALUES ('Beograd', 'Srbija', 'Zeleznicka', '36');
 
-INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id) VALUES (default, 'CenterNo1', 'Centar za transfuziju krvi no1', '5.0', '1');
-INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id) VALUES (default, 'CenterNo2', 'Drugi centar za transfuziju krvi', '4.6', '6');
-INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id) VALUES (default, 'CenterNo2', 'Drugi centar za transfuziju krvi', '5', '1');
+INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo1', 'Centar za transfuziju krvi no1', '5.0', '1', 'medicalCenter1.jpg');
+INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'The Blood Connection', 'Centar za transfuziju krvi Blood Connection', '4.6', '5', 'medicalCenter2.jpg');
+INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo2', 'Drugi centar za transfuziju krvi', '5', '6', 'medicalCenter3.jpg');
 
 -- REGISTERED_USER email: petrovicsara10@gmail.com password: sarap
 INSERT INTO public.user (dtype, user_id, jmbg, name, surname, password, salt, gender, occupation, occupation_info, email, phone_number, penalties, user_type, address_id, authority_id, enabled) VALUES ('RegisteredUser', default, '2010000805045', 'Sara', 'Petrovic', '$2y$12$RU7O/mGpTgy4lD1GH2mf7.9bM54T2eoDlP7YbrU1P8lurHe3dQ/4q', 'K+IsDJLi43-jlR+Fiap1mG==', 'FEMALE', 'STUDENT', 'FTN', 'petrovicsara10@gmail.com', '061123435', '0', 'REGISTERED_USER', '3', '1', true);

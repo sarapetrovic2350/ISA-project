@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit{
       this.authService.login(this.request).subscribe(
         {
           next: (res) => {
-            window.location.href = '/';
             this.successfulLogin(res);
             Swal.fire({
               icon: 'success',
               title: 'Success!',
               text: 'Sucessfully logged in!',
-            })   
+            })
+            window.location.href = '/';   
            
           },
           error: (e) => {

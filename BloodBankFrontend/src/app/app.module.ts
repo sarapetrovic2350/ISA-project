@@ -14,6 +14,8 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
 import { UpdateMedicalCenntarComponent } from './components/update-medical-cenntar/update-medical-cenntar.component';
 import { UpdateCentAdministratorComponent } from './components/update-cent-administrator/update-cent-administrator.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MedicalCentersComponent } from './components/medical-centers/medical-centers.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { HeaderComponent } from './components/header/header.component';
     UpdateUserComponent,
     UpdateMedicalCenntarComponent,
     UpdateCentAdministratorComponent,
-    HeaderComponent
+    HeaderComponent,
+    MedicalCentersComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

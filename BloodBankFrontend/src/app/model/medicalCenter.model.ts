@@ -6,7 +6,8 @@ export class medicalCenter{
         public name:string ='',
         public description:string ='',
         public averageGrade:number=0,
-        public address:Address = new Address()
+        public address:Address = new Address(),
+        public image: string = ''
     ){}
 }
 
