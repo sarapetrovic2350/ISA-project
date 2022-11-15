@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthRequest, User } from '../model/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +26,8 @@ export class AuthService {
     this.jwt = data.accessToken;
     this.expiresIn = data.expiresIn;
     localStorage.setItem('currentUser', JSON.stringify(this.user));
+    localStorage.setItem('role', data.user.authority.name);
+    console.log(localStorage.getItem('role'));
     console.log(localStorage.getItem('currentUser'));
 
   }
@@ -35,10 +36,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('currentUser')!);
   }
 
-  logout() {
-    this.user = new User();
-    localStorage.setItem('currentUser', JSON.stringify(this.user));
-    window.location.href = '/';
+  logout() { 
+    this.jwt = "";
+    localStorage.clear();
+    window.location.href = '/login';
   }
 
 }

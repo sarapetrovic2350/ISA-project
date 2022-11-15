@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit{
   request = new AuthRequest();
   submitted = false;
   message: string= "";
-  role:string = "";
 
   constructor(
     private router: Router,
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit{
       this.authService.login(this.request).subscribe(
         {
           next: (res) => {
-            this.router.navigate(['/']);
+            window.location.href = '/';
             this.successfulLogin(res);
             Swal.fire({
               icon: 'success',

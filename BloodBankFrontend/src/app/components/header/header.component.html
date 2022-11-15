@@ -3,10 +3,10 @@
         <button mat-button mat-ripple routerLink="/">
             <span>Home</span>
         </button>
-        <button mat-button mat-ripple routerLink="/update-user">
+        <button *ngIf="isLoggedIn" mat-button mat-ripple routerLink="/update-user">
           <span>My informations</span>
       </button>
-      <button mat-button mat-ripple routerLink="/update-medical-cenntar">
+      <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-medical-cenntar">
         <span>Update Center</span>
     </button>
     <button mat-button mat-ripple routerLink="/update-cent-administrator">
@@ -16,12 +16,15 @@
     <span class="flexExpand"></span>
     <div>
       <div fxLayout="row">
-        <button mat-button mat-ripple routerLink="/user-registration">
+        <button *ngIf="!isLoggedIn" mat-button mat-ripple routerLink="/user-registration">
             <span>Register</span>
         </button>
-        <button mat-button mat-ripple routerLink="/login">
+        <button *ngIf="!isLoggedIn" mat-button mat-ripple routerLink="/login">
             <span>Login</span>
         </button>
+        <button *ngIf="isLoggedIn" mat-button mat-ripple (click)="logout()">
+          <span>Logout</span>
+      </button>
       </div>
     </div>
   </mat-toolbar>

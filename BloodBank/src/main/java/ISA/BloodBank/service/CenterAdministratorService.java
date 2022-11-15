@@ -40,6 +40,7 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		centerAdministrator.setGender(centerAdministratorRegistrationDTO.getGender());
 		centerAdministrator.setOccupation(centerAdministratorRegistrationDTO.getOccupation());
 		centerAdministrator.setOccupationInfo(centerAdministratorRegistrationDTO.getOccupationInfo());
+		centerAdministrator.setMedicalCenter(centerAdministratorRegistrationDTO.getMedicalCenter());
 		centerAdministrator.setUserType(UserType.CENTER_ADMINISTRATOR);
 		centerAdministratorRepository.save(centerAdministrator);
 		return centerAdministrator;
