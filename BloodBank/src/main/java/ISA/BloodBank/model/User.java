@@ -47,7 +47,7 @@ public class User {
 	@Column(name = "phoneNumber", nullable = false)
 	private String phoneNumber;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
 	
