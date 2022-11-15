@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="MedicalCenter")
@@ -35,6 +37,7 @@ public class MedicalCenter {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
+
 	
 	//@OneToMany(mappedBy = "medicalCenter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	//@JoinColumn(name = "centerAdministrators", referencedColumnName = "userId")
@@ -43,7 +46,10 @@ public class MedicalCenter {
 	public MedicalCenter() {
 	}
 
-	public MedicalCenter(String name, String description, Double averageGrade, Address address) {
+	public MedicalCenter(String name, String description, Double averageGrade, Address address//,
+			//Set<CenterAdministrator> centerAdministrators
+			) {
+
 		super();
 		this.name = name;
 		this.description = description;
@@ -92,12 +98,13 @@ public class MedicalCenter {
 		this.address = address;
 	}
 
-	/*public Set<CenterAdministrator> getCenterAdministrators() {
-		return centerAdministrators;
-	}
+//	public Set<CenterAdministrator> getCenterAdministrators() {
+//		return centerAdministrators;
+//	}
+//
+//	public void setCenterAdministrators(Set<CenterAdministrator> centerAdministrators) {
+//		this.centerAdministrators = centerAdministrators;
+//	}
 
-	public void setCenterAdministrators(Set<CenterAdministrator> centerAdministrators) {
-		this.centerAdministrators = centerAdministrators;
-	}*/
 
 }

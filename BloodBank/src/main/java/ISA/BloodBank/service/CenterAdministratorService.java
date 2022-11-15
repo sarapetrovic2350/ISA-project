@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
@@ -13,6 +14,8 @@ import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
 import ISA.BloodBank.iservice.ICenterAdministratorService;
 import ISA.BloodBank.model.Authority;
 import ISA.BloodBank.model.CenterAdministrator;
+import ISA.BloodBank.model.MedicalCenter;
+import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
 import ISA.BloodBank.repository.ICenterAdministratorRepository;
 

@@ -15,20 +15,20 @@ public class CenterAdministrator extends User {
 	@JoinColumn(name = "medicalCenterId", referencedColumnName = "centerId")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private MedicalCenter medicalCenter;
-	
-	
+
+	public CenterAdministrator() {
+		super();
+	}
+
 	public MedicalCenter getMedicalCenter() {
 		return medicalCenter;
 	}
-
 
 	public void setMedicalCenter(MedicalCenter medicalCenter) {
 		this.medicalCenter = medicalCenter;
 	}
 
-
-	public CenterAdministrator() {
-		super();
-	}
+	
+	
 
 }
