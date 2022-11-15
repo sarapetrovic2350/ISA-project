@@ -10,6 +10,7 @@ import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
 import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
 import ISA.BloodBank.iservice.ICenterAdministratorService;
 import ISA.BloodBank.model.CenterAdministrator;
+import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
 import ISA.BloodBank.repository.ICenterAdministratorRepository;
@@ -72,5 +73,16 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	public CenterAdministrator findById(Long id) throws AccessDeniedException {
 		CenterAdministrator centerAdministrator = centerAdministratorRepository.findById(id).orElseGet(null);
 		return centerAdministrator;
+	}
+	
+	public CenterAdministrator findByEmail(String email) {
+		return centerAdministratorRepository.findByEmail(email); 
+	}
+	
+	public MedicalCenter getMedicalCenter(String email) {
+		CenterAdministrator centAdmin = findByEmail(email); 
+		
+		return centAdmin.getMedicalCenter(); 
+		
 	}
 }

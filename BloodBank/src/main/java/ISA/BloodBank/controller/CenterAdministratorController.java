@@ -20,6 +20,7 @@ import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
 import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.CenterAdministrator;
+import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.CenterAdministratorService;
 
@@ -65,6 +66,16 @@ public class CenterAdministratorController {
 	 @GetMapping(value="/getCenterAdministratorById/{adminId}")
 	 public CenterAdministrator loadById(@PathVariable Long adminId) {
 		return this.centerAdministratorService.findById(adminId);
+	 }
+	 
+	 @GetMapping(value="/getCenterAdministratorByEmail/{email}")
+	 public CenterAdministrator findByEmail(@PathVariable String email) {
+		return this.centerAdministratorService.findByEmail(email);
+	 }
+	 
+	 @GetMapping(value="/getMedicalCenterByAdminEmail/{email}")
+	 public MedicalCenter findCenterByAdminEmail(@PathVariable String email) {
+		return this.centerAdministratorService.getMedicalCenter(email);
 	 }
 
 }

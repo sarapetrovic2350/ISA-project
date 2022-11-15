@@ -6,5 +6,6 @@ import ISA.BloodBank.model.CenterAdministrator;
 
 @Repository
 public interface ICenterAdministratorRepository extends JpaRepository<CenterAdministrator, Long> {
-
+	
+	CenterAdministrator findByEmail(String email);
 }

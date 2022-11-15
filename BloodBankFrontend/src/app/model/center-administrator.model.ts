@@ -1,4 +1,5 @@
 import { Address } from "./address.model";
+import { medicalCenter } from "./medicalCenter.model";
 
 export class CenterAdministrator {
     constructor(

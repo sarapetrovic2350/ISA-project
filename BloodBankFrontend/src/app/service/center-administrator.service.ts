@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CenterAdministrator } from '../model/center-administrator.model';
+import {medicalCenter} from '../model/medicalCenter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,14 @@ export class CenterAdministratorService {
 
   updateCenterAdministrator(centerAdministrator: any): Observable<any> {
     return this.http.put<any>(this.apiHost + 'centerAdministrator/update' , centerAdministrator, {headers: this.headers});
+  }
+
+  findByEmail(email: string): Observable<CenterAdministrator>{
+    return this.http.get<CenterAdministrator>(this.apiHost + 'centerAdministrator/getCenterAdministratorByEmail/' + email, {headers: this.headers});
+  }
+
+  findCenterByAdminEmail(email: string): Observable<medicalCenter>{
+    return this.http.get<medicalCenter>(this.apiHost + 'centerAdministrator/getMedicalCenterByAdminEmail/' + email, {headers: this.headers});
   }
 
 }
