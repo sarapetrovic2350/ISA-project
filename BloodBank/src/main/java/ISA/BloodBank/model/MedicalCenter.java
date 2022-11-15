@@ -34,7 +34,7 @@ public class MedicalCenter {
 	@Column(name = "averageGrade", nullable = false)
 	private Double averageGrade;
 	
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
 
