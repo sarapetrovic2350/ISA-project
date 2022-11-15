@@ -103,4 +103,20 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	public String hashPassword(String password) {
 		return BCrypt.hashpw(password, BCrypt.gensalt(12));
 	}
+	
+	public CenterAdministrator findById(Long id) throws AccessDeniedException {
+		CenterAdministrator centerAdministrator = centerAdministratorRepository.findById(id).orElseGet(null);
+		return centerAdministrator;
+	}
+	
+	public CenterAdministrator findByEmail(String email) {
+		return centerAdministratorRepository.findByEmail(email); 
+	}
+	
+	public MedicalCenter getMedicalCenter(String email) {
+		CenterAdministrator centAdmin = findByEmail(email); 
+		
+		return centAdmin.getMedicalCenter(); 
+		
+	}
 }
