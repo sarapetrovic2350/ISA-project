@@ -32,7 +32,7 @@ private IMedicalCenterRepository medicalCenterRepository;
 		medCenter.setAverageGrade(medicalCenter.getAverageGrade());
 		medCenter.setName(medicalCenter.getName());
 		medCenter.setAddress(medicalCenter.getAddress());
-		medCenter.setCenterAdministrators(medicalCenter.getCenterAdministrators());
+		//medCenter.setCenterAdministrators(medicalCenter.getCenterAdministrators());
 		
 		medicalCenterRepository.save(medCenter);
 		return medCenter;

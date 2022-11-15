@@ -1,6 +1,5 @@
 package ISA.BloodBank.model;
 
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,25 +31,25 @@ public class MedicalCenter {
 
 	@Column(name = "averageGrade", nullable = false)
 	private Double averageGrade;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
 	private Address address;
-
-	@OneToMany(mappedBy = "medicalCenter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<CenterAdministrator> centerAdministrators;
+	
+	//@OneToMany(mappedBy = "medicalCenter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@JoinColumn(name = "centerAdministrators", referencedColumnName = "userId")
+	//private Set<CenterAdministrator> centerAdministrators;
 
 	public MedicalCenter() {
 	}
 
-	public MedicalCenter(String name, String description, Double averageGrade, Address address,
-			Set<CenterAdministrator> centerAdministrators) {
+	public MedicalCenter(String name, String description, Double averageGrade, Address address) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.averageGrade = averageGrade;
 		this.address = address;
-		this.centerAdministrators = centerAdministrators;
+		//this.centerAdministrators = centerAdministrators;
 	}
 
 	public Long getCenterId() {
@@ -93,12 +92,12 @@ public class MedicalCenter {
 		this.address = address;
 	}
 
-	public Set<CenterAdministrator> getCenterAdministrators() {
+	/*public Set<CenterAdministrator> getCenterAdministrators() {
 		return centerAdministrators;
 	}
 
 	public void setCenterAdministrators(Set<CenterAdministrator> centerAdministrators) {
 		this.centerAdministrators = centerAdministrators;
-	}
+	}*/
 
 }
