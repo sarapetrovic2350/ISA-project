@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CenterAdministrator } from '../model/center-administrator.model';
 import {medicalCenter} from '../model/medicalCenter.model';
+import { ChangePasswordDTO } from '../model/change-password-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +34,7 @@ export class CenterAdministratorService {
     return this.http.get<CenterAdministrator[]>(this.apiHost + 'centerAdministrator/getCenterAdministratorsByCenterId/' + id, {headers: this.headers});
   }
 
+  changePassword(newPassword: ChangePasswordDTO): Observable<ChangePasswordDTO>{
+    return this.http.put<any>(this.apiHost + 'centerAdministrator/changePassword' , newPassword, {headers: this.headers});
+  }
 }

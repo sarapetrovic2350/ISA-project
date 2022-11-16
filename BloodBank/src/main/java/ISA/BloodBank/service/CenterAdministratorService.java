@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
 import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
+import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.iservice.ICenterAdministratorService;
 import ISA.BloodBank.model.Authority;
 import ISA.BloodBank.model.CenterAdministrator;
@@ -132,5 +133,17 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		}
 		
 		return retList; 
+	}
+	
+	public ChangePasswordDTO changePassword(ChangePasswordDTO newPassword) {
+		CenterAdministrator centreAdmin = findByEmail(newPassword.getEmail()); 
+	
+		if(!newPassword.getPassword().equals(newPassword.getPasswordRepeated()) || !newPassword.getOldPassword().equals(centreAdmin.getPassword())){
+            return null;
+        }
+		centreAdmin.setPassword(newPassword.getPassword());
+		centerAdministratorRepository.save(centreAdmin);
+		
+		return newPassword; 
 	}
 }
