@@ -1,33 +1,27 @@
 .container {
-    width: 50%;
+    width: 80%;
     margin: auto;
     margin-top: 20px;
     border-radius: 3px;
     border: #DCD6CC 1px solid;
     background-color: white;
+    border-collapse: collapse;
 }
 
 table {
     width: 100%;
-}
 
+}
 .table-title {
     padding-bottom: 20px;
     padding-top: 20px;
     padding-left: 20px;
-    font-size: 20px;
-
+    font-size: 17px;
 }
 
 .cell-center {
-    text-align: center;
+    text-align: right;
 }
-
-.clickable:hover {
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .add-button {
     margin: 10px 20px 10px 10px;
     color: black;
@@ -36,7 +30,7 @@ table {
 }
 
 .table-header {
-    display: flex;
+    display:flex;
 }
 
 p {
