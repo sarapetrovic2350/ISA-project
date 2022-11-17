@@ -1,0 +1,106 @@
+<mat-card elevation="5" fxFlex class="content">
+    <mat-card-title style="margin-left: 27%;">
+        <h2>{{title}}</h2>
+    </mat-card-title>
+    <mat-card-content>
+        <p></p>
+        <form (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div>
+                    <mat-form-field>
+                        <label>Name: </label>
+                        <input name="name" [(ngModel)]="user.name" matInput disabled>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Surname: </label>
+                        <input type="surname" name="surname" [(ngModel)]="user.surname" matInput disabled>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <label>Jmbg: </label>
+                        <input type="number" name="jmbg" [(ngModel)]="user.jmbg" matInput disabled>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Email: </label>
+                        <input name="email" [(ngModel)]="user.email" matInput disabled>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <label>Weight: </label>
+                        <input type="number" [(ngModel)]="questionnaire.weight" name="weight" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Age: </label>
+                        <input type="number" [(ngModel)]="questionnaire.age" name="age" matInput required>
+                    </mat-form-field><br>
+                    <label>Do you have normal blood pressure?</label>
+                    <mat-radio-group label="Select an option" name="pressure"
+                        [(ngModel)]="questionnaire.normalBloodPressure">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>Do you feel healthy in general?</label>
+                    <mat-radio-group label="Select an option" name="healthy"
+                        [(ngModel)]="questionnaire.generalGoodHealth">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>In the last 7 days have you had any illness, infection or fever? </label>
+                    <mat-radio-group label="Select an option" name="symptomsOfIllness"
+                        [(ngModel)]="questionnaire.symptomsOfIllness">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>Do you have any skin disorders or conditions? </label>
+                    <mat-radio-group label="Select an option" name="skinDisorders"
+                        [(ngModel)]="questionnaire.skinDisorders">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>In the last 7 days have you taken any medicines such as aspirin? </label>
+                    <mat-radio-group label="Select an option" name="underMedication"
+                        [(ngModel)]="questionnaire.underMedication">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>In the last 7 days have you had any dental interventions? </label>
+                    <mat-radio-group label="Select an option" name="recentlyVisitedDentist"
+                        [(ngModel)]="questionnaire.recentlyVisitedDentist">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>In the last 6 months have you had a tattoo or piercing skin? </label>
+                    <mat-radio-group label="Select an option" name="tattooOrPiercing"
+                        [(ngModel)]="questionnaire.tattooOrPiercing">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>In the last 6 months have you donated blood? </label>
+                    <mat-radio-group label="Select an option" name="recentlyDonatedBlood"
+                        [(ngModel)]="questionnaire.recentlyDonatedBlood">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                    <label>Do you have menstrual period right now?</label>
+                    <mat-radio-group label="Select an option" name="hasPeriod" [(ngModel)]="questionnaire.hasPeriod">
+                        <mat-radio-button class="radio" [value]=true color="primary">Yes</mat-radio-button>
+                        <mat-radio-button class="radio" [value]=false color="primary">No</mat-radio-button>
+                    </mat-radio-group>
+                    <br>
+                </div>
+
+            </div>
+
+            <br><br>
+            <button color="primary" style="width: 50%; margin-left: 19%;" mat-raised-button
+                type="submit">Submit</button><br>
+
+        </form>
+    </mat-card-content>
+</mat-card>

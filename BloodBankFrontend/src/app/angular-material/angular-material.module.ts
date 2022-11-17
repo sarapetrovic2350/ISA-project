@@ -14,6 +14,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatNativeDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule
   ],
   exports: [
     CommonModule,
@@ -49,7 +51,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule
   ],
 })
 export class AngularMaterialModule {}

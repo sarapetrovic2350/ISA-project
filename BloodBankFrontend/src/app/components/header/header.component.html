@@ -1,45 +1,48 @@
 <mat-toolbar class="app-navbar" color="warn">
-    <div>
-        <button mat-button mat-ripple routerLink="/">
-            <span>Home</span>
-        </button>
-        <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/update-user">
-          <span>My informations</span>
-      </button>
-      <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-medical-cenntar">
-        <span>Update Center</span>
+  <div>
+    <button mat-button mat-ripple routerLink="/">
+      <span>Home</span>
+    </button>
+    <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/update-user">
+      <span>My informations</span>
+    </button>
+    <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/questionnaire">
+      <span>Fill donor questionnaire</span>
+    </button>
+    <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-medical-cenntar">
+      <span>Update Center</span>
     </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-cent-administrator">
       <span>Update CentAdm info</span>
-  </button>
-  <button *ngIf="isCenterOrSystemAdmin" mat-button mat-ripple routerLink="/show-users">
-    <span>See All Users</span>
-  </button>
-  <button *ngIf="isSystemAdmin" mat-button mat-ripple routerLink="/create-medical-cenntar">
-    <span>Create Medical Center</span>
-  </button>
-  <button *ngIf="isSystemAdmin" mat-button mat-ripple routerLink="/create-center-admin">
-    <span>Register Center Admin</span>
-  </button>
+    </button>
+    <button *ngIf="isCenterOrSystemAdmin" mat-button mat-ripple routerLink="/show-users">
+      <span>See All Users</span>
+    </button>
+    <button *ngIf="isSystemAdmin" mat-button mat-ripple routerLink="/create-medical-cenntar">
+      <span>Create Medical Center</span>
+    </button>
+    <button *ngIf="isSystemAdmin" mat-button mat-ripple routerLink="/create-center-admin">
+      <span>Register Center Admin</span>
+    </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple>
       <span>Make Appointments</span>
     </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple>
       <span>Blood Suplies</span>
     </button>
-    </div>
-    <span class="flexExpand"></span>
-    <div>
-      <div fxLayout="row">
-        <button *ngIf="!isLoggedIn" mat-button mat-ripple routerLink="/user-registration">
-            <span>Register</span>
-        </button>
-        <button *ngIf="!isLoggedIn" mat-button mat-ripple routerLink="/login">
-            <span>Login</span>
-        </button>
-        <button *ngIf="isLoggedIn" mat-button mat-ripple (click)="logout()">
-          <span>Logout</span>
+  </div>
+  <span class="flexExpand"></span>
+  <div>
+    <div fxLayout="row">
+      <button *ngIf="!isLoggedIn" mat-button mat-ripple routerLink="/user-registration">
+        <span>Register</span>
       </button>
-      </div>
+      <button *ngIf="!isLoggedIn" mat-button mat-ripple routerLink="/login">
+        <span>Login</span>
+      </button>
+      <button *ngIf="isLoggedIn" mat-button mat-ripple (click)="logout()">
+        <span>Logout</span>
+      </button>
     </div>
-  </mat-toolbar>
+  </div>
+</mat-toolbar>

@@ -11,6 +11,7 @@ import { ShowUsersComponent } from './components/show-users/show-users.component
 import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'create-center-admin',
     component: CreateCenterAdminComponent
+  },
+  {
+    path: 'questionnaire',
+    component: QuestionnaireComponent
   }
 ];
 
