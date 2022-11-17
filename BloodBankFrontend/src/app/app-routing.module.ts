@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ShowUsersComponent } from './components/show-users/show-users.component';
 import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
+import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'change-password-page',
     component: ChangePasswordPageComponent
+  }, 
+  {
+    path: 'create-center-admin',
+    component: CreateCenterAdminComponent
   }
 ];
 

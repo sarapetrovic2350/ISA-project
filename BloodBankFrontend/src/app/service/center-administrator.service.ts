@@ -37,4 +37,8 @@ export class CenterAdministratorService {
   changePassword(newPassword: ChangePasswordDTO): Observable<CenterAdministrator>{
     return this.http.put<any>(this.apiHost + 'centerAdministrator/changePassword' , newPassword, {headers: this.headers});
   }
+
+  createCenterAdmin(centerAdministrator: any): Observable<CenterAdministrator>{
+    return this.http.post<any>(this.apiHost + 'centerAdministrator/registerCenterAdministrator' , centerAdministrator, {headers: this.headers});
+  }
 }
