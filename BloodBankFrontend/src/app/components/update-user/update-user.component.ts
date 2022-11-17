@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-user.component.css']
 })
 export class UpdateUserComponent implements OnInit {
-  title = 'Update informations';
+  title = 'Update your informations';
 
   public user: User | undefined = undefined;
 
@@ -47,14 +47,6 @@ export class UpdateUserComponent implements OnInit {
           })  
       }
       });
-  }
-  
-  showSuccess() {
-    this.toastr.success('Successfully updated!', 'Blood Blank App');
-  }
-
-  showError() {
-    this.toastr.error('Check the fields again!', 'Warning');
   }
 
 }
