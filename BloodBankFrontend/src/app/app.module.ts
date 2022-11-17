@@ -16,6 +16,8 @@ import { UpdateCentAdministratorComponent } from './components/update-cent-admin
 import { HeaderComponent } from './components/header/header.component';
 import { MedicalCentersComponent } from './components/medical-centers/medical-centers.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ShowUsersComponent } from './components/show-users/show-users.component';
+import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 
 
@@ -30,6 +32,8 @@ import { ChangePasswordPageComponent } from './components/change-password-page/c
     HeaderComponent,
     MedicalCentersComponent,
     HomeComponent,
+    ShowUsersComponent,
+    RegisterMedicalCenterComponent,
     ChangePasswordPageComponent
   ],
   imports: [

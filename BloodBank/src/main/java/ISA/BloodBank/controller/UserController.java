@@ -57,6 +57,11 @@ public class UserController {
 		return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/getAllRegistredUsers")
+	public ResponseEntity<List<User>> findAllRegistredUsers() {
+		return new ResponseEntity<List<User>>(userService.getAllRegistredUsers(), HttpStatus.OK);
+	}
+	
 	 @PutMapping(value="/update")
 	 public @ResponseBody UserUpdateDTO update(@RequestBody UserUpdateDTO u) {
 		 return userService.updateUser(u);

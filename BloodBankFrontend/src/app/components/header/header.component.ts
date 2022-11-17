@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isCenterAdministrator: boolean = false;
   isRegisteredUser: boolean = false;
+  isCenterOrSystemAdmin: boolean = false;
+  isSystemAdmin: boolean = false;
 
   ngOnInit(): void {
     this.refreshUser();
@@ -34,6 +36,12 @@ export class HeaderComponent implements OnInit {
     }
     if(role == "ROLE_REGISTERED_USER"){
       this.isRegisteredUser = true;
+    }
+    if(role == "ROLE_CENTER_ADMINISTRATOR"|| role == "ROLE_SYSTEM_ADMINISTRATOR"){
+      this.isCenterOrSystemAdmin = true;
+    }
+    if(role == "ROLE_SYSTEM_ADMINISTRATOR"){
+      this.isSystemAdmin = true;
     }
   }
 
