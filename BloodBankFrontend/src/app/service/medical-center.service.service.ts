@@ -29,6 +29,8 @@ export class MedicalCenterServiceService {
   createMedicalCenter(medicalCenter: any): Observable<any> {
     console.log(medicalCenter); 
     return this.http.post<any>(this.apiHost + 'medicalCenter/createCenter' , medicalCenter, {headers: this.headers});
+  }
+
   searchMediclaCenter(name : string, place : string): Observable<medicalCenter[]> {
     if(place == ""){
       place = "null";
@@ -38,7 +40,6 @@ export class MedicalCenterServiceService {
     }
     return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/searchMedicalCenterByNameAndPlace/' + name + '/' + place, {headers: this.headers});
   }
-  
   filterMedicalCenters(name : string, place : string, grade:string) : Observable<medicalCenter[]> {
     if(place == ""){
       place = "null";
