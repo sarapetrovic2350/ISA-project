@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ISA.BloodBank.exception.ResourceConflictException;
-
+import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.User;
@@ -76,5 +77,10 @@ public class UserController {
 	 public User findById(@PathVariable String email) {
 		return this.userService.findByEmail(email);
 	 }
+	 
+	 @RequestMapping(value="/changePassword", method = RequestMethod.PUT)
+	    public @ResponseBody User changePassword(@RequestBody ChangePasswordDTO dto) {
+		 return userService.changePassword(dto);
+	    }
 	
 }

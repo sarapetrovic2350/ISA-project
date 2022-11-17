@@ -7,6 +7,7 @@ import { ChangePasswordDTO } from 'src/app/model/change-password-dto.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { CenterAdministratorService } from 'src/app/service/center-administrator.service';
 import Swal from 'sweetalert2';
+import { RegisterUserService } from 'src/app/service/register-user.service';
 
 @Component({
   selector: 'app-change-password-page',
@@ -22,13 +23,16 @@ export class ChangePasswordPageComponent implements OnInit {
   message: string="";
   submitted = false;
 
-  constructor(private toastr: ToastrService,private centerAdministratorService: CenterAdministratorService, private route: ActivatedRoute,
+  constructor(private toastr: ToastrService,private centerAdministratorService: CenterAdministratorService, private registerUserService: RegisterUserService, private route: ActivatedRoute,
     private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.user = this.authService.getCurrentUser();
 
     if (this.user != null) {
+      this.registerUserService.getUserByEmail(this.user.email).subscribe(res => {
+        this.user = res;
+      })
       this.centerAdministratorService.findByEmail(this.user.email).subscribe(res => {
         this.administrator = res;
         console.log(this.administrator.address.city); 
@@ -45,6 +49,16 @@ export class ChangePasswordPageComponent implements OnInit {
       return
     }
 
+    if(this.administrator == null){
+    this.registerUserService.changePassword(this.newPassword).subscribe(
+      {next: (res) => {
+      this.router.navigate(['/login']);
+      this.showSuccess();
+    },
+    error: (e) => {this.showError();
+      console.log(e);}
+    });
+  }else{
     this.centerAdministratorService.changePassword(this.newPassword).subscribe(
       {next: (res) => {
       //this.router.navigate(['/update-user']);
@@ -53,6 +67,7 @@ export class ChangePasswordPageComponent implements OnInit {
     error: (e) => {this.showError();
       console.log(e);}
     });
+  }
 
   }
 
