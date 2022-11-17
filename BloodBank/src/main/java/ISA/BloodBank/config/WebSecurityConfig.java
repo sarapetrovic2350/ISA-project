@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser", "/medicalCenter/createCenter", "/centerAdministrator/registerCenterAdministrator");
 		web.ignoring().antMatchers(HttpMethod.PUT, "/user/update",  "/medicalCenter/updateCenter",  "/centerAdministrator/update");
-		web.ignoring().antMatchers(HttpMethod.GET, "/", "/user/getAll", "/medicalCenter/getAll", 
+		web.ignoring().antMatchers(HttpMethod.GET, "/", "/user/getAll", "/user/getAllRegistredUsers", "/medicalCenter/getAll", 
 				"/centerAdministrator/getAll", "/user/getUserById/{userId}","/user//getUserByEmail/{email}",
 				"/medicalCenter/getMedicalCenterById/{centerId}", 
 				"/medicalCenter/searchMedicalCenterByNameAndPlace/{name}/{place}", 

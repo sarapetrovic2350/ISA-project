@@ -26,4 +26,9 @@ export class MedicalCenterServiceService {
     return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/getAll');
   }
 
+  createMedicalCenter(medicalCenter: any): Observable<any> {
+    console.log(medicalCenter); 
+    return this.http.post<any>(this.apiHost + 'medicalCenter/createCenter' , medicalCenter, {headers: this.headers});
+  }
+
 }

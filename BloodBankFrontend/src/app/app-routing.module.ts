@@ -7,6 +7,8 @@ import { UpdateMedicalCenntarComponent } from './components/update-medical-cennt
 import { UpdateCentAdministratorComponent } from './components/update-cent-administrator/update-cent-administrator.component';
 import { MedicalCentersComponent } from './components/medical-centers/medical-centers.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ShowUsersComponent } from './components/show-users/show-users.component';
+import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path: 'medical-centers',
     component: MedicalCentersComponent
+  },
+  {
+    path: 'show-users',
+    component: ShowUsersComponent
+  },
+  {
+    path: 'create-medical-cenntar',
+    component: RegisterMedicalCenterComponent
   }
 ];
 

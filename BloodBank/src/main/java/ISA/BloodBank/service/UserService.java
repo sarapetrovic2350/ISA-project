@@ -1,6 +1,7 @@
 package ISA.BloodBank.service;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -107,6 +108,19 @@ public class UserService implements IUserService{
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+	
+	public List<User> getAllRegistredUsers() {
+		
+		List<User > allUsers = userRepository.findAll();
+		List<User> newUsers = new ArrayList<>();
+		for(User user:allUsers) {
+			if(user.getUserType().equals(UserType.REGISTERED_USER)) {
+				newUsers.add(user);
+			}
+		}
+		
+		return newUsers;
 	}
 	
 	public User findById(Long id) throws AccessDeniedException {
