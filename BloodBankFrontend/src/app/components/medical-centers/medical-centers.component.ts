@@ -68,4 +68,13 @@ export class MedicalCentersComponent implements OnInit {
     console.log(data);
     console.log(this.medicalCenters);
       })};
+
+  cancelSearch(){
+    this.medicalCenterService.getAll().subscribe((data: any) => {
+      this.medicalCenters = data;
+        console.log(data);
+        console.log(this.medicalCenters);
+        this.isSearched = false;
+      })
+  }
 }
