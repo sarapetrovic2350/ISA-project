@@ -192,7 +192,7 @@ export class UpdateCentAdministratorComponent implements OnInit {
       this.message ="Your phone number shouldn't contain spaces!";
       return false;
     } else if (
-      !/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\\s./0-9]*$/.test(this.user.phoneNumber)
+      !/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\\s./0-9]*$/.test(this.administrator.phoneNumber)
     ) {
       this.message = "Your phone number is not in right form!";
       return false;
