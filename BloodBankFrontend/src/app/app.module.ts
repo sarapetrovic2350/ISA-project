@@ -20,6 +20,7 @@ import { ShowUsersComponent } from './components/show-users/show-users.component
 import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
+import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CreateCenterAdminComponent } from './components/create-center-admin/cre
     ShowUsersComponent,
     RegisterMedicalCenterComponent,
     ChangePasswordPageComponent,
-    CreateCenterAdminComponent
+    CreateCenterAdminComponent,
+    QuestionnaireComponent
   ],
   imports: [
     BrowserModule,
