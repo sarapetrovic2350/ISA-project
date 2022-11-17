@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 })
 export class CreateCenterAdminComponent implements OnInit {
 
+
+  title = 'Create Center Admin';
   public user: User= new User() ; 
   public administrator: CenterAdministrator = new CenterAdministrator();
 
