@@ -66,22 +66,22 @@ public class MedicalCenterController {
 	 }
 	 
 	 @GetMapping(value = "/searchMedicalCenterByNameAndPlace/{name}/{place}")
-		public ResponseEntity<List<MedicalCenterSearchDTO>> getAllMedicalCentersForSearch(@PathVariable String name,@PathVariable String place){
-			List<MedicalCenterSearchDTO> medicalCentersDTO = new ArrayList<MedicalCenterSearchDTO>();
-			List<MedicalCenter> medicalCenters = medicalCenterService.findMedicalCenterByNameAndPlace(name, place);
-			for (MedicalCenter medicalCenter : medicalCenters) {
-				medicalCentersDTO.add(new MedicalCenterSearchDTO(medicalCenter));
-			}
-			return medicalCentersDTO == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(medicalCentersDTO);
+		public ResponseEntity<List<MedicalCenter>> getAllMedicalCentersForSearch(@PathVariable String name,@PathVariable String place){
+			//List<MedicalCenterSearchDTO> medicalCentersDTO = new ArrayList<MedicalCenterSearchDTO>();
+			return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.findMedicalCenterByNameAndPlace(name, place), HttpStatus.OK);
+			//for (MedicalCenter medicalCenter : medicalCenters) {
+			//	medicalCentersDTO.add(new MedicalCenterSearchDTO(medicalCenter));
+//			}
+//			return medicalCentersDTO == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(medicalCentersDTO);
 		}
 	 
 	 @GetMapping(value = "/filterMedicalCenter/{name}/{place}/{grade}")
-		public ResponseEntity<List<MedicalCenterSearchDTO>> getFilteredMedicalCenters(@PathVariable String name,@PathVariable String place, @PathVariable Double grade){
-			List<MedicalCenterSearchDTO> medicalCentersDTO = new ArrayList<MedicalCenterSearchDTO>();
-			List<MedicalCenter> medicalCenters = medicalCenterService.filterMedicalCenter(name, place, grade);
-			for (MedicalCenter medicalCenter : medicalCenters) {
-				medicalCentersDTO.add(new MedicalCenterSearchDTO(medicalCenter));
-			}
-			return medicalCentersDTO == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(medicalCentersDTO);
+		public ResponseEntity<List<MedicalCenter>> getFilteredMedicalCenters(@PathVariable String name,@PathVariable String place, @PathVariable Double grade){
+			//List<MedicalCenterSearchDTO> medicalCentersDTO = new ArrayList<MedicalCenterSearchDTO>();
+		 	return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.filterMedicalCenter(name, place, grade), HttpStatus.OK);
+//			for (MedicalCenter medicalCenter : medicalCenters) {
+//				medicalCentersDTO.add(new MedicalCenterSearchDTO(medicalCenter));
+//			}
+//			return medicalCentersDTO == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(medicalCentersDTO);
 		}
 }

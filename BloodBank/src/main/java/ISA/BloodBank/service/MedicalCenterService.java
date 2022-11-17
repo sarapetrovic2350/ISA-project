@@ -63,9 +63,9 @@ private IMedicalCenterRepository medicalCenterRepository;
 
 	 public List<MedicalCenter> findMedicalCenterByNameAndPlace(String name, String place) {	
 			List<MedicalCenter> medicalCentersFind = new ArrayList<MedicalCenter>();
-	        if(name.equals("null") && !place.equals("null"))
+	        if(name.equals("") && !place.equals(""))
 	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByAddressCity(place);
-	        else if(!name.equals("null") && place.equals("null"))
+	        else if(!name.equals("") && place.equals(""))
 	        	medicalCentersFind = medicalCenterRepository.findByName(name);
 	        else {
 	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByNameAndAddressCity(name, place);
