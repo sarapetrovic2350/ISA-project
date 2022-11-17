@@ -25,7 +25,7 @@ private IMedicalCenterRepository medicalCenterRepository;
 	@Override
 	public MedicalCenter save(MedicalCenter medicalCenter) {
 		
-		MedicalCenter medCenter = new MedicalCenter(); 
+		MedicalCenter medCenter = new MedicalCenter();
 		medCenter.setCenterId(medicalCenter.getCenterId()); 
 		medCenter.setName(medicalCenter.getName());
 		medCenter.setDescription(medicalCenter.getDescription());
