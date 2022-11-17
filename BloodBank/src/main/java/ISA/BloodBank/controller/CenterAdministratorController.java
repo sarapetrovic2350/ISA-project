@@ -86,14 +86,16 @@ public class CenterAdministratorController {
 	 }
 	 
 	 @RequestMapping(value="/changePassword", method = RequestMethod.PUT)
-	    public ResponseEntity<ChangePasswordDTO> changePassword(@RequestBody ChangePasswordDTO dto) {
+	    public @ResponseBody CenterAdministrator changePassword(@RequestBody ChangePasswordDTO dto) {
 
-		 CenterAdministrator centAdmin = centerAdministratorService.findByEmail(dto.getEmail());
-	        ChangePasswordDTO u = centerAdministratorService.changePassword(dto);
-	        if(u == null){
-	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	        }
-	        return new ResponseEntity<>(u,HttpStatus.OK);
+		 //CenterAdministrator centAdmin = centerAdministratorService.findByEmail(dto.getEmail());
+		// CenterAdministrator retVal = centerAdministratorService.changePassword(dto);
+//	        if(u == null){
+//	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//	        }
+//	        return new ResponseEntity<>(u,HttpStatus.OK);
+	        return centerAdministratorService.changePassword(dto);
+	        
 	    }
 
 }

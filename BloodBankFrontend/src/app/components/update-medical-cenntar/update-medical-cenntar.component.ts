@@ -83,7 +83,7 @@ export class UpdateMedicalCenntarComponent implements OnInit {
    Swal.fire({
     icon: 'success',
     title: 'Success!',
-    text: 'Sucessfully registered!',
+    text: 'Sucessfully updated info!',
   })   
 
   }
@@ -93,7 +93,7 @@ export class UpdateMedicalCenntarComponent implements OnInit {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Email already exists.',
+      text: 'Something went wrong.',
     }) 
   }
 }

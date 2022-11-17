@@ -16,6 +16,7 @@ import { UpdateCentAdministratorComponent } from './components/update-cent-admin
 import { HeaderComponent } from './components/header/header.component';
 import { MedicalCentersComponent } from './components/medical-centers/medical-centers.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HomeComponent } from './pages/home/home.component';
     UpdateCentAdministratorComponent,
     HeaderComponent,
     MedicalCentersComponent,
-    HomeComponent
+    HomeComponent,
+    ChangePasswordPageComponent
   ],
   imports: [
     BrowserModule,

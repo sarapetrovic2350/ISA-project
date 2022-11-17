@@ -11,7 +11,13 @@
     </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-cent-administrator">
       <span>Update CentAdm info</span>
-  </button>
+    </button>
+    <button *ngIf="isCenterAdministrator" mat-button mat-ripple>
+      <span>Make Appointments</span>
+    </button>
+    <button *ngIf="isCenterAdministrator" mat-button mat-ripple>
+      <span>Blood Suplies</span>
+    </button>
     </div>
     <span class="flexExpand"></span>
     <div>

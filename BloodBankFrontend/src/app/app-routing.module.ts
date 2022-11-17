@@ -7,6 +7,7 @@ import { UpdateMedicalCenntarComponent } from './components/update-medical-cennt
 import { UpdateCentAdministratorComponent } from './components/update-cent-administrator/update-cent-administrator.component';
 import { MedicalCentersComponent } from './components/medical-centers/medical-centers.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'medical-centers',
     component: MedicalCentersComponent
+  }, 
+  {
+    path: 'change-password-page',
+    component: ChangePasswordPageComponent
   }
 ];
 

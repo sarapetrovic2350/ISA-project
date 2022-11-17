@@ -135,15 +135,42 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		return retList; 
 	}
 	
-	public ChangePasswordDTO changePassword(ChangePasswordDTO newPassword) {
-		CenterAdministrator centreAdmin = findByEmail(newPassword.getEmail()); 
+	public CenterAdministrator changePassword(ChangePasswordDTO newPassword) {
+		CenterAdministrator centreAdmin = findByEmail(newPassword.getEmail()); 	
+		checkInput(newPassword, centreAdmin);
+		generateNewSecurePassword(newPassword, centreAdmin);
+		return centerAdministratorRepository.save(centreAdmin);
+	}
 	
-		if(!newPassword.getPassword().equals(newPassword.getPasswordRepeated()) || !newPassword.getOldPassword().equals(centreAdmin.getPassword())){
-            return null;
-        }
-		centreAdmin.setPassword(newPassword.getPassword());
-		centerAdministratorRepository.save(centreAdmin);
+	private void checkInput(ChangePasswordDTO changePasswordDTO, CenterAdministrator centreAdmin) {
+		if (changePasswordDTO.getPassword().equals(changePasswordDTO.getOldPassword())) {
+			throw new IllegalArgumentException("Password can not be the same as the old one.");
+		}
+		if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getPasswordRepeated())) {
+			throw new IllegalArgumentException("Passwords must match!");
+		}
+		if (changePasswordDTO.getPassword().isEmpty() || changePasswordDTO.getPasswordRepeated().isEmpty()
+				|| changePasswordDTO.getOldPassword().isEmpty()) {
+			throw new IllegalArgumentException("Fill all the required fields!");
+		}
 		
-		return newPassword; 
+		
+		String oldPassword = generatePasswordWithSalt(changePasswordDTO.getOldPassword(), centreAdmin.getSalt());
+		if(!verifyHash(oldPassword, centreAdmin.getPassword())) {
+			throw new IllegalArgumentException("Old password isn't correct!");
+		}
+	}
+	
+	private void generateNewSecurePassword(ChangePasswordDTO changePasswordDTO, CenterAdministrator centreAdmin) {
+		byte[] salt = generateSalt();
+		String encodedSalt = Base64.getEncoder().encodeToString(salt);
+		centreAdmin.setSalt(encodedSalt);
+		String passwordWithSalt = generatePasswordWithSalt(changePasswordDTO.getPassword(), encodedSalt);
+		String newSecurePassword = hashPassword(passwordWithSalt);
+		centreAdmin.setPassword(newSecurePassword);
+	}
+	
+	public boolean verifyHash(String password, String hash) {
+		return BCrypt.checkpw(password, hash);
 	}
 }

@@ -34,7 +34,7 @@ export class CenterAdministratorService {
     return this.http.get<CenterAdministrator[]>(this.apiHost + 'centerAdministrator/getCenterAdministratorsByCenterId/' + id, {headers: this.headers});
   }
 
-  changePassword(newPassword: ChangePasswordDTO): Observable<ChangePasswordDTO>{
+  changePassword(newPassword: ChangePasswordDTO): Observable<CenterAdministrator>{
     return this.http.put<any>(this.apiHost + 'centerAdministrator/changePassword' , newPassword, {headers: this.headers});
   }
 }
