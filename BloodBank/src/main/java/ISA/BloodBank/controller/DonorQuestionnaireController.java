@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ISA.BloodBank.dto.DonorQuestionnaireDTO;
 import ISA.BloodBank.model.DonorQuestionnaire;
 import ISA.BloodBank.service.DonorQuestionnaireService;
 
@@ -31,10 +32,10 @@ public class DonorQuestionnaireController {
 	}
 	
 	@PostMapping(value = "/saveQuestionnaire")
-	public ResponseEntity<?> saveQuestionnaire(@RequestBody DonorQuestionnaire donorQuestionnaire,
+	public ResponseEntity<?> saveQuestionnaire(@RequestBody DonorQuestionnaireDTO donorQuestionnaireDTO,
 			UriComponentsBuilder uriComponentsBuilder) {
 		try {
-			return new ResponseEntity<>(donorQuestionnaireService.saveQuestionnaire(donorQuestionnaire), HttpStatus.CREATED);
+			return new ResponseEntity<>(donorQuestionnaireService.saveQuestionnaire(donorQuestionnaireDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}

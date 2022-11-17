@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ISA.BloodBank.dto.DonorQuestionnaireDTO;
 import ISA.BloodBank.model.DonorQuestionnaire;
 
 @Service
 public interface IDonorQuestionnaireService {
 
-	DonorQuestionnaire saveQuestionnaire(DonorQuestionnaire questionnaire);
+	DonorQuestionnaire saveQuestionnaire(DonorQuestionnaireDTO questionnaireDTO);
 	List<DonorQuestionnaire> getAllQuestionnaires();
 }
