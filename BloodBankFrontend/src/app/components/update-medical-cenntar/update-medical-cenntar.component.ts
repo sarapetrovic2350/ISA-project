@@ -8,6 +8,7 @@ import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { CenterAdministratorService } from 'src/app/service/center-administrator.service';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-medical-cenntar',
@@ -77,10 +78,22 @@ export class UpdateMedicalCenntarComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Successfully updated!', 'Blood Blank App');
+   // this.toastr.success('Successfully updated!', 'Blood Blank App');
+
+   Swal.fire({
+    icon: 'success',
+    title: 'Success!',
+    text: 'Sucessfully registered!',
+  })   
+
   }
 
   showError() {
-    this.toastr.error('Check the fields again!', 'Warning');
+    //this.toastr.error('Check the fields again!', 'Warning');
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Email already exists.',
+    }) 
   }
 }
