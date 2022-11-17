@@ -63,9 +63,9 @@ private IMedicalCenterRepository medicalCenterRepository;
 
 	 public List<MedicalCenter> findMedicalCenterByNameAndPlace(String name, String place) {	
 			List<MedicalCenter> medicalCentersFind = new ArrayList<MedicalCenter>();
-	        if(name.equals("") && !place.equals(""))
+	        if(name.equals("null") && !place.equals("null"))
 	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByAddressCity(place);
-	        else if(!name.equals("") && place.equals(""))
+	        else if(!name.equals("null") && place.equals("null"))
 	        	medicalCentersFind = medicalCenterRepository.findByName(name);
 	        else {
 	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByNameAndAddressCity(name, place);
@@ -73,11 +73,12 @@ private IMedicalCenterRepository medicalCenterRepository;
 			return medicalCentersFind;
 		}
 	 
-	 public List<MedicalCenter> filterMedicalCenter(String name, String place, Double grade) {
+	 public List<MedicalCenter> filterMedicalCenter(String name, String place, String grade) {
 		 List<MedicalCenter> medicalCentersFind = findMedicalCenterByNameAndPlace(name, place);
 		 List<MedicalCenter> filteredMedicalCenters = new ArrayList<MedicalCenter>();
 		 for(MedicalCenter medicalCenter : medicalCentersFind) {
-			 if(Double.compare(medicalCenter.getAverageGrade() , grade) == 0) {
+			 String[] gradeParts = grade.split("-");
+			 if(medicalCenter.getAverageGrade() >= Double.valueOf(gradeParts[0]) &&  medicalCenter.getAverageGrade() <= Double.valueOf(gradeParts[1])) {
 				 filteredMedicalCenters.add(medicalCenter);
 			 }
 		 }
