@@ -11,10 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.iservice.IUserService;
 import ISA.BloodBank.model.Authority;
+import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.ConfirmationToken;
 import ISA.BloodBank.model.JwtAuthenticationRequest;
 import ISA.BloodBank.model.RegisteredUser;
@@ -153,6 +155,41 @@ public class UserService implements IUserService{
 	public User findLoggedInUser() {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return userRepository.findByUserId(user.getUserId());
+	}
+	
+	public User changePassword(ChangePasswordDTO newPassword) {
+		User user = findByEmail(newPassword.getEmail()); 	
+		checkInput(newPassword, user);
+		generateNewSecurePassword(newPassword, user);
+		return userRepository.save(user);
+	}
+	
+	private void checkInput(ChangePasswordDTO changePasswordDTO, User user) {
+		if (changePasswordDTO.getPassword().equals(changePasswordDTO.getOldPassword())) {
+			throw new IllegalArgumentException("Password can not be the same as the old one.");
+		}
+		if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getPasswordRepeated())) {
+			throw new IllegalArgumentException("Passwords must match!");
+		}
+		if (changePasswordDTO.getPassword().isEmpty() || changePasswordDTO.getPasswordRepeated().isEmpty()
+				|| changePasswordDTO.getOldPassword().isEmpty()) {
+			throw new IllegalArgumentException("Fill all the required fields!");
+		}
+		
+		
+		String oldPassword = generatePasswordWithSalt(changePasswordDTO.getOldPassword(), user.getSalt());
+		if(!verifyHash(oldPassword, user.getPassword())) {
+			throw new IllegalArgumentException("Old password isn't correct!");
+		}
+	}
+	
+	private void generateNewSecurePassword(ChangePasswordDTO changePasswordDTO, User user) {
+		byte[] salt = generateSalt();
+		String encodedSalt = Base64.getEncoder().encodeToString(salt);
+		user.setSalt(encodedSalt);
+		String passwordWithSalt = generatePasswordWithSalt(changePasswordDTO.getPassword(), encodedSalt);
+		String newSecurePassword = hashPassword(passwordWithSalt);
+		user.setPassword(newSecurePassword);
 	}
 	
 }
