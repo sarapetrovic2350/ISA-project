@@ -16,8 +16,11 @@ import Swal from 'sweetalert2';
 export class ChangePasswordPageComponent implements OnInit {
   title = 'Update your Password';
   public user: User= new User() ; 
-  public administrator: CenterAdministrator | undefined = undefined;
+  public administrator: CenterAdministrator = new CenterAdministrator();
   public newPassword: ChangePasswordDTO = new ChangePasswordDTO();
+
+  message: string="";
+  submitted = false;
 
   constructor(private toastr: ToastrService,private centerAdministratorService: CenterAdministratorService, private route: ActivatedRoute,
     private router: Router, private authService: AuthService) { }
@@ -34,6 +37,13 @@ export class ChangePasswordPageComponent implements OnInit {
   }
 
   public changePassword(){
+
+    if (
+      !this.validatePassword()
+    ) {
+      this.submitted = false;
+      return
+    }
 
     this.centerAdministratorService.changePassword(this.newPassword).subscribe(
       {next: (res) => {
@@ -57,11 +67,36 @@ export class ChangePasswordPageComponent implements OnInit {
 
   showError() {
     //this.toastr.error('Check the fields again!', 'Warning');
+    this.submitted = false;
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
       text: 'Something went wrong',
     }) 
+  }
+
+  validatePassword() {
+    if (this.newPassword.password.length < 4) {
+      this.message = "Your password should contain at least 4 character!";
+      return false; 
+    } else if (!this.newPassword.password.match(/[A-Z]/g)) {
+      this.message = "Your password should contain at least one big letter.";
+      return false;
+    } else if (!this.newPassword.password.match(/[0-9]/g)) {
+      this.message = "Your password should contain at least one number.";
+      return false;
+    } else if (this.newPassword.password !== this.newPassword.passwordRepeated) {
+      this.message = "Passwords do not match!";
+      return false;
+    }
+    return true;
+  }
+
+  validateEmail(){
+    if(this.newPassword.email.match(this.administrator.email)){
+      this.message = "You wrote the wrong email adress!";
+      return false; 
+    }
   }
 
 }
