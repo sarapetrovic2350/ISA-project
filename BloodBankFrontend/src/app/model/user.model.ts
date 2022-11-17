@@ -12,7 +12,8 @@ export class User {
         public jmbg: number = 0,
         public gender: string = '',
         public occupation: string = '',
-        public occupationInfo: string= ''
+        public occupationInfo: string= '',
+        public userType: string=''
       ) {}
 }
 

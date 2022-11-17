@@ -71,12 +71,14 @@
                 </div>
                    
             </div><br>
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <label>Want to change password? </label><br>
                 <button color="primary" style="width: 78%; margin-left: 7%;" mat-raised-button mat-ripple routerLink="/change-password-page">Change Password</button>
-            </mat-form-field>
+            </mat-form-field> -->
+            <a style="color:blueviolet" href="/change-password-page">Want to change password?</a>
             <button color="primary" style="width: 86%; margin-left: 7%;" (click)="updateCenterAdministrator()" mat-raised-button type="submit">Update your Information</button>
         </form> 
+        <label *ngIf="message != ''" style="color: red;">{{message}}</label>
     </mat-card-content>       
 </mat-card>
 

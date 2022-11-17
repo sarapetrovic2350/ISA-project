@@ -10,7 +10,7 @@ INSERT INTO public.address (city, country, street, street_number) VALUES ('Beogr
 INSERT INTO public.address (city, country, street, street_number) VALUES ('Beograd', 'Srbija', 'Zeleznicka', '36');
 
 INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo1', 'Centar za transfuziju krvi no1', '5.0', '1', 'medicalCenter1.jpg');
-INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'The Blood Connection', 'Centar za transfuziju krvi Blood Connection', '4.6', '5', 'medicalCenter2.jpg');
+INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'The Blood Connection', 'Centar za transfuziju krvi Blood Connection', '3.6', '5', 'medicalCenter2.jpg');
 INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo2', 'Drugi centar za transfuziju krvi', '5', '6', 'medicalCenter3.jpg');
 
 -- REGISTERED_USER email: petrovicsara10@gmail.com password: sarap
