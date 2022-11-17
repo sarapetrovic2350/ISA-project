@@ -63,13 +63,24 @@ private IMedicalCenterRepository medicalCenterRepository;
 
 	 public List<MedicalCenter> findMedicalCenterByNameAndPlace(String name, String place) {	
 			List<MedicalCenter> medicalCentersFind = new ArrayList<MedicalCenter>();
-	        if(name.equals("null") && !place.equals("null"))
-	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByAddressCity(place);
-	        else if(!name.equals("null") && place.equals("null"))
-	        	medicalCentersFind = medicalCenterRepository.findByName(name);
-	        else {
-	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByNameAndAddressCity(name, place);
-	        }
+//	        if(name.equals("null") && !place.equals("null"))
+//	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByAddressCity(place);
+//	        else if(!name.equals("null") && place.equals("null"))
+//	        	medicalCentersFind = medicalCenterRepository.findByName(name);
+//	        else {
+//	        	medicalCentersFind = medicalCenterRepository.findMedicalCentersByNameAndAddressCity(name, place);
+//	        }
+//			return medicalCentersFind;
+			List<MedicalCenter> medicalCenters = getAll();
+			for (MedicalCenter medicalCenter : medicalCenters) {
+				if(name.equals("null") || place.equals("null")) {
+					if(medicalCenter.getName().toLowerCase().contains(name.toLowerCase().trim()) || medicalCenter.getAddress().getCity().toLowerCase().contains(place.toLowerCase().trim()))
+						medicalCentersFind.add(medicalCenter);
+				}else {
+					if(medicalCenter.getName().toLowerCase().contains(name.toLowerCase().trim()) && medicalCenter.getAddress().getCity().toLowerCase().contains(place.toLowerCase().trim()))
+						medicalCentersFind.add(medicalCenter);
+				}
+			}
 			return medicalCentersFind;
 		}
 	 
