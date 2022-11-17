@@ -1,0 +1,78 @@
+<mat-card elevation="5" fxFlex class="content" >
+    <mat-card-title>
+        <h2>{{title}}</h2>
+    </mat-card-title>
+    <mat-card-content>
+        <p></p>
+        <form>
+            <div class="row" *ngIf="administrator">
+                <div>
+                    <mat-form-field>
+                        <label>First Name: </label>
+                        <input name ="name" [(ngModel)]="administrator.name" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Last Name: </label>
+                        <input name ="surname" [(ngModel)]="administrator.surname" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>JMBG: </label>
+                        <input name ="jmbg" [(ngModel)]="administrator.jmbg" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Email: </label>
+                        <input name ="email" [(ngModel)]="administrator.email" matInput required>
+                    </mat-form-field> 
+                    <mat-form-field>
+                        <label>Phone number: </label>
+                        <input name ="phoneNumber" [(ngModel)]="administrator.phoneNumber" matInput required>
+                    </mat-form-field> 
+                    <mat-form-field>
+                        <label>Gender</label>
+                        <select name ="gender" matNativeControl [(ngModel)]="administrator.gender" required>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                    </mat-form-field>
+                    
+                </div>
+            <div>
+                    <mat-form-field>
+                        <label>Street: </label>
+                        <input name ="street" [(ngModel)]="administrator.address.street" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Street number: </label>
+                        <input name ="streetNumber" [(ngModel)]="administrator.address.streetNumber" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>City: </label>
+                        <input name ="city" [(ngModel)]="administrator.address.city" matInput required>
+                    </mat-form-field>  
+                    <mat-form-field>
+                        <label>Country: </label>
+                        <input name ="country" [(ngModel)]="administrator.address.country" matInput required>
+                    </mat-form-field>
+                    
+                    <mat-form-field>
+                        <label>Occupation</label>
+                        <select name ="occupation" matNativeControl [(ngModel)]="administrator.occupation" required>
+                            <option value="STUDENT">Student</option>
+                            <option value="EMPLOYED">Employed</option>
+                            <option value="UNEMPLOYED">Unemployed</option>
+                            <option value="PENSIONER">Pensioner</option>
+                        </select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Occupation information:</label>
+                        <input name ="occupationInfo" [(ngModel)]="administrator.occupationInfo" matInput required>
+                    </mat-form-field>
+
+                </div>
+                   
+            </div><br>
+            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="onSubmit()" mat-raised-button type="submit">Create new Admin</button>
+        </form> 
+        <label *ngIf="message != ''" style="color: red;">{{message}}</label>
+    </mat-card-content>       
+</mat-card>

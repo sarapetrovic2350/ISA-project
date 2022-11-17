@@ -1,4 +1,10 @@
 <div>
+    <input type="text" placeholder="Enter name or surname" [(ngModel)]="filteredString">
+    <a mat-button class="searchBtns" (click)="search(filteredString)">Search</a>
+    <a mat-button class="searchBtns" (click)="cancelSearch()">Cancel</a>
+</div>
+
+<div>
     <table>
         <thead>
             <tr>
@@ -13,11 +19,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of allUsers">
+            <tr *ngFor="let user of users">
                 <td>{{user.name}}</td>
                 <td>{{user.surname}}</td>
                 <td>{{user.gender}}</td>
-                <td>{{user.address.street}} {{user.address.streetNumber}}<br>
+                <td>{{user.address.street}} {{user.address.streetNumber}}
                     {{user.address.city}}<br>
                     {{user.address.country}}
                 </td>
