@@ -43,5 +43,6 @@
 
             <button color="primary" style="width: 86%; margin-left: 7%;" (click)="onSubmit()" mat-raised-button type="submit">Submit</button>
         </form> 
+        <label *ngIf="message != ''" style="color: red;">{{message}}</label>
     </mat-card-content>       
 </mat-card>
