@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
 import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
+import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.MedicalCenter;
@@ -83,5 +84,18 @@ public class CenterAdministratorController {
 	 public ArrayList<CenterAdministrator> getAdministratorsByCenterId(@PathVariable Long centerId) {
 		return this.centerAdministratorService.getAllAdministratorsByCenterId(centerId);
 	 }
+	 
+	 @RequestMapping(value="/changePassword", method = RequestMethod.PUT)
+	    public @ResponseBody CenterAdministrator changePassword(@RequestBody ChangePasswordDTO dto) {
+
+		 //CenterAdministrator centAdmin = centerAdministratorService.findByEmail(dto.getEmail());
+		// CenterAdministrator retVal = centerAdministratorService.changePassword(dto);
+//	        if(u == null){
+//	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//	        }
+//	        return new ResponseEntity<>(u,HttpStatus.OK);
+	        return centerAdministratorService.changePassword(dto);
+	        
+	    }
 
 }

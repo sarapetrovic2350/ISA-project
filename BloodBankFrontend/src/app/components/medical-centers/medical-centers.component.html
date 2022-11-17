@@ -1,3 +1,37 @@
+<div style=" margin-left:1%; margin-top: 2%;">
+  <mat-form-field class="fieldd">
+    <label>Name: </label> 
+    <input [(ngModel)]="name" matInput >
+  </mat-form-field>
+  <mat-form-field style=" margin-left:2%" class="fieldd">
+    <label>Place: </label>
+    <input [(ngModel)]="place" matInput>
+  </mat-form-field>
+  <button color="primary" style="width: 10%; margin-left: 5%;" (click)="searchMediclaCenter()" mat-raised-button type="search">Search</button>
+</div>
+<div *ngIf="isSearched == true" style=" margin-left:1%; margin-top: 2%;">
+  <div style=" margin-left:5%; margin-top: 1%;"><b>Filter medical centers:</b></div>   
+  <select [(ngModel)]="filterOption" class="btn dropdown-toggle"  style="margin-left: 4%;" (change)="filterMedicalCenters()">
+     <option [ngValue]=0 disabled selected>By grade</option>
+     <option [ngValue]=1 >1-2</option>
+     <option [ngValue]=2 >2-3</option> 
+     <option [ngValue]=3 >3-4</option> 
+     <option [ngValue]=4 >4-5</option> 
+
+ </select>
+
+</div>
+<div style=" margin-left:1%; margin-top: 2%;">
+  <div style=" margin-left:5%; margin-top: 1%;"><b>Sort medical centers:</b></div>   
+  <select [(ngModel)]="selectedOption" class="btn dropdown-toggle"  style="margin-left: 4%;" (change)="changeSorting()">
+     <option [ngValue]=0 disabled selected>Sorting</option>
+     <option [ngValue]=1 >By name</option>
+     <option [ngValue]=2 >By city</option> 
+     <option [ngValue]=3 >By grade</option> 
+ </select>
+
+</div>
+
 <div>
     <div class="row"> 
             <div class="card"  *ngFor="let mc of medicalCenters">

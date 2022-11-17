@@ -30,3 +30,38 @@
     border-top-right-radius: calc(0.25rem - 1px);
 }
 
+.btn {
+    background-color: #f44336;
+    border: none;  
+    color: white;  
+    padding: 8px 12px;  
+    font-size: 16px;  
+    cursor: pointer;
+    border-radius: 5px;
+    width : 10%;
+    max-width: 10%;
+    min-width: 15%;
+    
+}
+
+.fieldd {
+    background-color: #f44336;
+    border: none;  
+    color: white;  
+    padding: 5px 5px;  
+    font-size: 16px;  
+    cursor: pointer;
+    
+}
+
+  
+.bottom {
+	z-index: 1;
+    position: fixed;
+    left: 0;
+    right: 0; 
+    height: 91%;
+    bottom: 0;
+    overflow: scroll;  
+    overflow-x: hidden;
+}

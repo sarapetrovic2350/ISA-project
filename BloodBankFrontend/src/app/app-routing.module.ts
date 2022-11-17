@@ -9,6 +9,7 @@ import { MedicalCentersComponent } from './components/medical-centers/medical-ce
 import { HomeComponent } from './pages/home/home.component';
 import { ShowUsersComponent } from './components/show-users/show-users.component';
 import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
+import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'create-medical-cenntar',
     component: RegisterMedicalCenterComponent
+  }, 
+  {
+    path: 'change-password-page',
+    component: ChangePasswordPageComponent
   }
 ];
 

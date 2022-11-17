@@ -28,10 +28,13 @@
                         <input name ="phoneNumber" [(ngModel)]="administrator.phoneNumber" matInput required>
                     </mat-form-field> 
                     <mat-form-field>
-                        <label>Password: </label>
-                        <input name ="password" [(ngModel)]="administrator.password" matInput required type="password" required>
-                    </mat-form-field> 
-
+                        <label>Gender</label>
+                        <select name ="gender" matNativeControl [(ngModel)]="administrator.gender" required>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                    </mat-form-field>
+                    
                 </div>
             <div>
                     <mat-form-field>
@@ -50,13 +53,7 @@
                         <label>Country: </label>
                         <input name ="country" [(ngModel)]="administrator.address.country" matInput required>
                     </mat-form-field>
-                    <mat-form-field>
-                        <label>Gender</label>
-                        <select name ="gender" matNativeControl [(ngModel)]="administrator.gender" required>
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
-                        </select>
-                    </mat-form-field>
+                    
                     <mat-form-field>
                         <label>Occupation</label>
                         <select name ="occupation" matNativeControl [(ngModel)]="administrator.occupation" required>
@@ -74,8 +71,11 @@
                 </div>
                    
             </div><br>
-
-            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="updateCenterAdministrator()" mat-raised-button type="submit">Submit</button>
+            <mat-form-field>
+                <label>Want to change password? </label><br>
+                <button color="primary" style="width: 78%; margin-left: 7%;" mat-raised-button mat-ripple routerLink="/change-password-page">Change Password</button>
+            </mat-form-field>
+            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="updateCenterAdministrator()" mat-raised-button type="submit">Update your Information</button>
         </form> 
     </mat-card-content>       
 </mat-card>
