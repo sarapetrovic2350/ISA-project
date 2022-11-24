@@ -19,6 +19,7 @@ export class MedicalCentersComponent implements OnInit {
   name: string = "";
   place: string = "";
   isSearched: Boolean = false;
+  isFiltered: Boolean = false;
 
   constructor(private medicalCenterService: MedicalCenterServiceService) { }
 
@@ -38,7 +39,8 @@ export class MedicalCentersComponent implements OnInit {
 
   handlePageChange(event: number): void {
     this.page = event;
-    this.retrieveCenters();
+    if(!this.isSearched)
+      this.retrieveCenters();
   }
 
   getRequestParams(page: number, pageSize: number): any {
@@ -82,7 +84,8 @@ export class MedicalCentersComponent implements OnInit {
     const centerName = this.name;
     const centerPlace = this.place;
     this.medicalCenterService.searchMediclaCenter(centerName, centerPlace).subscribe((data: any) => {
-      this.medicalCenters = data;
+      this.medicalCenters = data.searchedCenters;
+      this.count = data.totalItems;
       console.log(data);
       console.log(this.medicalCenters);
       this.isSearched = true;
@@ -94,7 +97,8 @@ export class MedicalCentersComponent implements OnInit {
     const centerPlace = this.place;
     const grade = this.filterOption;
     this.medicalCenterService.filterMedicalCenters(centerName, centerPlace, grade).subscribe((data: any) => {
-      this.medicalCenters = data;
+      this.medicalCenters = data.filteredCenters;
+      this.count = data.totalItems;
       console.log(data);
       console.log(this.medicalCenters);
     })

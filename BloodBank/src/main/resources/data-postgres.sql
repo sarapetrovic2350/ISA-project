@@ -11,8 +11,8 @@ INSERT INTO public.address (city, country, street, street_number) VALUES ('Beogr
 
 INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo1', 'Centar za transfuziju krvi no1', '5.0', '1', 'medicalCenter4.jpg');
 INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'The Blood Connection', 'Centar za transfuziju krvi Blood Connection', '4.6', '5', 'medicalCenter2.jpg');
-INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo2', 'Drugi centar za transfuziju krvi', '3.8', '6', 'medicalCenter6.jpg');
-INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'Medical Center Hope', 'Novi centar za transfuziju krvi', '4.8', '2', 'medicalCenter5.jpg');
+INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'CenterNo2', 'Drugi centar za transfuziju krvi', '4.8', '6', 'medicalCenter6.jpg');
+INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'Medical Center Hope', 'Novi centar za transfuziju krvi', '4.8', '5', 'medicalCenter5.jpg');
 INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'Save life', 'Centar za donaciju krvi Save Life', '5.0', '3', 'medicalCenter3.jpg');
 INSERT INTO public.medical_center (center_id, name, description, average_grade, address_id, image) VALUES (default, 'Blood Bank', 'Medicinski centar Blood Bank', '3.6', '4', 'medicalCenter1.jpg');
 
