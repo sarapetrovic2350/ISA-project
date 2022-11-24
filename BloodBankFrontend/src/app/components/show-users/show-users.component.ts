@@ -12,6 +12,12 @@ export class ShowUsersComponent implements OnInit {
   allUsers: User[] = [];
   users: User[]= [];
   filteredString : string='';
+
+  name: string = "";
+  surname: string = "";
+  isSearched: Boolean = false;
+
+
   constructor(private showUsersService: ShowUsersService) { }
 
   ngOnInit(): void {
@@ -58,4 +64,29 @@ export class ShowUsersComponent implements OnInit {
     })
   }
 
+  public searchUser(): void {
+
+    let role = localStorage.getItem('role');
+    if(role == "ROLE_SYSTEM_ADMINISTRATOR"){
+      const name = this.name;
+      const surname = this.surname;
+      this.showUsersService.searchUsersForSystemAdmin(name, surname).subscribe((data: any) => {
+      this.users = data;
+      console.log(data);
+      console.log(this.users);
+      this.isSearched = true;
+    })
+
+    }else{
+      const name = this.name;
+      const surname = this.surname;
+      this.showUsersService.searchUsersForCenterAdmin(name, surname).subscribe((data: any) => {
+      this.users = data;
+      console.log(data);
+      console.log(this.users);
+      this.isSearched = true;
+    })
+
+  };
+}
 }

@@ -19,6 +19,7 @@ import ISA.BloodBank.model.Authority;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.ConfirmationToken;
 import ISA.BloodBank.model.JwtAuthenticationRequest;
+import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
@@ -190,6 +191,36 @@ public class UserService implements IUserService{
 		String passwordWithSalt = generatePasswordWithSalt(changePasswordDTO.getPassword(), encodedSalt);
 		String newSecurePassword = hashPassword(passwordWithSalt);
 		user.setPassword(newSecurePassword);
+	}
+	
+	public List<User> findUserByNameAndSurnameForSystemAdmin(String name, String surname) {	
+		List<User> usersFind = new ArrayList<User>();
+		List<User> users = getAllUsers();
+		for (User user : users) {
+			if(name.equals("null") || surname.equals("null")) {
+				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) || user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+					usersFind.add(user);
+			}else {
+				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) && user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+					usersFind.add(user);
+			}
+		}
+		return usersFind;
+	}
+	
+	public List<User> findUserByNameAndSurnameForCenterAdmin(String name, String surname) {	
+		List<User> usersFind = new ArrayList<User>();
+		List<User> users = getAllRegistredUsers();
+		for (User user : users) {
+			if(name.equals("null") || surname.equals("null")) {
+				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) || user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+					usersFind.add(user);
+			}else {
+				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) && user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+					usersFind.add(user);
+			}
+		}
+		return usersFind;
 	}
 	
 }

@@ -21,4 +21,24 @@ export class ShowUsersService {
     return this.http.get<User[]>(this.apiHost + 'user/getAllRegistredUsers');
   }
 
+  searchUsersForSystemAdmin(name : string, surname : string): Observable<User[]> {
+    if(surname == ""){
+      surname = "null";
+    }
+    if(name == ""){
+      name = "null"
+    }
+    return this.http.get<User[]>(this.apiHost + 'user/findUserByNameAndSurnameForSystemAdmin/' + name + '/' + surname, {headers: this.headers});
+  }
+
+  searchUsersForCenterAdmin(name : string, surname : string): Observable<User[]> {
+    if(surname == ""){
+      surname = "null";
+    }
+    if(name == ""){
+      name = "null"
+    }
+    return this.http.get<User[]>(this.apiHost + 'user/findUserByNameAndSurnameForCenterAdmin/' + name + '/' + surname, {headers: this.headers});
+  }
+
 }
