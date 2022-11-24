@@ -21,6 +21,7 @@ import { RegisterMedicalCenterComponent } from './components/register-medical-ce
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
+    NgxPaginationModule,
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({

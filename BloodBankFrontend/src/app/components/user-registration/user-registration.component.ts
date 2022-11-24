@@ -21,6 +21,7 @@ export class UserRegistrationComponent implements OnInit {
   country: string="";
   message: string="";
   submitted = false;
+  jmbg: string = "";
 
   constructor(
     private router: Router,
@@ -32,7 +33,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.user.jmbg = parseInt(this.jmbg)
     if (
       !this.validateFirstName() ||
       !this.validateLastName() ||

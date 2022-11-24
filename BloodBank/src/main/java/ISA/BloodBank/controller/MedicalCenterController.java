@@ -1,7 +1,13 @@
 package ISA.BloodBank.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -52,7 +59,31 @@ public class MedicalCenterController {
 	public ResponseEntity<List<MedicalCenter>> findAll() {
 		return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.getAll(), HttpStatus.OK);
 	}
-	
+		
+	@GetMapping("/findAll")
+	  public ResponseEntity<Map<String, Object>> findAllPagination(
+	        @RequestParam(defaultValue = "1") int page,
+	        @RequestParam(defaultValue = "3") int size
+	      ) {
+	    try {      
+	      List<MedicalCenter> centers = new ArrayList<MedicalCenter>();
+	      Pageable paging = PageRequest.of(page, size);
+	      
+	      Page<MedicalCenter> pageCenters = medicalCenterService.findAll(paging);
+	      centers = pageCenters.getContent();
+	            
+	      Map<String, Object> response = new HashMap<>();
+	      response.put("centers", centers);
+	      response.put("currentPage", pageCenters.getNumber());
+	      response.put("totalItems", pageCenters.getTotalElements());
+	      response.put("totalPages", pageCenters.getTotalPages());
+	      
+	      return new ResponseEntity<>(response, HttpStatus.OK);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	  }
+
 	 @RequestMapping(value="/updateCenter", method = RequestMethod.PUT)
 	 public @ResponseBody MedicalCenter update(@RequestBody MedicalCenter medCenterDto) { 
 		 System.out.println(medCenterDto); 

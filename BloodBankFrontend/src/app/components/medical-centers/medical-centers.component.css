@@ -12,7 +12,7 @@
     background-clip: border-box;
     border: 3px outset rgba(0, 0, 0, 0.125);
     border-radius: 10px;
-    width: 22%;
+    width: 25%;
     max-width: 22%;
     min-width: 20%;
     text-align: left;
@@ -37,9 +37,9 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    width: 10%;
-    max-width: 10%;
-    min-width: 15%;
+    width: 12%;
+    max-width: 12%;
+    min-width: 12%;
 
 }
 
@@ -47,14 +47,14 @@
     background-color: #f44336;
     border: none;
     color: white;
-    padding: 5px 5px;
-    font-size: 16px;
+    padding: 2px 2px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
     width: 12%;
     max-width: 12%;
     min-width: 12%;
-
 }
 
 .div1 {
@@ -75,4 +75,7 @@
 
 .height {
     height: 70px;
+}
+.footer {
+    text-align: center;
 }

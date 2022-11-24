@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -100,5 +102,10 @@ private IMedicalCenterRepository medicalCenterRepository;
 	public MedicalCenter findById(Long id) throws AccessDeniedException {
 		MedicalCenter u = medicalCenterRepository.findById(id).orElseGet(null);
 		return u;
+	}
+
+	@Override
+	public Page<MedicalCenter> findAll(Pageable pageable) {
+		return medicalCenterRepository.findAll(pageable);
 	}
 }

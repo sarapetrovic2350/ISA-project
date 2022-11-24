@@ -17,6 +17,8 @@ export class QuestionnaireComponent implements OnInit {
   user = new User();
   questionnaire = new Questionnaire();
   submitted = false;
+  weight: string = "";
+  age: string = "";
 
   constructor(
     private authService: AuthService,
@@ -28,6 +30,8 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   onSubmit() {
+    this.questionnaire.weight = parseInt(this.weight);
+    this.questionnaire.age = parseInt(this.age);
     this.submitted = true;
     this.questionnaire.userEmail = this.user.email;
     this.questionnaireService.saveQuestionnaire(this.questionnaire).subscribe(

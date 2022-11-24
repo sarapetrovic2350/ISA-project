@@ -2,7 +2,8 @@ package ISA.BloodBank.repository;
 
 import java.util.List;
 
-import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,8 @@ import ISA.BloodBank.model.MedicalCenter;
 
 @Repository
 public interface IMedicalCenterRepository extends JpaRepository<MedicalCenter, Long> {
+	
+	Page<MedicalCenter> findAll(Pageable pageable);
 	
 	//MedicalCenter findMedCenterById(Long centerId); 
 	

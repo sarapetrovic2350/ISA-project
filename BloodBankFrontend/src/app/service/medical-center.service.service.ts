@@ -22,8 +22,8 @@ export class MedicalCenterServiceService {
     return this.http.put<any>(this.apiHost + 'medicalCenter/updateCenter' , medicalCenter, {headers: this.headers});
   }
 
-  getAll(): Observable<medicalCenter[]> {
-    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/getAll');
+  getAll(params: any): Observable<medicalCenter[]> {
+    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/findAll', { params });
   }
 
   createMedicalCenter(medicalCenter: any): Observable<any> {
