@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CenterAdministrator } from 'src/app/model/center-administrator.model';
+import { medicalCenter } from 'src/app/model/medicalCenter.model';
 import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { CenterAdministratorService } from 'src/app/service/center-administrator.service';
+import { MedicalCenterServiceService } from 'src/app/service/medical-center.service.service';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-create-center-admin',
@@ -14,10 +17,14 @@ import Swal from 'sweetalert2';
 })
 export class CreateCenterAdminComponent implements OnInit {
 
+  medicalCenters : medicalCenter[] = [];
 
   title = 'Create Center Admin';
   public user: User= new User() ; 
   public administrator: CenterAdministrator = new CenterAdministrator();
+
+
+  selectedCenter: number = 0;
 
   message: string="";
   submitted = false;
@@ -25,19 +32,25 @@ export class CreateCenterAdminComponent implements OnInit {
   showMessage = false;
 
   constructor(private toastr: ToastrService,private centerAdministratorService: CenterAdministratorService, private route: ActivatedRoute,
-    private router: Router, private authService: AuthService) { }
+    private router: Router, private authService: AuthService,private medicalCenterService: MedicalCenterServiceService) { }
 
   ngOnInit(): void {
+
+    this.medicalCenterService.getAllCenters().subscribe(result => {
+      this.medicalCenters = result;
+    })
   }
 
   onSubmit() {
+
+    this.administrator.medicalCenter = this.selectedCenter;
 
     if (
       !this.validateFirstName() ||
       !this.validateLastName() ||
       !this.validateJmbg() ||
       !this.validateEmail() ||
-      !this.validatePhoneNumber() ||
+      //!this.validatePhoneNumber() ||
       !this.validateStreet() ||
       !this.validateStreetNumber() ||
       !this.validateCity() ||

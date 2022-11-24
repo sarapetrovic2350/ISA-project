@@ -27,7 +27,7 @@ public class CenterAdministratorRegistrationDTO {
 
 	private String occupationInfo;
 
-	private MedicalCenter medicalCenter;
+	private Long medicalCenter;
 
 	public CenterAdministratorRegistrationDTO() {
 
@@ -35,7 +35,7 @@ public class CenterAdministratorRegistrationDTO {
 
 	public CenterAdministratorRegistrationDTO(String email, String password, String name, String surname,
 			Address address, String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo,
-			MedicalCenter medicalCenter) {
+			Long medicalCenter) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -130,11 +130,11 @@ public class CenterAdministratorRegistrationDTO {
 		this.occupationInfo = occupationInfo;
 	}
 
-	public MedicalCenter getMedicalCenter() {
+	public Long getMedicalCenter() {
 		return medicalCenter;
 	}
 
-	public void setMedicalCenter(MedicalCenter medicalCenter) {
+	public void setMedicalCenter(Long medicalCenter) {
 		this.medicalCenter = medicalCenter;
 	}
 }

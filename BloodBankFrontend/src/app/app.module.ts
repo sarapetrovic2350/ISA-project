@@ -22,6 +22,7 @@ import { ChangePasswordPageComponent } from './components/change-password-page/c
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatSelectModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

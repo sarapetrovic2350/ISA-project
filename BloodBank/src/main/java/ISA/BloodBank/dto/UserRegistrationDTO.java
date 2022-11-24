@@ -25,13 +25,15 @@ public class UserRegistrationDTO {
 	private Occupation occupation;
 
 	private String occupationInfo;
+	
+	private String centerId;
 
 	public UserRegistrationDTO() {
 
 	}
 
 	public UserRegistrationDTO(String email, String password, String name, String surname, Address address,
-			String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo) {
+			String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo,String centerId) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -43,6 +45,15 @@ public class UserRegistrationDTO {
 		this.jmbg = jmbg;
 		this.occupation = occupation;
 		this.occupationInfo = occupationInfo;
+		this.centerId = centerId;
+	}
+
+	public String getCenterId() {
+		return centerId;
+	}
+
+	public void setCenterId(String centerId) {
+		this.centerId = centerId;
 	}
 
 	public String getEmail() {
