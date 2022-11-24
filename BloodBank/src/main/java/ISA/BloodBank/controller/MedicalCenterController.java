@@ -1,15 +1,14 @@
 package ISA.BloodBank.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import ISA.BloodBank.dto.MedicalCenterSearchDTO;
-import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
 import ISA.BloodBank.model.MedicalCenter;
-import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.MedicalCenterService;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -97,12 +93,25 @@ public class MedicalCenterController {
 	 }
 	 
 	 @GetMapping(value = "/searchMedicalCenterByNameAndPlace/{name}/{place}")
-		public ResponseEntity<List<MedicalCenter>> getAllMedicalCentersForSearch(@PathVariable String name,@PathVariable String place){
-			return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.findMedicalCenterByNameAndPlace(name, place), HttpStatus.OK);
+		public ResponseEntity<Map<String, Object>> getAllMedicalCentersForSearch(@PathVariable String name,@PathVariable String place){
+			List<MedicalCenter> searchedCenters = medicalCenterService.findMedicalCenterByNameAndPlace(name, place);
+			int total = searchedCenters.size();
+			Map<String, Object> response = new HashMap<>();
+			response.put("searchedCenters", searchedCenters);
+			response.put("totalItems", total);
+			
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 	 
 	 @GetMapping(value = "/filterMedicalCenter/{name}/{place}/{grade}")
-		public ResponseEntity<List<MedicalCenter>> getFilteredMedicalCenters(@PathVariable String name,@PathVariable String place, @PathVariable String grade){
-		 	return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.filterMedicalCenter(name, place, grade), HttpStatus.OK);
+		public ResponseEntity<Map<String, Object>> getFilteredMedicalCenters(@PathVariable String name,@PathVariable String place, @PathVariable String grade){
+			List<MedicalCenter> filteredCenters = medicalCenterService.filterMedicalCenter(name, place, grade);
+			int total = filteredCenters.size();
+			Map<String, Object> response = new HashMap<>();
+			response.put("filteredCenters", filteredCenters);
+			response.put("totalItems", total);
+			
+			return new ResponseEntity<>(response, HttpStatus.OK);	
+		 
 		}
 }
