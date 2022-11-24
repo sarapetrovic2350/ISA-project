@@ -68,6 +68,17 @@
                         <input name ="occupationInfo" [(ngModel)]="administrator.occupationInfo" matInput required>
                     </mat-form-field>
 
+                    <div>
+                        <mat-form-field appearance="outline" color="primary" class="form-field">
+                            <mat-label>Medical Center</mat-label>
+                            <mat-select [(value)]="selectedCenter">
+                                    <mat-option *ngFor="let center of medicalCenters" value="{{center.centerId}}">
+                                        {{center.name}}
+                                    </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
                 </div>
                    
             </div><br>

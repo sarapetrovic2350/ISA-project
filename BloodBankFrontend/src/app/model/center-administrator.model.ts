@@ -12,6 +12,7 @@ export class CenterAdministrator {
         public jmbg: number = 0,
         public gender: string = '',
         public occupation: string = '',
-        public occupationInfo: string= ''
+        public occupationInfo: string= '',
+        public medicalCenter: number = 0
       ) {}
 }
