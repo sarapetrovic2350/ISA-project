@@ -19,7 +19,8 @@ export class MedicalCentersComponent implements OnInit {
   name: string = "";
   place: string = "";
   isSearched: Boolean = false;
-  isFiltered: Boolean = false;
+  isSorted: Boolean = false;
+  sortAfterSearch: Boolean = false;
 
   constructor(private medicalCenterService: MedicalCenterServiceService) { }
 
@@ -39,8 +40,12 @@ export class MedicalCentersComponent implements OnInit {
 
   handlePageChange(event: number): void {
     this.page = event;
-    if(!this.isSearched)
+    if (this.isSorted && !this.isSearched) {
+      this.changeSorting();
+    }
+    if (!this.isSorted && !this.isSearched) {
       this.retrieveCenters();
+    }
   }
 
   getRequestParams(page: number, pageSize: number): any {
@@ -58,24 +63,57 @@ export class MedicalCentersComponent implements OnInit {
   }
 
   changeSorting() {
-    if (this.selectedOption == '1') {
+    if (this.sortAfterSearch) {
+      if (this.selectedOption == '1') {
+        return this.medicalCenters.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      else if (this.selectedOption == '3') {
+        this.medicalCenters.sort(function (a, b) {
 
-      return this.medicalCenters.sort((a, b) => a.name.localeCompare(b.name));
-
-    } else if (this.selectedOption == '3') {
-
-      this.medicalCenters.sort(function (a, b) {
-
-        return b.averageGrade - a.averageGrade
-      })
-
-    } else if (this.selectedOption == '2') {
-
-      return this.medicalCenters.sort((a, b) => a.address.city.localeCompare(b.address.city));
-
+          return b.averageGrade - a.averageGrade
+        })
+      } else if (this.selectedOption == '2') {
+        return this.medicalCenters.sort((a, b) => a.address.city.localeCompare(b.address.city));
+      } else {
+        return null;
+      }
     }
     else {
-      return null;
+      if (this.selectedOption == '1') {
+        this.isSorted = true;
+        const params = this.getRequestParams(this.page, this.pageSize);
+        this.medicalCenterService.sortMedicalCentersByNameAsc(params).subscribe((data: any) => {
+          this.medicalCenters = data.centers;
+          this.count = data.totalItems;
+          console.log(data);
+          console.log(this.medicalCenters);
+
+        })
+
+      } else if (this.selectedOption == '3') {
+        this.isSorted = true;
+        const params = this.getRequestParams(this.page, this.pageSize);
+        this.medicalCenterService.sortMedicalCentersByAverageGradeDesc(params).subscribe((data: any) => {
+          this.medicalCenters = data.centers;
+          this.count = data.totalItems;
+          console.log(data);
+          console.log(this.medicalCenters);
+        })
+
+      } else if (this.selectedOption == '2') {
+        this.isSorted = true;
+        const params = this.getRequestParams(this.page, this.pageSize);
+        this.medicalCenterService.sortMedicalCentersByCityNameAsc(params).subscribe((data: any) => {
+          this.medicalCenters = data.centers;
+          this.count = data.totalItems;
+          console.log(data);
+          console.log(this.medicalCenters);
+        })
+
+      }
+      else {
+        return null;
+      }
     }
 
   }
@@ -90,6 +128,7 @@ export class MedicalCentersComponent implements OnInit {
       console.log(this.medicalCenters);
       this.isSearched = true;
     })
+    this.sortAfterSearch = true;
   };
 
   public filterMedicalCenters(): void {
@@ -101,11 +140,17 @@ export class MedicalCentersComponent implements OnInit {
       this.count = data.totalItems;
       console.log(data);
       console.log(this.medicalCenters);
+
     })
   };
 
   cancelSearch() {
     this.retrieveCenters();
     this.isSearched = false;
+    this.sortAfterSearch = false;
+    this.isSorted = false;
+    this.selectedOption = '0';
+    this.name = "";
+    this.place = "";
   }
 }
