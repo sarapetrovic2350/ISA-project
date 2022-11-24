@@ -28,10 +28,13 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	
 	private AuthorityService authorityService;
 	
+	private MedicalCenterService medicalCenterService;
+	
 	@Autowired
-	public CenterAdministratorService(ICenterAdministratorRepository centerAdministratorRepository, AuthorityService authorityService) {
+	public CenterAdministratorService(ICenterAdministratorRepository centerAdministratorRepository, AuthorityService authorityService, MedicalCenterService medicalCenterService) {
 		this.centerAdministratorRepository = centerAdministratorRepository;
 		this.authorityService = authorityService;
+		this.medicalCenterService = medicalCenterService;
 	}
 
 	@Override
@@ -54,8 +57,9 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		centerAdministrator.setGender(centerAdministratorRegistrationDTO.getGender());
 		centerAdministrator.setOccupation(centerAdministratorRegistrationDTO.getOccupation());
 		centerAdministrator.setOccupationInfo(centerAdministratorRegistrationDTO.getOccupationInfo());
-		centerAdministrator.setMedicalCenter(centerAdministratorRegistrationDTO.getMedicalCenter());
+		centerAdministrator.setMedicalCenter(medicalCenterService.findById(centerAdministratorRegistrationDTO.getMedicalCenter()));
 		centerAdministrator.setUserType(UserType.CENTER_ADMINISTRATOR);
+		
 		centerAdministrator.setEnabled(true);
 		Authority authority = authorityService.findByName("ROLE_CENTER_ADMINISTRATOR");
 		centerAdministrator.setAuthority(authority);
