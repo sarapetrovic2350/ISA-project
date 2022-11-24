@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -57,8 +58,8 @@ public class MedicalCenterController {
 	}
 		
 	@GetMapping("/findAll")
-	  public ResponseEntity<Map<String, Object>> findAllPagination(
-	        @RequestParam(defaultValue = "1") int page,
+	  public ResponseEntity<Map<String, Object>> findAllWithPagination(
+	        @RequestParam(defaultValue = "0") int page,
 	        @RequestParam(defaultValue = "3") int size
 	      ) {
 	    try {      
@@ -66,6 +67,75 @@ public class MedicalCenterController {
 	      Pageable paging = PageRequest.of(page, size);
 	      
 	      Page<MedicalCenter> pageCenters = medicalCenterService.findAll(paging);
+	      centers = pageCenters.getContent();
+	            
+	      Map<String, Object> response = new HashMap<>();
+	      response.put("centers", centers);
+	      response.put("currentPage", pageCenters.getNumber());
+	      response.put("totalItems", pageCenters.getTotalElements());
+	      response.put("totalPages", pageCenters.getTotalPages());
+	      
+	      return new ResponseEntity<>(response, HttpStatus.OK);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	  }
+	
+	@GetMapping("/findAllSortedByName")
+	  public ResponseEntity<Map<String, Object>> findAllSortedByNameWithPagination(
+			@RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "3") int size) {
+		
+	    try {      
+	      List<MedicalCenter> centers = new ArrayList<MedicalCenter>();
+	      Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
+	      Page<MedicalCenter> pageCenters = medicalCenterService.findAllOrderByNameAsc(paging);
+	      centers = pageCenters.getContent();
+	            
+	      Map<String, Object> response = new HashMap<>();
+	      response.put("centers", centers);
+	      response.put("currentPage", pageCenters.getNumber());
+	      response.put("totalItems", pageCenters.getTotalElements());
+	      response.put("totalPages", pageCenters.getTotalPages());
+	      
+	      return new ResponseEntity<>(response, HttpStatus.OK);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	  }
+	
+	@GetMapping("/findAllSortedByAverageGrade")
+	  public ResponseEntity<Map<String, Object>> findAllSortedByAverageGradeWithPagination(
+			@RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "3") int size) {
+		
+	    try {      
+	      List<MedicalCenter> centers = new ArrayList<MedicalCenter>();
+	      Pageable paging = PageRequest.of(page, size, Sort.by("averageGrade").descending());
+	      Page<MedicalCenter> pageCenters = medicalCenterService.findAllOrderByAverageGradeDesc(paging);
+	      centers = pageCenters.getContent();
+	            
+	      Map<String, Object> response = new HashMap<>();
+	      response.put("centers", centers);
+	      response.put("currentPage", pageCenters.getNumber());
+	      response.put("totalItems", pageCenters.getTotalElements());
+	      response.put("totalPages", pageCenters.getTotalPages());
+	      
+	      return new ResponseEntity<>(response, HttpStatus.OK);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	  }
+	
+	@GetMapping("/findAllSortedByCityName")
+	  public ResponseEntity<Map<String, Object>> findAllSortedByCityNameWithPagination(
+			@RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "3") int size) {
+		
+	    try {      
+	      List<MedicalCenter> centers = new ArrayList<MedicalCenter>();
+	      Pageable paging = PageRequest.of(page, size, Sort.by("address.city").ascending());
+	      Page<MedicalCenter> pageCenters = medicalCenterService.findAllOrderByCityNameAsc(paging);
 	      centers = pageCenters.getContent();
 	            
 	      Map<String, Object> response = new HashMap<>();

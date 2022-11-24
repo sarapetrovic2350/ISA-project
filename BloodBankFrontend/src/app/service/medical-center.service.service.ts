@@ -29,6 +29,15 @@ export class MedicalCenterServiceService {
   getAllCenters(): Observable<medicalCenter[]> {
     return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/getAll', {});
   }
+  sortMedicalCentersByNameAsc(params: any):  Observable<medicalCenter[]> {
+    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/findAllSortedByName', { params });
+  }
+  sortMedicalCentersByCityNameAsc(params: any):  Observable<medicalCenter[]> {
+    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/findAllSortedByCityName', { params });
+  }
+  sortMedicalCentersByAverageGradeDesc(params: any):  Observable<medicalCenter[]> {
+    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/findAllSortedByAverageGrade', { params });
+  }
 
   createMedicalCenter(medicalCenter: any): Observable<any> {
     console.log(medicalCenter); 

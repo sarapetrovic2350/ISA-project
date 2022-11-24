@@ -9,10 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
-import ISA.BloodBank.dto.MedicalCenterUpdateDTO;
-import ISA.BloodBank.iservice.IMedicalCenterService; 
-import ISA.BloodBank.repository.IMedicalCenterRepository;
+import ISA.BloodBank.iservice.IMedicalCenterService;
 import ISA.BloodBank.model.MedicalCenter;
+import ISA.BloodBank.repository.IMedicalCenterRepository;
 
 @Service
 public class MedicalCenterService implements IMedicalCenterService{
@@ -108,4 +107,21 @@ private IMedicalCenterRepository medicalCenterRepository;
 	public Page<MedicalCenter> findAll(Pageable pageable) {
 		return medicalCenterRepository.findAll(pageable);
 	}
+
+	@Override
+	public Page<MedicalCenter> findAllOrderByNameAsc(Pageable pageable) {
+		return medicalCenterRepository.findAll(pageable);
+	}
+	
+	@Override
+	public Page<MedicalCenter> findAllOrderByAverageGradeDesc(Pageable pageable) {
+		return medicalCenterRepository.findAll(pageable);
+	}
+	
+	@Override
+	public Page<MedicalCenter> findAllOrderByCityNameAsc(Pageable pageable) {
+		return medicalCenterRepository.findAll(pageable);
+	}
+	
+
 }

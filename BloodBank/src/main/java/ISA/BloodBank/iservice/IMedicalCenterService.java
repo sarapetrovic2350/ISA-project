@@ -17,5 +17,10 @@ public interface IMedicalCenterService {
 	List<MedicalCenter> getAll();
 	
 	Page<MedicalCenter> findAll(Pageable pageable);
+	Page<MedicalCenter> findAllOrderByNameAsc(Pageable pageable);
+	Page<MedicalCenter> findAllOrderByAverageGradeDesc(Pageable pageable);
+	Page<MedicalCenter> findAllOrderByCityNameAsc(Pageable pageable);
+	
+	
 	
 }

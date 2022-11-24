@@ -79,6 +79,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/centerAdministrator/getMedicalCenterByAdminEmail/{email}",
 				"/centerAdministrator/getCenterAdministratorsByCenterId/{centerId}",
 				"/donorQuestionnaire/getAll",
+				"/medicalCenter/findAllSortedByName",
+				"/medicalCenter/findAllSortedByAverageGrade",
+				"/medicalCenter/findAllSortedByCityName",
 				"/webjars/**", "/*.html", "/favicon.ico",
 				"/**/*.html", "/**/*.css", "/**/*.js");
 
