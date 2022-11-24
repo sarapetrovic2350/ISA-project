@@ -4,6 +4,18 @@
     <a mat-button class="searchBtns" (click)="cancelSearch()">Cancel</a>
 </div>
 
+<div class="div1">
+    <mat-form-field class="fieldd ml4">
+      <input [(ngModel)]="name" matInput placeholder="Search by name...">
+    </mat-form-field>
+    <mat-form-field class="fieldd ml2">
+      <input [(ngModel)]="surname" matInput placeholder="Search by surname...">
+    </mat-form-field>
+    <button color="primary" class="search" (click)="searchUser()" mat-raised-button type="search">Search</button>
+    <button *ngIf="isSearched == true" color="primary" class="search" (click)="cancelSearch()" mat-raised-button
+      type="cancel">Cancel</button>
+  </div>
+
 <div>
     <table class="container" >
         <thead>

@@ -22,6 +22,7 @@ import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
+import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.UserService;
 
@@ -82,5 +83,15 @@ public class UserController {
 	    public @ResponseBody User changePassword(@RequestBody ChangePasswordDTO dto) {
 		 return userService.changePassword(dto);
 	    }
+	 
+	 @GetMapping(value = "/findUserByNameAndSurnameForSystemAdmin/{name}/{surname}")
+		public ResponseEntity<List<User>> findUserByNameAndSurname(@PathVariable String name,@PathVariable String surname){
+			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForSystemAdmin(name, surname), HttpStatus.OK);
+		}
+	 
+	 @GetMapping(value = "/findUserByNameAndSurnameForCenterAdmin/{name}/{surname}")
+		public ResponseEntity<List<User>> findUserByNameAndSurnameForCenterAdmin(@PathVariable String name,@PathVariable String surname){
+			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname), HttpStatus.OK);
+		}
 	
 }
