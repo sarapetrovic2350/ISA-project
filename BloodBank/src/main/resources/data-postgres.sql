@@ -36,6 +36,15 @@ INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id,
 
 INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-10-10 12:05:00','neki tekst', 'neki tekst', '1', null, '1', '3' ); 
 INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-11-11 12:05:00', 'neki tekst', 'neki tekst', '1', '4', null, '3'); 
-INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-09-09 12:05:00', 'neki tekst', 'neki tekst', '1', null, '2', '3');
+INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-09-09 12:05:00', 'neki tekst', 'neki tekst', '1', null, '2', '3');;
 
 INSERT INTO public.donor_questionnaire (id, age, general_good_health, has_period, normal_blood_pressure, recently_donated_blood, visited_dentist, skin_disorders, symptoms_of_illness, tattoo_or_piercing, under_medication, weight, user_id ) VALUES (default, '22', true, false, true, false, false, false, false, false, false, '56', '2' ); 
+
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'A_POSITIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'A_NEGATIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'B_POSITIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'B_NEGATIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'ZERO_POSITIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'ZERO_NEGATIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_POSITIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_NEGATIVE', 1000);
