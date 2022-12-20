@@ -24,6 +24,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatSelectModule} from '@angular/material/select';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
+import { CreateReportComponent } from './components/create-report/create-report.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PredefinedAppointmentComponent } from './components/predefined-appointm
     ChangePasswordPageComponent,
     CreateCenterAdminComponent,
     QuestionnaireComponent,
-    PredefinedAppointmentComponent
+    PredefinedAppointmentComponent,
+    CreateReportComponent
   ],
   imports: [
     BrowserModule,

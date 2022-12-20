@@ -20,12 +20,15 @@ public class CreateReportDTO {
 	private Double quantaty; 
 	private String reason; 
 	private String date; 
+	private Boolean present;
+	private Double equipmentQuantaty; 
 	
 	CreateReportDTO(){}
 
 	public CreateReportDTO(String administratorEmail, Long customerId, Long bloodId, Long appointmentId,
 			Double haemoglobinValue, String heart, String lungs, Double weight, Double height, Double bloodPreasure,
-			ReportStatus reportStatus, Double quantaty, String reason, String date) {
+			ReportStatus reportStatus, Double quantaty, String reason, String date, Boolean present,
+			Double equipmentQuantaty) {
 		super();
 		this.administratorEmail = administratorEmail;
 		this.customerId = customerId;
@@ -41,7 +44,11 @@ public class CreateReportDTO {
 		this.quantaty = quantaty;
 		this.reason = reason;
 		this.date = date;
+		this.present = present;
+		this.equipmentQuantaty = equipmentQuantaty;
 	}
+
+
 
 	public String getAdministratorEmail() {
 		return administratorEmail;
@@ -153,6 +160,22 @@ public class CreateReportDTO {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public Boolean getPresent() {
+		return present;
+	}
+
+	public void setPresent(Boolean present) {
+		this.present = present;
+	}
+
+	public Double getEquipmentQuantaty() {
+		return equipmentQuantaty;
+	}
+
+	public void setEquipmentQuantaty(Double equipmentQuantaty) {
+		this.equipmentQuantaty = equipmentQuantaty;
 	}
 	
 }

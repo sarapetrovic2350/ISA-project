@@ -24,6 +24,7 @@ import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
 import ISA.BloodBank.repository.IUserRepository;
+import ISA.BloodBank.repository.RegisteredUserRepository;
 
 @Service
 public class UserService implements IUserService{
@@ -34,13 +35,16 @@ public class UserService implements IUserService{
 	
 	private ConfirmationTokenService confirmationTokenService;
 	
+	private RegisteredUserRepository registeredUserRepository; 
+	
 	@Autowired
 	public UserService(IUserRepository userRepository, AuthorityService authorityService,
-			ConfirmationTokenService confirmationTokenService) {
+			ConfirmationTokenService confirmationTokenService, RegisteredUserRepository registeredUserRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.authorityService = authorityService;
 		this.confirmationTokenService = confirmationTokenService;
+		this.registeredUserRepository = registeredUserRepository; 
 	}
 	
 	@Override
@@ -221,6 +225,15 @@ public class UserService implements IUserService{
 			}
 		}
 		return usersFind;
+	}
+	
+	public void updatePenal(Long id) {
+		
+		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
+		Integer penal = user.getPenalties() + 1; 
+		user.setPenalties(penal); 
+		registeredUserRepository.save(user); 
+		
 	}
 	
 }

@@ -42,22 +42,22 @@ public class Report {
 	@Column(name = "date", nullable = false)
 	private LocalDateTime date;
 	
-	@Column(name = "haemoglobinValue", nullable = true)
+	@Column(name = "haemoglobinValue", nullable = false)
 	private Double haemoglobinValue;
 	
-	@Column(name = "heart", nullable = true)
+	@Column(name = "heart", nullable = false)
 	private String heart;
 	
-	@Column(name = "lungs", nullable = true)
+	@Column(name = "lungs", nullable = false)
 	private String lungs;
 	
-	@Column(name = "weight", nullable = true)
+	@Column(name = "weight", nullable = false)
 	private Double weight;
 	
-	@Column(name = "height", nullable = true)
+	@Column(name = "height", nullable = false)
 	private Double height;
 	
-	@Column(name = "bloodPreasure", nullable = true)
+	@Column(name = "bloodPreasure", nullable = false)
 	private Double bloodPreasure;
 	
 	@Enumerated(EnumType.STRING)
