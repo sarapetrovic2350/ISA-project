@@ -23,6 +23,7 @@ import { CreateCenterAdminComponent } from './components/create-center-admin/cre
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatSelectModule} from '@angular/material/select';
+import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {MatSelectModule} from '@angular/material/select';
     RegisterMedicalCenterComponent,
     ChangePasswordPageComponent,
     CreateCenterAdminComponent,
-    QuestionnaireComponent
+    QuestionnaireComponent,
+    PredefinedAppointmentComponent
   ],
   imports: [
     BrowserModule,
