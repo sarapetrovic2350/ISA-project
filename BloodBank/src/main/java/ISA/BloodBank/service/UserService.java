@@ -22,6 +22,7 @@ import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
 import ISA.BloodBank.repository.IUserRepository;
+import ISA.BloodBank.repository.RegisteredUserRepository;
 
 @Service
 public class UserService implements IUserService{
@@ -42,6 +43,7 @@ public class UserService implements IUserService{
 		this.authorityService = authorityService;
 		this.confirmationTokenService = confirmationTokenService;
 		this.emailService = emailService;
+
 	}
 	
 	@Override
@@ -223,6 +225,16 @@ public class UserService implements IUserService{
 		return usersFind;
 	}
 	
+	public void updatePenal(Long id) {
+		
+		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
+		Integer penal = user.getPenalties() + 1; 
+		user.setPenalties(penal); 
+		registeredUserRepository.save(user); 
+		
+	}
+
+
 	@Override
 	public void sendConfirmationEmail(User user, ConfirmationToken confirmationToken) {
 		System.out.println("User's email: " + user.getEmail());
@@ -243,6 +255,5 @@ public class UserService implements IUserService{
 		existingUser.setEnabled(true);
 		userRepository.save(existingUser);
 	}
-
 	
 }
