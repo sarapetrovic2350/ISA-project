@@ -40,16 +40,20 @@ public class Appointment {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private CenterAdministrator centerAdministrator;
 	
+	@Column(name = "isAvailable", nullable = false)
+	private Boolean isAvailable;
+	
 	public Appointment() {}
 
 	public Appointment(Long appointmentId, LocalDateTime date, String duration, RegisteredUser registeredUser,
-			CenterAdministrator centerAdministrator) {
+			CenterAdministrator centerAdministrator, Boolean isAvailable) {
 		super();
 		this.appointmentId = appointmentId;
 		this.date = date;
 		this.duration = duration;
 		this.registeredUser = registeredUser;
 		this.centerAdministrator = centerAdministrator;
+		this.isAvailable = isAvailable;
 	}
 
 	public Long getAppointmentId() {
@@ -91,5 +95,14 @@ public class Appointment {
 	public void setCenterAdministrator(CenterAdministrator centerAdministrator) {
 		this.centerAdministrator = centerAdministrator;
 	}
+
+	public Boolean getIsAvailable() {
+		return isAvailable;
+	}
+
+	public void setIsAvailable(Boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+	
 	
 }

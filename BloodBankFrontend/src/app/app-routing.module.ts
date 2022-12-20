@@ -12,6 +12,7 @@ import { RegisterMedicalCenterComponent } from './components/register-medical-ce
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'questionnaire',
     component: QuestionnaireComponent
+  },
+  {
+    path: 'predefined-appointment',
+    component: PredefinedAppointmentComponent
   }
 ];
 
