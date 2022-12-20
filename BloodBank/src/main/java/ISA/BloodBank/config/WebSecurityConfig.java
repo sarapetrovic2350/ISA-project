@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
 		.authenticationEntryPoint(restAuthenticationEntryPoint).and().authorizeRequests()
-		.antMatchers().permitAll()
+		.antMatchers("/auth/*").permitAll()
 		.anyRequest().authenticated().and().httpBasic().and().cors().and()
 		.addFilterBefore(new TokenAuthenticationFilter(tokenUtils, jwtUserDetailsService),
 				BasicAuthenticationFilter.class);
@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser", "/medicalCenter/createCenter", "/centerAdministrator/registerCenterAdministrator", "/donorQuestionnaire/saveQuestionnaire",
 				"/appointment/createPredefinedAppointment", "/report/createReport");
-		web.ignoring().antMatchers(HttpMethod.PUT, "/user/update",  "/medicalCenter/updateCenter",  "/centerAdministrator/update", "/centerAdministrator/changePassword", "/user/changePassword", "/blood/addBlood");
+		web.ignoring().antMatchers(HttpMethod.PUT, "/user/update",  "/medicalCenter/updateCenter",  "/centerAdministrator/update", "/centerAdministrator/changePassword", "/user/changePassword", "/blood/addBlood", "/auth/activate-account/*");
 		web.ignoring().antMatchers(HttpMethod.GET, "/", "/user/getAll", "/medicalCenter/getAll", "/user/getAllRegistredUsers", "/medicalCenter/findAll", 
 				"/centerAdministrator/getAll", "/user/getUserById/{userId}","/user//getUserByEmail/{email}",
 				"/medicalCenter/getMedicalCenterById/{centerId}", 
