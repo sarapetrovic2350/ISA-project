@@ -227,10 +227,10 @@ public class UserService implements IUserService{
 	
 	public void updatePenal(Long id) {
 		
-		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
-		Integer penal = user.getPenalties() + 1; 
-		user.setPenalties(penal); 
-		registeredUserRepository.save(user); 
+//		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
+//		Integer penal = user.getPenalties() + 1; 
+//		user.setPenalties(penal); 
+//		registeredUserRepository.save(user); 
 		
 	}
 
