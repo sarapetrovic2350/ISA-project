@@ -13,6 +13,7 @@ import { ChangePasswordPageComponent } from './components/change-password-page/c
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
+import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'predefined-appointment',
     component: PredefinedAppointmentComponent
+  }, 
+  {
+    path: 'confirm-registration/:id',
+    component: ConfirmRegistrationComponent
   }
 ];
 

@@ -6,9 +6,9 @@ import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.ChangePasswordDTO;
@@ -16,10 +16,8 @@ import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
 import ISA.BloodBank.iservice.IUserService;
 import ISA.BloodBank.model.Authority;
-import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.ConfirmationToken;
 import ISA.BloodBank.model.JwtAuthenticationRequest;
-import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
@@ -34,13 +32,16 @@ public class UserService implements IUserService{
 	
 	private ConfirmationTokenService confirmationTokenService;
 	
+	private EmailService emailService;
+	
 	@Autowired
 	public UserService(IUserRepository userRepository, AuthorityService authorityService,
-			ConfirmationTokenService confirmationTokenService) {
+			ConfirmationTokenService confirmationTokenService, EmailService emailService) {
 		super();
 		this.userRepository = userRepository;
 		this.authorityService = authorityService;
 		this.confirmationTokenService = confirmationTokenService;
+		this.emailService = emailService;
 	}
 	
 	@Override
@@ -63,13 +64,12 @@ public class UserService implements IUserService{
 		registeredUser.setOccupationInfo(userRegistrationDTO.getOccupationInfo());
 		registeredUser.setUserType(UserType.REGISTERED_USER);
 		registeredUser.setPenalties(0);
-		registeredUser.setEnabled(true); 	// send confirmation email - false
+		registeredUser.setEnabled(false);
 		Authority authority = authorityService.findByName("ROLE_REGISTERED_USER");
 		registeredUser.setAuthority(authority);
 		userRepository.save(registeredUser);
 		ConfirmationToken confirmationToken = confirmationTokenService.saveConfirmationToken(registeredUser);
-		 /*send confirmation email
-		*/
+		sendConfirmationEmail(registeredUser, confirmationToken);
 		return registeredUser;
 		
 	}
@@ -222,5 +222,27 @@ public class UserService implements IUserService{
 		}
 		return usersFind;
 	}
+	
+	@Override
+	public void sendConfirmationEmail(User user, ConfirmationToken confirmationToken) {
+		System.out.println("User's email: " + user.getEmail());
+		try {
+
+			String recipientEmail = user.getEmail();
+			String subject = "Confirm registration";
+			String message = "Please activate your account by clicking the link below: \n\n"
+					+ "http://localhost:4200/confirm-registration/" + confirmationToken.getConfirmationToken();
+			emailService.sendNotificationAsync(recipientEmail, subject, message);
+		} catch (Exception e) {
+			System.out.println("Error sending email: " + e.getMessage());
+		}
+
+	}
+	public void activateAccount(User user) {
+		User existingUser = userRepository.findById(user.getUserId()).orElse(null);
+		existingUser.setEnabled(true);
+		userRepository.save(existingUser);
+	}
+
 	
 }

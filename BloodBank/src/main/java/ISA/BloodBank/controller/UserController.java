@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.dto.UserRegistrationDTO;
 import ISA.BloodBank.dto.UserUpdateDTO;
-import ISA.BloodBank.model.MedicalCenter;
+import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.UserService;
 
