@@ -36,7 +36,7 @@ public class BloodController {
 	
 	@RequestMapping(value="/addBlood", method = RequestMethod.PUT)
 	 public @ResponseBody Blood addBlood(@RequestBody AddingBloodDTO c) {
-		 System.out.println(c);
+		 //System.out.println(c);
 		 return bloodService.addingBlood(c);
 	 }
 }
