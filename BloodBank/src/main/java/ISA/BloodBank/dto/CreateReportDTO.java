@@ -6,7 +6,7 @@ import ISA.BloodBank.model.ReportStatus;
 
 public class CreateReportDTO {
 
-	private String emailAdministrator; 
+	private String administratorEmail; 
 	private Long customerId; 
 	private Long bloodId; 
 	private Long appointmentId; 
@@ -19,14 +19,15 @@ public class CreateReportDTO {
 	private ReportStatus reportStatus;
 	private Double quantaty; 
 	private String reason; 
+	private String date; 
 	
 	CreateReportDTO(){}
 
-	public CreateReportDTO(String emailAdministrator, Long customerId, Long bloodId, Long appointmentId,
+	public CreateReportDTO(String administratorEmail, Long customerId, Long bloodId, Long appointmentId,
 			Double haemoglobinValue, String heart, String lungs, Double weight, Double height, Double bloodPreasure,
-			ReportStatus reportStatus, Double quantaty, String reason) {
+			ReportStatus reportStatus, Double quantaty, String reason, String date) {
 		super();
-		this.emailAdministrator = emailAdministrator;
+		this.administratorEmail = administratorEmail;
 		this.customerId = customerId;
 		this.bloodId = bloodId;
 		this.appointmentId = appointmentId;
@@ -39,14 +40,15 @@ public class CreateReportDTO {
 		this.reportStatus = reportStatus;
 		this.quantaty = quantaty;
 		this.reason = reason;
+		this.date = date;
 	}
 
-	public String getEmailAdministrator() {
-		return emailAdministrator;
+	public String getAdministratorEmail() {
+		return administratorEmail;
 	}
 
-	public void setEmailAdministrator(String emailAdministrator) {
-		this.emailAdministrator = emailAdministrator;
+	public void setAdministratorEmail(String administratorEmail) {
+		this.administratorEmail = administratorEmail;
 	}
 
 	public Long getCustomerId() {
@@ -143,6 +145,14 @@ public class CreateReportDTO {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 }

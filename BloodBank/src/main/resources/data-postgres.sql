@@ -48,3 +48,5 @@ INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'ZER
 INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'ZERO_NEGATIVE', 1000);
 INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_POSITIVE', 1000);
 INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_NEGATIVE', 1000);
+
+--INSERT INTO public.report (id, blood_preasure, date, haemoglobin_value, heart, height, lungs, quantaty, reason, status, weight, appointment_id, blood_id, center_admin_id, user_id) VALUES (default, 100, '2022-12-12 12:05:00', 10, 'dobro je', 180, 'dobro je', 400, 'Primljeno je', 'ACCEPTED', 70, 1, 5, 4, 1); 

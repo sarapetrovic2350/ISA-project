@@ -1,5 +1,7 @@
 package ISA.BloodBank.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,45 +39,50 @@ public class Report {
 	@JoinColumn(name = "appointmentId", referencedColumnName = "appointmentId")
 	private Appointment appointment;
 	
-	@Column(name = "haemoglobinValue", nullable = false)
+	@Column(name = "date", nullable = false)
+	private LocalDateTime date;
+	
+	@Column(name = "haemoglobinValue", nullable = true)
 	private Double haemoglobinValue;
 	
-	@Column(name = "heart", nullable = false)
+	@Column(name = "heart", nullable = true)
 	private String heart;
 	
-	@Column(name = "lungs", nullable = false)
+	@Column(name = "lungs", nullable = true)
 	private String lungs;
 	
-	@Column(name = "weight", nullable = false)
+	@Column(name = "weight", nullable = true)
 	private Double weight;
 	
-	@Column(name = "height", nullable = false)
+	@Column(name = "height", nullable = true)
 	private Double height;
 	
-	@Column(name = "bloodPreasure", nullable = false)
+	@Column(name = "bloodPreasure", nullable = true)
 	private Double bloodPreasure;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
 	private ReportStatus reportStatus;
 	
-	@Column(name = "quantaty", nullable = false)
+	@Column(name = "quantaty", nullable = true)
 	private Double quantaty;
 	
-	@Column(name = "reason", nullable = false)
+	@Column(name = "reason", nullable = true)
 	private String reasonForDenying;
 	
-	Report(){}
+	public Report(){}
 
 	public Report(Long reportId, RegisteredUser registeredUser, CenterAdministrator centerAdministrator, Blood blood,
-			Appointment appointment, Double haemoglobinValue, String heart, String lungs, Double weight, Double height,
-			Double bloodPreasure, ReportStatus reportStatus, Double quantaty, String reasonForDenying) {
+			Appointment appointment, LocalDateTime date, Double haemoglobinValue, String heart, String lungs,
+			Double weight, Double height, Double bloodPreasure, ReportStatus reportStatus, Double quantaty,
+			String reasonForDenying) {
 		super();
 		this.reportId = reportId;
 		this.registeredUser = registeredUser;
 		this.centerAdministrator = centerAdministrator;
 		this.blood = blood;
 		this.appointment = appointment;
+		this.date = date;
 		this.haemoglobinValue = haemoglobinValue;
 		this.heart = heart;
 		this.lungs = lungs;
@@ -198,6 +205,13 @@ public class Report {
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
 	}
-	
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
 	
 }
