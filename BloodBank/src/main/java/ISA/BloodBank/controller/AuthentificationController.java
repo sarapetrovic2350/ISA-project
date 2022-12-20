@@ -1,5 +1,7 @@
 package ISA.BloodBank.controller;
 
+import java.time.LocalDateTime;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ISA.BloodBank.model.ConfirmationToken;
 import ISA.BloodBank.model.JwtAuthenticationRequest;
 import ISA.BloodBank.model.TokenUtils;
 import ISA.BloodBank.model.User;
@@ -81,6 +86,30 @@ public class AuthentificationController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@PutMapping(value = "/activate-account/{token}", consumes = "application/json")
+	public ResponseEntity<Boolean> activateAccount(@PathVariable String token) {
+
+		try {
+
+			ConfirmationToken confirmationToken = confirmationTokenService.findByConfirmationToken(token);
+			if (confirmationToken != null
+					&& LocalDateTime.now().isBefore(confirmationToken.getCreatedDate().plusDays(5))) {
+				User user = userService.findByEmail(confirmationToken.getUser().getEmail());
+				System.out.println(user.toString());
+				userService.activateAccount(user);
+				
+				return new ResponseEntity<>(HttpStatus.OK);
+
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
 	}
 
 }

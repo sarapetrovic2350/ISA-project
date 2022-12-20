@@ -61,7 +61,7 @@ export class UserRegistrationComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Success!',
-            text: 'Sucessfully registered!',
+            text: 'Account verification link has been sent to your email. Please check your email and confirm the registration!',
           })   
          
         },

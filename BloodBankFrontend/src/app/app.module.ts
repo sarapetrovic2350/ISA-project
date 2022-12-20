@@ -25,6 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import {MatSelectModule} from '@angular/material/select';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { CreateReportComponent } from './components/create-report/create-report.component';
+import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CreateReportComponent } from './components/create-report/create-report.
     CreateCenterAdminComponent,
     QuestionnaireComponent,
     PredefinedAppointmentComponent,
-    CreateReportComponent
+    CreateReportComponent,
+    ConfirmRegistrationComponent
   ],
   imports: [
     BrowserModule,

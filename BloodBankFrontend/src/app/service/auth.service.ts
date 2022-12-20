@@ -9,6 +9,7 @@ export class AuthService {
 
   apiHost: string = 'http://localhost:8091/';
   url = this.apiHost + 'auth/login';
+  activate_account_url = this.apiHost + 'auth/activate-account/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   private user = new User();
@@ -30,6 +31,9 @@ export class AuthService {
     console.log(localStorage.getItem('role'));
     console.log(localStorage.getItem('currentUser'));
 
+  }
+  activateAccount(token: string) {
+    return this.http.put<any>(this.activate_account_url + token, {headers: this.headers});
   }
 
   getCurrentUser(): User {
