@@ -26,6 +26,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { CreateReportComponent } from './components/create-report/create-report.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 @NgModule({
@@ -58,6 +61,9 @@ import { ConfirmRegistrationComponent } from './components/confirm-registration/
     HttpClientModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

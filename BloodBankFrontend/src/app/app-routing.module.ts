@@ -14,8 +14,13 @@ import { CreateCenterAdminComponent } from './components/create-center-admin/cre
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
+import {CreateReportComponent} from './components/create-report/create-report.component';
 
 const routes: Routes = [
+  {
+    path:'create-report', 
+    component: CreateReportComponent
+  }, 
   {
     path:'',
     component: HomeComponent
