@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { medicalCenter } from 'src/app/model/medicalCenter.model';
 import { MedicalCenterServiceService } from 'src/app/service/medical-center.service.service';
 
@@ -21,11 +22,16 @@ export class MedicalCentersComponent implements OnInit {
   isSearched: Boolean = false;
   isSorted: Boolean = false;
   sortAfterSearch: Boolean = false;
+  loggedInRegisteredUser: Boolean = false;
 
-  constructor(private medicalCenterService: MedicalCenterServiceService) { }
+  constructor(private medicalCenterService: MedicalCenterServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.retrieveCenters();
+    let role = localStorage.getItem('role');
+    if(role == "ROLE_REGISTERED_USER") {
+      this.loggedInRegisteredUser = true;
+    }
   }
 
   retrieveCenters(): void {
@@ -152,5 +158,8 @@ export class MedicalCentersComponent implements OnInit {
     this.selectedOption = '0';
     this.name = "";
     this.place = "";
+  }
+  viewAppointments(centerId: number){
+    this.router.navigate(['predefined-appointments/' + centerId]);
   }
 }

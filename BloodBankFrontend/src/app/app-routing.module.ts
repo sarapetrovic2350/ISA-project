@@ -15,6 +15,7 @@ import { QuestionnaireComponent } from './components/questionnaire/questionnaire
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 import {CreateReportComponent} from './components/create-report/create-report.component';
+import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
   {
     path: 'confirm-registration/:id',
     component: ConfirmRegistrationComponent
+  },
+  {
+    path: 'predefined-appointments/:id',
+    component: PredefinedAppointmentsForCenterComponent
   }
 ];
 
