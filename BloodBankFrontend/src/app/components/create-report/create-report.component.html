@@ -1,1 +1,98 @@
-<p>create-report works!</p>
+<h1 mat-dialog-title align="center">Report</h1>
+<div mat-dialog-content align="center">
+    <mat-horizontal-stepper linear>
+         <!-- Step1 -->
+        <mat-step label="Present" completed={{firstStep}}>
+            <form [formGroup]="formGroupPresent">
+                <mat-form-field appearance="outline" color="primary" class="form-field">
+                    <mat-label>Did the patient come?</mat-label>
+                    <select name="status" formControlName="present" matNativeControl required>
+                        <option [ngValue]="0">No</option>
+                        <option [ngValue]="1">Yes</option>
+                    </select>
+                </mat-form-field>
+                  <span *ngIf="formGroupPresent.controls['present'].valid" firstStep=true></span>
+                  <div *ngIf="!formGroupPresent.controls['present'].valid" class="text-danger" firstStep=false> </div>
+                  <br>
+                <div>
+                    <button [disabled]="!formGroupPresent.valid"  class="continueBtn" mat-raised-button matStepperNext (click)="check()">Continue</button>
+                </div>
+            </form>
+        </mat-step>
+         <!-- Step2  -->
+        <mat-step label="Report" completed={{secondStep}}>
+            <form [formGroup]="formGroupReport">
+                <mat-form-field>
+                    <label>Heart: </label>
+                    <input name ="heart" formControlName="heart" matInput required>
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Lungs: </label>
+                    <input name ="lungs" formControlName="lungs" matInput required>
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Weight: </label>
+                    <input name ="weight" formControlName="weight" matInput required>
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Height: </label>
+                    <input name ="height" formControlName="height" matInput required>
+                </mat-form-field>
+                <mat-form-field>
+                    <label>blood Presure: </label>
+                    <input name ="bloodPresure" [value]="report.bloodPreasure" matInput required>
+                </mat-form-field>
+                <mat-form-field>
+                    <label>Hemoglobin: </label>
+                    <input name ="haemoglobinValue" formControlName="haemoglobinValue" matInput required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" color="primary" class="form-field">
+                    <mat-label>Did the patient come?</mat-label>
+                    <select name="bloodType" formControlName="status" matNativeControl required (ngModelChange)="chooseStatus()">
+                        <option [ngValue]="0">ACCEPTED</option>
+                        <option [ngValue]="1">DENIED</option>
+                    </select>
+                </mat-form-field>
+                    <mat-form-field appearance="fill" *ng-if="addReason === true">
+                        <label>Reason: </label>
+                        <input name ="reason" formControlName="reason" matInput required>
+                    </mat-form-field>
+            </form>
+            <div>
+                <button class="backBtn" mat-raised-button matStepperPrevious>Back</button>
+                <button  class="continueBtn" mat-raised-button matStepperNext (click)="newCheck()">Continue</button>
+            </div>
+        </mat-step>
+         <!-- Step3  -->
+        <mat-step label="Prescription" completed={{thirdStep}}>
+            <form [formGroup]="formGroupBlood">
+             
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Blood Type</mat-label>
+                        <mat-select name="bloodType" [(value)]="blodId" matNativeControl required>
+                            <mat-option [value]="7">AB+</mat-option>
+                            <mat-option [value]="1">A+</mat-option>
+                            <mat-option [value]="3">B+</mat-option>
+                            <mat-option [value]="5">0+</mat-option>
+                            <mat-option [value]="8">AB-</mat-option>
+                            <mat-option [value]="2">A-</mat-option>
+                            <mat-option [value]="4">B-</mat-option>
+                            <mat-option [value]="6">0-</mat-option>
+                        </mat-select >
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="primary" class="form-field">
+                        <mat-label>How much blood:</mat-label>
+                        <input required name ="name" formControlName="quantaty" matInput required>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" color="primary" class="form-field">
+                        <mat-label>Used Equipment:</mat-label>
+                        <input required type = "number" name ="name" formControlName="equipment" matInput required>
+                    </mat-form-field>
+            </form>
+            <div>
+                <button class="backBtn" mat-raised-button matStepperPrevious>Back</button>
+                <button  class="continueBtn" mat-raised-button matStepperNext (click)="create()">Continue</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

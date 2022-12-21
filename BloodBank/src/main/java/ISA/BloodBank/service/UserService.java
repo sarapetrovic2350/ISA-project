@@ -35,14 +35,17 @@ public class UserService implements IUserService{
 	
 	private EmailService emailService;
 	
+	private RegisteredUserRepository registeredUserRepository; 
+	
 	@Autowired
 	public UserService(IUserRepository userRepository, AuthorityService authorityService,
-			ConfirmationTokenService confirmationTokenService, EmailService emailService) {
+			ConfirmationTokenService confirmationTokenService, EmailService emailService, RegisteredUserRepository registeredUserRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.authorityService = authorityService;
 		this.confirmationTokenService = confirmationTokenService;
 		this.emailService = emailService;
+		this.registeredUserRepository = registeredUserRepository;  
 
 	}
 	
@@ -227,10 +230,10 @@ public class UserService implements IUserService{
 	
 	public void updatePenal(Long id) {
 		
-//		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
-//		Integer penal = user.getPenalties() + 1; 
-//		user.setPenalties(penal); 
-//		registeredUserRepository.save(user); 
+		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
+		Integer penal = user.getPenalties() + 1; 
+		user.setPenalties(penal); 
+		registeredUserRepository.save(user); 
 		
 	}
 

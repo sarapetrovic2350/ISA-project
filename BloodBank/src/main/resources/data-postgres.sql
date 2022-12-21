@@ -50,3 +50,10 @@ INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_
 INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_NEGATIVE', 1000);
 
 --INSERT INTO public.report (id, blood_preasure, date, haemoglobin_value, heart, height, lungs, quantaty, reason, status, weight, appointment_id, blood_id, center_admin_id, user_id) VALUES (default, 100, '2022-12-12 12:05:00', 10, 'dobro je', 180, 'dobro je', 400, 'Primljeno je', 'ACCEPTED', 70, 1, 5, 4, 1); 
+
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 1); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 2); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 3); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 4); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 5); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 6); 

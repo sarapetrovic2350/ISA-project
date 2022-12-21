@@ -30,4 +30,12 @@ export class RegisterUserService {
     changePassword(newPassword: ChangePasswordDTO): Observable<ChangePasswordDTO>{
       return this.http.put<any>(this.apiHost + 'user/changePassword' , newPassword, {headers: this.headers});
     }
+
+    getUserById(id: any): Observable<any>{
+      return this.http.get<User>(this.apiHost + 'user/getUserById/' + id, {headers: this.headers});
+    }
+
+    checkPenalties(id: any, present: any): Observable<any>{
+      return this.http.get<User>(this.apiHost + 'user/checkPenalties/' + id +'/'+ present, {headers: this.headers});
+    }
 }

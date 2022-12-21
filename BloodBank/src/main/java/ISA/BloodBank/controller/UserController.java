@@ -92,5 +92,20 @@ public class UserController {
 		public ResponseEntity<List<User>> findUserByNameAndSurnameForCenterAdmin(@PathVariable String name,@PathVariable String surname){
 			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname), HttpStatus.OK);
 		}
+	 
+	 @GetMapping(value = "/checkPenalties/{id}/{present}")
+		public ResponseEntity<?> checkPenalties(@PathVariable Long id,@PathVariable String present){
+//			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname), HttpStatus.OK);
+		 if(present == "0") {
+			 // ovde nije dosao 
+			 	userService.updatePenal(id); 
+				String ret = "Penalties well refreshed!"; 
+				return new ResponseEntity<>(ret, HttpStatus.BAD_REQUEST);
+		 }else 
+		 {
+			 
+			 return new ResponseEntity<>(HttpStatus.OK);
+		 }
+	 }
 	
 }
