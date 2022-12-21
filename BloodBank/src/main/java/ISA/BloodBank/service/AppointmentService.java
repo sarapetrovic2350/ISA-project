@@ -2,6 +2,7 @@ package ISA.BloodBank.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import ISA.BloodBank.iservice.IAppointmentService;
 import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.RegisteredUser;
-import ISA.BloodBank.model.User;
 import ISA.BloodBank.repository.IAppointmentRepository;
 
 @Service
@@ -77,6 +77,21 @@ public class AppointmentService implements IAppointmentService {
 		
 		return appointment;
 		
+	}
+
+	@Override
+	public List<Appointment> findAllByCenterId(Long id) {
+		return appointmentRepository.findAppointmentsByCenterAdministratorMedicalCenterCenterId(id);
+	}
+
+	@Override
+	public Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId) {
+		Appointment schedulingAppointment = appointmentRepository.findByAppointmentId(appointmentId);
+		schedulingAppointment.setIsAvailable(false);
+		RegisteredUser registeredUser = (RegisteredUser)userService.findById(registeredUserId);
+		schedulingAppointment.setRegisteredUser(registeredUser);
+		appointmentRepository.save(schedulingAppointment);
+		return schedulingAppointment;
 	}
 
 }
