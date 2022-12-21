@@ -59,7 +59,8 @@ public class DonorQuestionnaireService implements IDonorQuestionnaireService{
 		
 		return retVal; 
 	}
-	
+	//INSERT INTO public.donor_questionnaire (id, age, general_good_health, has_period, normal_blood_pressure, recently_donated_blood, visited_dentist, skin_disorders, symptoms_of_illness, tattoo_or_piercing, under_medication, weight, user_id ) VALUES 
+	//(default, '22', true, false, true, false, false, false, false, false, false, '56', '2' ); 
 	public Boolean checkQuestionnare(Long Id) {
 		
 		DonorQuestionnaire questionnaire = getQuestionnareByUserId(Id); 

@@ -19,6 +19,10 @@ import { PredefinedAppointmentsForCenterComponent } from './components/predefine
 
 const routes: Routes = [
   {
+    path:'report/:id/search', 
+    component: CreateReportComponent
+  },
+  {
     path:'create-report', 
     component: CreateReportComponent
   }, 

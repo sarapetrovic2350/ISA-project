@@ -53,8 +53,8 @@ public class ReportService implements IReportService{
 		rep.setCenterAdministrator(centAdmi); 
 		RegisteredUser user = (RegisteredUser) userRepository.findByUserId(report.getCustomerId()); 
 		rep.setRegisteredUser(user); 
-		Blood blood = bloodRepository.findById(report.getBloodId()).get(); 
-		rep.setBlood(blood); 
+//		Blood blood = bloodRepository.findById(report.getBloodId()).get(); 
+//		rep.setBlood(blood); 
 		Appointment appointment = (Appointment) appointmentsRepository.findById(report.getAppointmentId()).get(); 
 		rep.setAppointment(appointment); 
 		
@@ -63,10 +63,13 @@ public class ReportService implements IReportService{
 		rep.setLungs(report.getLungs()); 
 		rep.setWeight(report.getWeight()); 
 		rep.setHeight(report.getHeight()); 
-		rep.setBloodPreasure(report.getBloodPreasure()); 
+		//rep.setBloodPreasure(report.getBloodPreasure());
+		rep.setBloodPreasure(90.0); 
 		rep.setReportStatus(report.getReportStatus());  
 		
 		if(report.getReportStatus() == ReportStatus.ACCEPTED ) {	
+			Blood blood = bloodRepository.findById(report.getBloodId()).get(); 
+			rep.setBlood(blood); 
 			rep.setQuantaty(report.getQuantaty());
 			rep.setReasonForDenying("Krv je primljena"); 
 		}else {

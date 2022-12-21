@@ -96,7 +96,8 @@ public class UserController {
 	 @GetMapping(value = "/checkPenalties/{id}/{present}")
 		public ResponseEntity<?> checkPenalties(@PathVariable Long id,@PathVariable String present){
 //			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname), HttpStatus.OK);
-		 if(present == "0") {
+		 String comp = "NO"; 
+		 if(present.equals(comp)) {
 			 // ovde nije dosao 
 			 	userService.updatePenal(id); 
 				String ret = "Penalties well refreshed!"; 
