@@ -29,6 +29,7 @@ import { ConfirmRegistrationComponent } from './components/confirm-registration/
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
+import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     QuestionnaireComponent,
     PredefinedAppointmentComponent,
     CreateReportComponent,
-    ConfirmRegistrationComponent
+    ConfirmRegistrationComponent,
+    PredefinedAppointmentsForCenterComponent
   ],
   imports: [
     BrowserModule,

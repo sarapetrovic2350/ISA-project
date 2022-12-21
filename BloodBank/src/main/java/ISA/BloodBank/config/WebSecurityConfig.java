@@ -66,8 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser", "/medicalCenter/createCenter", "/centerAdministrator/registerCenterAdministrator", "/donorQuestionnaire/saveQuestionnaire",
-				"/appointment/createPredefinedAppointment", "/report/createReport", "/systemAdministrator/registerSystemAdministrator");
-		web.ignoring().antMatchers(HttpMethod.PUT, "/user/update",  "/medicalCenter/updateCenter",  "/centerAdministrator/update", "/centerAdministrator/changePassword", "/user/changePassword", "/blood/addBlood", "/auth/activate-account/*");
+				"/appointment/createPredefinedAppointment", "/report/createReport", "/systemAdministrator/registerSystemAdministrator",
+				"/appointment/createAppointmentRegisteredUser");
+		web.ignoring().antMatchers(HttpMethod.PUT, "/user/update",  "/medicalCenter/updateCenter",  "/centerAdministrator/update", "/centerAdministrator/changePassword", "/user/changePassword","/appointment/schedulePredefinedAppointment/{appointmentId}/{registeredUserId}", "/blood/addBlood", "/auth/activate-account/* ");
 		web.ignoring().antMatchers(HttpMethod.GET, "/", "/user/getAll", "/medicalCenter/getAll", "/user/getAllRegistredUsers", "/medicalCenter/findAll", 
 				"/centerAdministrator/getAll", "/user/getUserById/{userId}","/user//getUserByEmail/{email}",
 				"/medicalCenter/getMedicalCenterById/{centerId}", 
@@ -85,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/medicalCenter/findAllSortedByAverageGrade",
 				"/medicalCenter/findAllSortedByCityName",
 				"/blood/getAll",
+				"/appointment/findPredefinedAppointmentsForMedicalCenter/{id}",
 				"/report/getAll",
 				"/user/checkPenalties/{id}/{present}",
 				"/donorQuestionnaire/checkQuestionnaire/{userId}",
