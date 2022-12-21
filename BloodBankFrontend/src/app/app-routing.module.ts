@@ -18,6 +18,10 @@ import {CreateReportComponent} from './components/create-report/create-report.co
 
 const routes: Routes = [
   {
+    path:'report/:id/search', 
+    component: CreateReportComponent
+  },
+  {
     path:'create-report', 
     component: CreateReportComponent
   }, 

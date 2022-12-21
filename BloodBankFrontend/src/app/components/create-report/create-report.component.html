@@ -6,10 +6,10 @@
             <form [formGroup]="formGroupPresent">
                 <mat-form-field appearance="outline" color="primary" class="form-field">
                     <mat-label>Did the patient come?</mat-label>
-                    <select name="status" formControlName="present" matNativeControl required>
-                        <option [ngValue]="0">No</option>
-                        <option [ngValue]="1">Yes</option>
-                    </select>
+                    <mat-select name="status" formControlName="present" matNativeControl required>
+                        <mat-option [value]="0">No</mat-option>
+                        <mat-option [value]="1">Yes</mat-option>
+                    </mat-select>
                 </mat-form-field>
                   <span *ngIf="formGroupPresent.controls['present'].valid" firstStep=true></span>
                   <div *ngIf="!formGroupPresent.controls['present'].valid" class="text-danger" firstStep=false> </div>
@@ -46,17 +46,17 @@
                     <label>Hemoglobin: </label>
                     <input name ="haemoglobinValue" formControlName="haemoglobinValue" matInput required>
                 </mat-form-field>
-                <mat-form-field appearance="outline" color="primary" class="form-field">
+                <!-- <mat-form-field appearance="outline" color="primary" class="form-field">
                     <mat-label>Did the patient come?</mat-label>
                     <select name="bloodType" formControlName="status" matNativeControl required (ngModelChange)="chooseStatus()">
                         <option [ngValue]="0">ACCEPTED</option>
                         <option [ngValue]="1">DENIED</option>
                     </select>
-                </mat-form-field>
-                    <mat-form-field appearance="fill" *ng-if="addReason === true">
+                </mat-form-field> -->
+                    <!-- <mat-form-field appearance="fill" *ng-if="addReason === true">
                         <label>Reason: </label>
                         <input name ="reason" formControlName="reason" matInput required>
-                    </mat-form-field>
+                    </mat-form-field> -->
             </form>
             <div>
                 <button class="backBtn" mat-raised-button matStepperPrevious>Back</button>

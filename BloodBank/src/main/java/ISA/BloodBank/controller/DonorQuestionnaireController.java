@@ -50,9 +50,9 @@ public class DonorQuestionnaireController {
 	@GetMapping(value = "/checkQuestionnaire/{userId}")
 	public ResponseEntity<?> checkQuestionnaire(@PathVariable Long userId, UriComponentsBuilder uriComponentsBuilder) {
 		if(donorQuestionnaireService.checkQuestionnare(userId) == true ) {
-			return new ResponseEntity<List<DonorQuestionnaire>>(donorQuestionnaireService.getAllQuestionnaires(), HttpStatus.OK);
+			return new ResponseEntity<DonorQuestionnaire>(donorQuestionnaireService.getQuestionnareByUserId(userId), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<List<DonorQuestionnaire>>(donorQuestionnaireService.getAllQuestionnaires(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DonorQuestionnaire>(HttpStatus.OK);
 		}	
 	}
 	

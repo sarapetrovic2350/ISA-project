@@ -27,7 +27,9 @@ export class CreateReportComponent implements OnInit {
   selectedPresent: string = '';  
   report: Report = new Report(); 
 
-  idUser = 1; 
+  nesto: string = ''; 
+
+  idUser = 2; 
 
   blodId: number = 0; 
 
@@ -75,6 +77,13 @@ export class CreateReportComponent implements OnInit {
       this.patient = res;
     })
 
+    this.route.params.subscribe((params: Params) => {
+      this.userService.getUserById(params['id']).subscribe(res => {
+        this.patient = res;
+        console.log(this.patient); 
+      })
+    });
+
     this.formGroupReport =this.formBuilder.group({
       heart : ["", Validators.required],
       lungs : ["", Validators.required],
@@ -98,10 +107,18 @@ export class CreateReportComponent implements OnInit {
   }
 
   check(){
-    console.groupCollapsed(this.selectedPresent); 
+    console.log(this.selectedPresent); 
+    this.selectedPresent = this.formGroupPresent.value.present;
     if(this.selectedPresent == '0'){
+      this.nesto = "NO"; 
+    }else{
+
+      this.nesto = "YES"; 
+    }
+    
+    if(this.nesto == "NO"){
       // idi na sledecu stranu i pravi penal 
-      this.userService.checkPenalties(this.idUser, this.selectedPresent).subscribe( 
+      this.userService.checkPenalties(Number(this.patient.userId), this.nesto).subscribe( 
         {
         error: (e) => {
           console.log(e);
@@ -116,72 +133,72 @@ export class CreateReportComponent implements OnInit {
         }
         });
      }
-     //else{
-    //   // proveri korisnikov upitnik 
+     else{
+      // proveri korisnikov upitnik 
       
-    //   this.questionsService.checkQuestionnaire(this.idUser).subscribe( 
-    //     {
-    //     error: (e) => {
-    //       console.log(e);
-    //       // predji na sledecu drugu strabicu 
-    //       // prestani sa koracima 
-    //       this.router.navigate(['/medical-centers']);
-    //         Swal.fire({
-    //           icon: 'error',
-    //           title: '',
-    //           text: 'Patients questionnaire says he can not give blood!',
-    //         })  
-    //     }
-    //     });
-    // }
+      this.questionsService.checkQuestionnaire(Number(this.patient.userId)).subscribe( 
+        {
+        error: (e) => {
+          console.log(e);
+          // predji na sledecu drugu strabicu 
+          // prestani sa koracima 
+          this.router.navigate(['/medical-centers']);
+            Swal.fire({
+              icon: 'error',
+              title: '',
+              text: 'Patients questionnaire says he can not give blood!',
+            })  
+        }
+        });
+    }
 
   }
 
   newCheck(){
-    this.report.appointmentId = 1; 
-    this.report.customerId = this.idUser; 
-    this.report.administratorEmail = this.administrator.email; 
-    //this.report.bloodId = this.formGroupBlood.value.bloodIdd; 
-    this.report.bloodId = this.blodId
-    this.report.weight = this.formGroupReport.value.weight; 
-    this.report.haemoglobinValue = this.formGroupReport.value.haemoglobinValue;
-    this.report.heart =this.formGroupReport.value.heart;
-    this.report.lungs =this.formGroupReport.value.lungs;
-    this.report.height=this.formGroupReport.value.height
-    //this.report.bloodPreasure=this.formGroupReport.value.bloodPreasure; 
-    this.report.reportStatus=this.formGroupReport.value.status; 
-    this.report.quantaty= this.formGroupBlood.value.quantaty
-    this.report.reason= this.formGroupReport.value.reason;  
-    this.report. equipmentQuantaty=this.formGroupBlood.value.equipment; 
-    this.report.present = this.formGroupPresent.value.present; 
-    console.log(this.report); 
-    if(this.report.reportStatus == "1"){
-      this.reportService.createReport(this.report).subscribe( 
-        {next: (res) => {
+    // this.report.appointmentId = 1; 
+    // this.report.customerId = this.idUser; 
+    // this.report.administratorEmail = this.administrator.email; 
+    // //this.report.bloodId = this.formGroupBlood.value.bloodIdd; 
+    // this.report.bloodId = this.blodId
+    // this.report.weight = this.formGroupReport.value.weight; 
+    // this.report.haemoglobinValue = this.formGroupReport.value.haemoglobinValue;
+    // this.report.heart =this.formGroupReport.value.heart;
+    // this.report.lungs =this.formGroupReport.value.lungs;
+    // this.report.height=this.formGroupReport.value.height
+    // //this.report.bloodPreasure=this.formGroupReport.value.bloodPreasure; 
+    // this.report.reportStatus="ACCEPTED"; 
+    // this.report.quantaty= this.formGroupBlood.value.quantaty
+    // this.report.reason= "Dobro je";  
+    // this.report. equipmentQuantaty=this.formGroupBlood.value.equipment; 
+    // this.report.present = this.formGroupPresent.value.present; 
+    // console.log(this.report); 
+    // if(this.report.reportStatus == "1"){
+    //   this.reportService.createReport(this.report).subscribe( 
+    //     {next: (res) => {
           
-            Swal.fire({
-              icon: 'success',
-              title: 'Noted!',
-              text: 'Noted!',
-            })  
-        },
-        error: (e) => {
-          this.router.navigate(['/medical-centers']);
-          console.log(e);
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Check the fields again!',
-            })  
-        }
-        }); 
-    }
+    //         Swal.fire({
+    //           icon: 'success',
+    //           title: 'Noted!',
+    //           text: 'Noted!',
+    //         })  
+    //     },
+    //     error: (e) => {
+    //       this.router.navigate(['/medical-centers']);
+    //       console.log(e);
+    //         Swal.fire({
+    //           icon: 'error',
+    //           title: 'Oops...',
+    //           text: 'Check the fields again!',
+    //         })  
+    //     }
+    //     }); 
+    // }
     
   }
 
   create(){
     this.report.appointmentId = 1; 
-    this.report.customerId = this.idUser; 
+    this.report.customerId = Number(this.patient.userId); 
     this.report.administratorEmail = this.administrator.email; 
     //this.report.bloodId = this.formGroupBlood.value.bloodIdd; 
     this.report.bloodId = this.blodId
@@ -191,9 +208,9 @@ export class CreateReportComponent implements OnInit {
     this.report.lungs =this.formGroupReport.value.lungs;
     this.report.height=this.formGroupReport.value.height
     //this.report.bloodPreasure=this.formGroupReport.value.bloodPreasure; 
-    this.report.reportStatus=this.formGroupReport.value.status; 
+    this.report.reportStatus="ACCEPTED";  
     this.report.quantaty= this.formGroupBlood.value.quantaty
-    this.report.reason= this.formGroupReport.value.reason; 
+    this.report.reason= "Dobro je"; 
     this.report. equipmentQuantaty=this.formGroupBlood.value.equipment; 
     this.report.present = this.formGroupPresent.value.present; 
     this.reportService.createReport(this.report).subscribe( 
