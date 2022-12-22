@@ -3,6 +3,8 @@ export class PredefinedAppointment {
         public duration: string = '',
         public date: string = '',
         public time: string = '',
-        public administratorCenterID: string = ''
+        public administratorCenterID: string = '',
+        public registeredUserID: string = '',
+        public medicalCenterID: string = ''
       ) {}
 }

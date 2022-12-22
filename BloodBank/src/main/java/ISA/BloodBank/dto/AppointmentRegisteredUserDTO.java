@@ -1,35 +1,23 @@
 package ISA.BloodBank.dto;
 
 public class AppointmentRegisteredUserDTO {
-	
-	private String duration;
 
 	private String date;
 	
 	private String time;
 	
-	private String administratorCenterID;
+	private String medicalCenterID;
 	
 	private String registeredUserID;
 	
 	public AppointmentRegisteredUserDTO() {}
 
-	public AppointmentRegisteredUserDTO(String duration, String date, String time, String administratorCenterID,
-			String registeredUserID) {
+	public AppointmentRegisteredUserDTO(String date, String time, String medicalCenterID, String registeredUserID) {
 		super();
-		this.duration = duration;
 		this.date = date;
 		this.time = time;
-		this.administratorCenterID = administratorCenterID;
+		this.medicalCenterID = medicalCenterID;
 		this.registeredUserID = registeredUserID;
-	}
-
-	public String getDuration() {
-		return duration;
-	}
-
-	public void setDuration(String duration) {
-		this.duration = duration;
 	}
 
 	public String getDate() {
@@ -48,12 +36,12 @@ public class AppointmentRegisteredUserDTO {
 		this.time = time;
 	}
 
-	public String getAdministratorCenterID() {
-		return administratorCenterID;
+	public String getMedicalCenterID() {
+		return medicalCenterID;
 	}
 
-	public void setAdministratorCenterID(String administratorCenterID) {
-		this.administratorCenterID = administratorCenterID;
+	public void setMedicalCenterID(String medicalCenterID) {
+		this.medicalCenterID = medicalCenterID;
 	}
 
 	public String getRegisteredUserID() {
@@ -63,6 +51,8 @@ public class AppointmentRegisteredUserDTO {
 	public void setRegisteredUserID(String registeredUserID) {
 		this.registeredUserID = registeredUserID;
 	}
+
+	
 	
 	
 

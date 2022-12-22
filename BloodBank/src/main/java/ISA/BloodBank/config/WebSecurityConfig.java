@@ -90,6 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/report/getAll",
 				"/user/checkPenalties/{id}/{present}",
 				"/donorQuestionnaire/checkQuestionnaire/{userId}",
+				"/medicalCenter/medicalCentersWithAvailableAppointment",
 				"/webjars/**", "/*.html", "/favicon.ico",
 				"/**/*.html", "/**/*.css", "/**/*.js");
 

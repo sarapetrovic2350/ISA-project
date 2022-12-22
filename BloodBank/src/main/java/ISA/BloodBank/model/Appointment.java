@@ -40,19 +40,25 @@ public class Appointment {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private CenterAdministrator centerAdministrator;
 	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "centerId", referencedColumnName = "centerId")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private MedicalCenter medicalCenter;
+	
 	@Column(name = "isAvailable", nullable = false)
 	private Boolean isAvailable;
 	
 	public Appointment() {}
 
 	public Appointment(Long appointmentId, LocalDateTime date, String duration, RegisteredUser registeredUser,
-			CenterAdministrator centerAdministrator, Boolean isAvailable) {
+			CenterAdministrator centerAdministrator, MedicalCenter medicalCenter,Boolean isAvailable) {
 		super();
 		this.appointmentId = appointmentId;
 		this.date = date;
 		this.duration = duration;
 		this.registeredUser = registeredUser;
 		this.centerAdministrator = centerAdministrator;
+		this.medicalCenter = medicalCenter;
 		this.isAvailable = isAvailable;
 	}
 
@@ -103,6 +109,16 @@ public class Appointment {
 	public void setIsAvailable(Boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
+
+	public MedicalCenter getMedicalCenter() {
+		return medicalCenter;
+	}
+
+	public void setMedicalCenter(MedicalCenter medicalCenter) {
+		this.medicalCenter = medicalCenter;
+	}
+	
+	
 	
 	
 }

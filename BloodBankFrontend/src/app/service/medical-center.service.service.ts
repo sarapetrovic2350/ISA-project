@@ -73,4 +73,8 @@ export class MedicalCenterServiceService {
     return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/filterMedicalCenter/' + name + '/' + place + '/' + grade, {headers: this.headers});
   }
 
+  getMedicalCentersWithAvailableAppointment(params: any): Observable<medicalCenter[]> {
+    return this.http.get<medicalCenter[]>(this.apiHost + 'medicalCenter/medicalCentersWithAvailableAppointment', { params });
+  }
+
 }

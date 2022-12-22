@@ -14,6 +14,7 @@ export class AppointmentService {
   constructor(private http: HttpClient) { }
 
   createPredefinedAppointment(appointment: PredefinedAppointment) {
+    console.log(appointment)
     return this.http.post<any>(this.apiHost + 'appointment/createPredefinedAppointment', appointment);
   }
 
@@ -23,5 +24,9 @@ export class AppointmentService {
 
   schedulePredefinedAppointment(appointmentId: number, registeredUserId: number): Observable<any> {
     return this.http.put<any>(this.apiHost + 'appointment/schedulePredefinedAppointment/' + appointmentId + '/' + registeredUserId, {heaaders: this.headers});
+  }
+
+  createAppointmentRegisteredUser(appointmentRegisteredUserDTO: PredefinedAppointment){
+    return this.http.post<any>(this.apiHost + 'appointment/createAppointmentRegisteredUser', appointmentRegisteredUserDTO);
   }
 }

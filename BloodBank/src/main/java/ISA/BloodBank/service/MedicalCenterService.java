@@ -1,15 +1,19 @@
 package ISA.BloodBank.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.iservice.IMedicalCenterService;
+import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.repository.IMedicalCenterRepository;
 
@@ -17,10 +21,13 @@ import ISA.BloodBank.repository.IMedicalCenterRepository;
 public class MedicalCenterService implements IMedicalCenterService{
 
 private IMedicalCenterRepository medicalCenterRepository;
+
+private AppointmentService appointmentService;
 	
 	@Autowired
-	public MedicalCenterService(IMedicalCenterRepository medicalCenterRepository) {
+	public MedicalCenterService(IMedicalCenterRepository medicalCenterRepository, @Lazy AppointmentService appointmentService) {
 		this.medicalCenterRepository = medicalCenterRepository;
+		this.appointmentService = appointmentService;
 	}
 	
 	@Override
@@ -123,5 +130,18 @@ private IMedicalCenterRepository medicalCenterRepository;
 		return medicalCenterRepository.findAll(pageable);
 	}
 	
+	 public List<MedicalCenter> GetMedicalCentersWithAvailableAppointment(String date, String time) {	
+			List<MedicalCenter> medicalCentersFind = new ArrayList<MedicalCenter>();
+			List<MedicalCenter> medicalCenters = getAll();
+			for(MedicalCenter medicalCenter : medicalCenters) {
+				List<Appointment> appointments = appointmentService.getAllAppointmentsByMedicalCenterIdAndDate(medicalCenter.getCenterId(), date, time);
+				if(appointments.isEmpty()) {
+					medicalCentersFind.add(medicalCenter);
+				}else {
+					continue;}
+				
+			}
+			return medicalCentersFind;
+		}
 
 }
