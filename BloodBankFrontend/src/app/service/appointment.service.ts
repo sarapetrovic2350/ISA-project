@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PredefAppointment } from '../model/predef-appointment.model';
 import { PredefinedAppointment } from '../model/predefined-appointment.model';
 
 @Injectable({
@@ -17,8 +18,8 @@ export class AppointmentService {
     return this.http.post<any>(this.apiHost + 'appointment/createPredefinedAppointment', appointment);
   }
 
-  findPredefinedAppointmentsForMedicalCenter(centerId: number): Observable<any[]> {
-    return this.http.get<any[]>(this.apiHost + 'appointment/findPredefinedAppointmentsForMedicalCenter/' + centerId);
+  findPredefinedAppointmentsForMedicalCenter(centerId: number): Observable<PredefAppointment[]> {
+    return this.http.get<PredefAppointment[]>(this.apiHost + 'appointment/findPredefinedAppointmentsForMedicalCenter/' + centerId);
   }
 
   schedulePredefinedAppointment(appointmentId: number, registeredUserId: number): Observable<any> {

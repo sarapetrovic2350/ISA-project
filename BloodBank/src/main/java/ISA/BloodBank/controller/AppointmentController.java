@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ISA.BloodBank.dto.AppointmentDTO;
 import ISA.BloodBank.dto.AppointmentRegisteredUserDTO;
+import ISA.BloodBank.dto.PredefinedAppointmentDTO;
 import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.DonorQuestionnaire;
@@ -102,17 +103,21 @@ public class AppointmentController {
 	
 
 	@GetMapping(value = "/findPredefinedAppointmentsForMedicalCenter/{id}")
-	public ResponseEntity<List<Appointment>> findPredefinedAppointmentsForMedicalCenter(@PathVariable Long id) {
+	public ResponseEntity<List<PredefinedAppointmentDTO>> findPredefinedAppointmentsForMedicalCenter(@PathVariable Long id) {
 		try {
-			List<Appointment> predefinedAppointments = new ArrayList<Appointment>();
+			List<PredefinedAppointmentDTO> predefinedAppointmentDTOs = new ArrayList<PredefinedAppointmentDTO>();
 			List<Appointment> appointmentsForCenter = appointmentService.findAllByCenterId(id);
 			for (Appointment a : appointmentsForCenter) {
 				if (a.getIsAvailable() && a.getRegisteredUser() == null) {
-					predefinedAppointments.add(a);
+					PredefinedAppointmentDTO predefinedAppointmentDTO = new PredefinedAppointmentDTO();
+					predefinedAppointmentDTO.setAppointmentId(a.getAppointmentId());
+					predefinedAppointmentDTO.setDate(a.getDate().toLocalDate().toString());
+					predefinedAppointmentDTO.setTime(a.getDate().toLocalTime().toString());
+					predefinedAppointmentDTO.setDuration(a.getDuration());
+					predefinedAppointmentDTOs.add(predefinedAppointmentDTO);
 				}
 			}
-
-			return new ResponseEntity<List<Appointment>>(predefinedAppointments, HttpStatus.OK);
+			return new ResponseEntity<List<PredefinedAppointmentDTO>>(predefinedAppointmentDTOs, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

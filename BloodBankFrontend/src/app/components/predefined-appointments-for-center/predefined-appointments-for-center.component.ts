@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Params } from '@angular/router';
+import { PredefAppointment } from 'src/app/model/predef-appointment.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
@@ -13,9 +14,11 @@ import Swal from 'sweetalert2';
 export class PredefinedAppointmentsForCenterComponent implements OnInit {
 
   title = "Predefined appointments";
-  public dataSource = new MatTableDataSource<any>();
+  public dataSource = new MatTableDataSource<PredefAppointment>();
   public displayedColumns = ['date', 'time', 'duration', 'schedule'];
-  public predefinedAppointments: any[] = [];
+  public predefinedAppointments: PredefAppointment[] = [];
+  public selectedOption: string = "";
+
   constructor(private route: ActivatedRoute, private appointmentService: AppointmentService, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -50,5 +53,22 @@ export class PredefinedAppointmentsForCenterComponent implements OnInit {
       }
     });
   }
+  changeSorting() {
+    console.log(this.selectedOption);
+    if (this.selectedOption == '1') {
+      console.log(this.predefinedAppointments);
+      
+      return this.predefinedAppointments.sort((a, b) =>  new Date(b.date).getTime() - new Date(a.date).getTime());
+      
+    }
+
+    else if (this.selectedOption == '2') {
+      return this.predefinedAppointments.sort((a, b) => b.time.localeCompare(a.time));
+    }
+    else {
+      return null;
+    }
+  }
+
 
 }
