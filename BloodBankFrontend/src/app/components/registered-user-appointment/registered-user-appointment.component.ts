@@ -26,6 +26,7 @@ export class RegisteredUserAppointmentComponent implements OnInit {
   public displayedColumns = ['name', 'address', 'grade', 'schedule'];
   title = "Medical Centers";
   public dataSource = new MatTableDataSource<any>();
+  public selectedOption: string = "";
 
   formGroupAppointment = new FormGroup({
     date: new FormControl(), 
@@ -57,7 +58,6 @@ export class RegisteredUserAppointmentComponent implements OnInit {
     //this.dateOfBirth.setValue(yyyy + '-' + mm + '-' + dd);
     return yyyy + '-' + mm + '-' + dd;
   }
-
   getRequestParams(date: string, time: string): any {
     let params: any = {};
 
@@ -77,6 +77,22 @@ export class RegisteredUserAppointmentComponent implements OnInit {
       console.log(this.date);
     })
   }
+
+  changeSorting() {
+    console.log(this.selectedOption);
+    if (this.selectedOption == '1') {
+      this.medicalCenters.sort((a, b) => b.averageGrade - a.averageGrade);
+        return this.dataSource.data = this.medicalCenters
+    }
+    else if (this.selectedOption == '2') {
+      this.medicalCenters.sort((a, b) => a.averageGrade - b.averageGrade);
+        return this.dataSource.data = this.medicalCenters
+    }
+    else {
+      return null;
+    }
+  }
+
 
   scheduleAppointment(id: string){
     this.appointmentRegisteredUserDTO.registeredUserID = this.user.userId;
