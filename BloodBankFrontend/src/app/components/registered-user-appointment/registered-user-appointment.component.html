@@ -3,23 +3,23 @@
     <mat-horizontal-stepper linear>
          <!-- Step1 -->
         <mat-step label="Choose date and time" completed={{firstStep}}>
-            <form >
+            <form [formGroup]="formGroupAppointment">
                 <div class="row">
                     <div>
                         <mat-form-field>
                             <label>Date: </label>
-                            <input matInput (dateChange)=getValidDate(date) [matDatepicker]="startDate"   [(ngModel)]="date" name="date">
+                            <input matInput formControlName="date" (dateChange)=getValidDate(date) [matDatepicker]="startDate"   [(ngModel)]="date" name="date">
                             <mat-datepicker-toggle [for]="startDate" matSuffix></mat-datepicker-toggle>
                             <mat-datepicker #startDate></mat-datepicker>
                         </mat-form-field><br>
                         <mat-form-field>
                             <label>Time: </label>
-                            <input name ="time"  [(ngModel)]="time" matInput required>
+                            <input formControlName="time" name ="time"  [(ngModel)]="time" matInput required>
                         </mat-form-field><br>
                     </div>
                 </div>
                 <div>
-                    <button  class="continueBtn" mat-raised-button matStepperNext (click)="showMedicalCenters()">Continue</button>
+                    <button [disabled]="!formGroupAppointment.valid" class="continueBtn" mat-raised-button matStepperNext (click)="showMedicalCenters()">Continue</button>
                 </div>
             </form>
         </mat-step>
