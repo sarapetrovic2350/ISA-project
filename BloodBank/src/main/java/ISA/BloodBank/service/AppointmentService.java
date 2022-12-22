@@ -23,14 +23,16 @@ public class AppointmentService implements IAppointmentService {
 	private CenterAdministratorService centerAdministaratorService;
 	
 	private UserService userService;
+	private EmailService emailService;
 	
 	@Autowired
 	public AppointmentService(IAppointmentRepository appointmentRepository, CenterAdministratorService centerAdministaratorService,
-			UserService userService) {
+			UserService userService, EmailService emailService) {
 		super();
 		this.appointmentRepository = appointmentRepository;
 		this.centerAdministaratorService = centerAdministaratorService;
 		this.userService = userService;
+		this.emailService = emailService;
 	}
 	
 	@Override
@@ -91,6 +93,7 @@ public class AppointmentService implements IAppointmentService {
 		RegisteredUser registeredUser = (RegisteredUser)userService.findById(registeredUserId);
 		schedulingAppointment.setRegisteredUser(registeredUser);
 		appointmentRepository.save(schedulingAppointment);
+		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
 		return schedulingAppointment;
 	}
 
