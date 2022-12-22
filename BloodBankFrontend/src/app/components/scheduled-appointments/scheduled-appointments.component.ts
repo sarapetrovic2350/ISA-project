@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class ScheduledAppointmentsComponent implements OnInit {
   title = "Upcoming scheduled appointments";
   public dataSource = new MatTableDataSource<ScheduledAppointment>();
-  public displayedColumns = ['date', 'time', 'duration', 'schedule'];
+  public displayedColumns = ['date', 'time', 'duration', 'medicalCenter', 'cancel'];
   public scheduledAppointments: ScheduledAppointment[] = [];
   public registeredUserId: number = 0;
 

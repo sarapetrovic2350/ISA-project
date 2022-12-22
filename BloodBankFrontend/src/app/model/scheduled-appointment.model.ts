@@ -5,5 +5,6 @@ export class ScheduledAppointment {
         public date: string = '',
         public time: string = '',
         public duration: string = '',
+        public medicalCenterName: string = ''
       ) {}
 }

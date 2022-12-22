@@ -7,18 +7,20 @@ public class ScheduledAppointmentDTO {
 	private String date;
 	private String time;
 	private String duration;
+	private String medicalCenterName;
 
 	public ScheduledAppointmentDTO() {
 	}
 
 	public ScheduledAppointmentDTO(Long appointmentId, Long registeredUserId, String date, String time,
-			String duration) {
+			String duration, String medicalCenterName) {
 		super();
 		this.appointmentId = appointmentId;
 		this.registeredUserId = registeredUserId;
 		this.date = date;
 		this.time = time;
 		this.duration = duration;
+		this.medicalCenterName = medicalCenterName;
 	}
 
 	public Long getAppointmentId() {
@@ -61,4 +63,12 @@ public class ScheduledAppointmentDTO {
 		this.duration = duration;
 	}
 
+	public String getMedicalCenterName() {
+		return medicalCenterName;
+	}
+
+	public void setMedicalCenterName(String medicalCenterName) {
+		this.medicalCenterName = medicalCenterName;
+	}
+	
 }

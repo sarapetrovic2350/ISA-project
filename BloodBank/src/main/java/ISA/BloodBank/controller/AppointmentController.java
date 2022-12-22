@@ -144,6 +144,7 @@ public class AppointmentController {
 					scheduledAppointmentDTO.setDate(a.getDate().toLocalDate().toString());
 					scheduledAppointmentDTO.setTime(a.getDate().toLocalTime().toString());
 					scheduledAppointmentDTO.setDuration(a.getDuration());
+					scheduledAppointmentDTO.setMedicalCenterName(a.getMedicalCenter().getName());
 					scheduledAppointmentDTOs.add(scheduledAppointmentDTO);
 				}
 			}
