@@ -30,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { PredefinedAppointmentsForCenterComponent } from './components/predefine
     PredefinedAppointmentComponent,
     CreateReportComponent,
     ConfirmRegistrationComponent,
-    PredefinedAppointmentsForCenterComponent
+    PredefinedAppointmentsForCenterComponent,
+    ScheduledAppointmentsComponent
   ],
   imports: [
     BrowserModule,

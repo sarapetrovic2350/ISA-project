@@ -10,5 +10,6 @@ import ISA.BloodBank.model.Appointment;
 public interface IAppointmentRepository extends JpaRepository<Appointment, Long>{
 	
 	List<Appointment> findAppointmentsByCenterAdministratorMedicalCenterCenterId(Long id);
+	List<Appointment> findAppointmentsByRegisteredUserUserId(Long id);
 	Appointment findByAppointmentId(Long appointmentId);
 }
