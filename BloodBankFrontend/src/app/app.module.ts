@@ -27,6 +27,11 @@ import { PredefinedAppointmentComponent } from './components/predefined-appointm
 import { CreateReportComponent } from './components/create-report/create-report.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 import { CreateSystemAdminComponent } from './components/create-system-admin/create-system-admin.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 
 @NgModule({
@@ -48,7 +53,9 @@ import { CreateSystemAdminComponent } from './components/create-system-admin/cre
     PredefinedAppointmentComponent,
     CreateReportComponent,
     ConfirmRegistrationComponent,
-    CreateSystemAdminComponent
+    CreateSystemAdminComponent,
+    PredefinedAppointmentsForCenterComponent,
+    ScheduledAppointmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,9 @@ import { CreateSystemAdminComponent } from './components/create-system-admin/cre
     HttpClientModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatStepperModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

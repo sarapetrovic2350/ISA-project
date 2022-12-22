@@ -31,8 +31,15 @@ INSERT INTO public.user (dtype, user_id, jmbg, name, surname, password, salt, ge
 -- CENTER_ADMINISTRATOR email: petar@gmail.com password: petar
 INSERT INTO public.user (dtype, user_id, jmbg, name, surname, password, salt, gender, occupation, occupation_info, email, phone_number, user_type, address_id, medical_center_id, authority_id, enabled) VALUES ('CenterAdministrator', default, '1505000800145', 'Petar', 'Petrovic', '$2y$12$Wm7c0bzr1uu1rKjtU8qGCedUmDUjRjkW.AZFMbKPgRh3.vwycR7Wa', '98oZRNi4sHgZxXx+7aVbBS==', 'MALE', 'EMPLOYED', 'CenterNo1', 'petar@gmail.com', '0619999888', 'CENTER_ADMINISTRATOR', '5', '1', '2', true);
 
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available) VALUES (default,'2022-12-12 12:05:00', '10', '4', '1', true); 
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available) VALUES (default,'2022-12-12 12:20:00', '10', '4', '1', true); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-12 12:05:00', '10', '4', '1', false, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-12 12:20:00', '10', '4', '1', false, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-26 12:10:00', '10', '4', null, true, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:10:00', '10', '4', null, true, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:20:00', '10', '4', null, true, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:30:00', '10', '4', null, true, false);
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-28 15:20:00', '10', '4', null, true, false);
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-29 11:40:00', '10', '5', null, true, false);
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, is_available, is_cancelled) VALUES (default,'2022-12-29 11:50:00', '10', '5', null, true, false);
 
 INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-10-10 12:05:00','neki tekst', 'neki tekst', '1', null, '1', '3' ); 
 INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-11-11 12:05:00', 'neki tekst', 'neki tekst', '1', '4', null, '3'); 
@@ -50,3 +57,10 @@ INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_
 INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_NEGATIVE', 1000);
 
 --INSERT INTO public.report (id, blood_preasure, date, haemoglobin_value, heart, height, lungs, quantaty, reason, status, weight, appointment_id, blood_id, center_admin_id, user_id) VALUES (default, 100, '2022-12-12 12:05:00', 10, 'dobro je', 180, 'dobro je', 400, 'Primljeno je', 'ACCEPTED', 70, 1, 5, 4, 1); 
+
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 1); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 2); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 3); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 4); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 5); 
+INSERT INTO public.equipment_storage (id, quantaty, center_id) VALUES (default, 1990, 6); 

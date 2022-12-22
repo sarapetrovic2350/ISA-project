@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 import { ShowUsersService } from 'src/app/service/show-users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-users',
@@ -17,8 +18,10 @@ export class ShowUsersComponent implements OnInit {
   surname: string = "";
   isSearched: Boolean = false;
 
+  idNum: number = 0; 
 
-  constructor(private showUsersService: ShowUsersService) { }
+
+  constructor(private showUsersService: ShowUsersService, private Router: Router) { }
 
   ngOnInit(): void {
     
@@ -88,5 +91,11 @@ export class ShowUsersComponent implements OnInit {
     })
 
   };
-}
+  }
+
+  public report(id: string){
+    this.idNum = Number(id); 
+    this.Router.navigate(['/report/' + id + '/search']);
+  }
+
 }

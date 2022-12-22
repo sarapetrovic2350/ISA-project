@@ -15,8 +15,19 @@ import { CreateSystemAdminComponent } from './components/create-system-admin/cre
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
+import {CreateReportComponent} from './components/create-report/create-report.component';
+import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 const routes: Routes = [
+  {
+    path:'report/:id/search', 
+    component: CreateReportComponent
+  },
+  {
+    path:'create-report', 
+    component: CreateReportComponent
+  }, 
   {
     path:'',
     component: HomeComponent
@@ -76,6 +87,14 @@ const routes: Routes = [
   {
     path: 'create-system-admin',
     component: CreateSystemAdminComponent
+  },
+  {
+    path: 'predefined-appointments/:id',
+    component: PredefinedAppointmentsForCenterComponent
+  },
+  {
+    path: 'scheduled-appointments',
+    component: ScheduledAppointmentsComponent
   }
 ];
 

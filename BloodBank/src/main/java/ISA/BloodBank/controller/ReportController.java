@@ -50,6 +50,7 @@ public class ReportController {
 	@PostMapping(value = "/createReport")
 	public ResponseEntity<?> createReport(@RequestBody CreateReportDTO report,
 			UriComponentsBuilder uriComponentsBuilder) {
+		report.setReportStatus(ReportStatus.ACCEPTED); 
 		try {
 			// add validations
 			if(report.getPresent() == false) {
