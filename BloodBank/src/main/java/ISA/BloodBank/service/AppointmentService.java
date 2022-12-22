@@ -87,7 +87,7 @@ public class AppointmentService implements IAppointmentService {
 		LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
 		appointment.setDate(dateTime);
 		appointmentRepository.save(appointment);
-		
+		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), appointment);
 		return appointment;
 		
 	}
