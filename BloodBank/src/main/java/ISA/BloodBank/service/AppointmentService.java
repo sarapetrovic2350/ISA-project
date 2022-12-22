@@ -69,7 +69,12 @@ public class AppointmentService implements IAppointmentService {
 	@Override
 	public Appointment createAppointmentRegisteredUser(AppointmentRegisteredUserDTO appointmentRegisteredUserDTO) {
 		Appointment appointment = new Appointment();
-		List<CenterAdministrator> administrators = centerAdministaratorService.GetFreeCenterAdministartior(Long.parseLong(appointmentRegisteredUserDTO.getMedicalCenterID()));
+		String time = appointmentRegisteredUserDTO.getTime();
+		String date = appointmentRegisteredUserDTO.getDate();
+		String dateAndTime = date + ' ' + time;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+		List<CenterAdministrator> administrators = centerAdministaratorService.GetFreeCenterAdministartior(Long.parseLong(appointmentRegisteredUserDTO.getMedicalCenterID()), date, time);
 		MedicalCenter medicalCenter = new MedicalCenter();
 		RegisteredUser registeredUser = new RegisteredUser();
 		medicalCenter  = medicalCenterService.findById(Long.parseLong(appointmentRegisteredUserDTO.getMedicalCenterID()));
@@ -80,11 +85,6 @@ public class AppointmentService implements IAppointmentService {
 		registeredUser = (RegisteredUser)userService.findById(Long.parseLong(appointmentRegisteredUserDTO.getRegisteredUserID()));
 		appointment.setRegisteredUser(registeredUser);
 		appointment.setDuration("15");
-		String time = appointmentRegisteredUserDTO.getTime();
-		String date = appointmentRegisteredUserDTO.getDate();
-		String dateAndTime = date + ' ' + time;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
 		appointment.setDate(dateTime);
 		appointmentRepository.save(appointment);
 		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), appointment);
