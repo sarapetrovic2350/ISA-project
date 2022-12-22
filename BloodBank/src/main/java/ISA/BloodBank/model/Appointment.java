@@ -48,10 +48,13 @@ public class Appointment {
 	@Column(name = "isAvailable", nullable = false)
 	private Boolean isAvailable;
 	
+	@Column(name = "isCancelled", nullable = false)
+	private Boolean isCancelled;
+	
 	public Appointment() {}
 
 	public Appointment(Long appointmentId, LocalDateTime date, String duration, RegisteredUser registeredUser,
-			CenterAdministrator centerAdministrator, MedicalCenter medicalCenter,Boolean isAvailable) {
+			CenterAdministrator centerAdministrator, MedicalCenter medicalCenter, Boolean isAvailable, Boolean isCancelled) {
 		super();
 		this.appointmentId = appointmentId;
 		this.date = date;
@@ -60,6 +63,7 @@ public class Appointment {
 		this.centerAdministrator = centerAdministrator;
 		this.medicalCenter = medicalCenter;
 		this.isAvailable = isAvailable;
+		this.isCancelled = isCancelled;
 	}
 
 	public Long getAppointmentId() {
@@ -118,7 +122,12 @@ public class Appointment {
 		this.medicalCenter = medicalCenter;
 	}
 	
-	
-	
+	public Boolean getIsCancelled() {
+		return isCancelled;
+	}
+
+	public void setIsCancelled(Boolean isCancelled) {
+		this.isCancelled = isCancelled;
+	}
 	
 }

@@ -26,11 +26,13 @@ import {MatSelectModule} from '@angular/material/select';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { CreateReportComponent } from './components/create-report/create-report.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
+import { CreateSystemAdminComponent } from './components/create-system-admin/create-system-admin.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
 import { RegisteredUserAppointmentComponent } from './components/registered-user-appointment/registered-user-appointment.component';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 
 @NgModule({
@@ -53,7 +55,10 @@ import { RegisteredUserAppointmentComponent } from './components/registered-user
     CreateReportComponent,
     ConfirmRegistrationComponent,
     PredefinedAppointmentsForCenterComponent,
-    RegisteredUserAppointmentComponent
+    RegisteredUserAppointmentComponent,
+    CreateSystemAdminComponent,
+    PredefinedAppointmentsForCenterComponent,
+    ScheduledAppointmentsComponent
   ],
   imports: [
     BrowserModule,

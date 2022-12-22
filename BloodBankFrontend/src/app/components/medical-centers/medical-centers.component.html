@@ -56,8 +56,8 @@
         <li *ngIf="mc.description == null" class="list-group-item height">The medical center currently does not have
           decription.</li>
         <p *ngIf="loggedInRegisteredUser" class="list-group-item">Want to schedule appointment?</p>
-        <button *ngIf="loggedInRegisteredUser" color="primary"  mat-raised-button
-        type="submit" (click)="viewAppointments(mc.centerId)">View predefined appointments</button>
+        <button *ngIf="loggedInRegisteredUser" color="primary" mat-raised-button type="submit"
+          (click)="viewAppointments(mc.centerId)">View predefined appointments</button>
       </ul>
 
     </div>

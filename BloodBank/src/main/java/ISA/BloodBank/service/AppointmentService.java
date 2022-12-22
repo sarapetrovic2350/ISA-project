@@ -28,15 +28,17 @@ public class AppointmentService implements IAppointmentService {
 	private MedicalCenterService medicalCenterService;
 	
 	private UserService userService;
+	private EmailService emailService;
 	
 	@Autowired
 	public AppointmentService(IAppointmentRepository appointmentRepository, @Lazy CenterAdministratorService centerAdministaratorService,
-			UserService userService, MedicalCenterService medicalCenterService) {
+			UserService userService, MedicalCenterService medicalCenterService, EmailService emailService) {
 		super();
 		this.appointmentRepository = appointmentRepository;
 		this.centerAdministaratorService = centerAdministaratorService;
 		this.userService = userService;
 		this.medicalCenterService = medicalCenterService;
+		this.emailService = emailService;
 	}
 	
 	@Override
@@ -48,6 +50,7 @@ public class AppointmentService implements IAppointmentService {
 		MedicalCenter medicalCenter = centerAdministrator.getMedicalCenter();
 		appointment.setMedicalCenter(medicalCenter);
 		appointment.setIsAvailable(true);
+		appointment.setIsCancelled(false);
 		appointment.setRegisteredUser(null);
 		appointment.setDuration(appointmentDTO.getDuration());
 		String time = appointmentDTO.getTime();
@@ -66,21 +69,19 @@ public class AppointmentService implements IAppointmentService {
 	@Override
 	public Appointment createAppointmentRegisteredUser(AppointmentRegisteredUserDTO appointmentRegisteredUserDTO) {
 		Appointment appointment = new Appointment();
-		//CenterAdministrator centerAdministrator = new CenterAdministrator();
 		List<CenterAdministrator> administrators = centerAdministaratorService.GetFreeCenterAdministartior(Long.parseLong(appointmentRegisteredUserDTO.getMedicalCenterID()));
 		MedicalCenter medicalCenter = new MedicalCenter();
 		RegisteredUser registeredUser = new RegisteredUser();
-		//centerAdministrator = centerAdministaratorService.findById(Long.parseLong(appointmentRegisteredUserDTO.getAdministratorCenterID()));
 		medicalCenter  = medicalCenterService.findById(Long.parseLong(appointmentRegisteredUserDTO.getMedicalCenterID()));
 		appointment.setCenterAdministrator(administrators.get(0));
 		appointment.setMedicalCenter(medicalCenter);
 		appointment.setIsAvailable(false);
+		appointment.setIsCancelled(false);
 		registeredUser = (RegisteredUser)userService.findById(Long.parseLong(appointmentRegisteredUserDTO.getRegisteredUserID()));
 		appointment.setRegisteredUser(registeredUser);
 		appointment.setDuration("15");
 		String time = appointmentRegisteredUserDTO.getTime();
 		String date = appointmentRegisteredUserDTO.getDate();
-		//String dateParts[] = date.split("T");
 		String dateAndTime = date + ' ' + time;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
@@ -103,6 +104,7 @@ public class AppointmentService implements IAppointmentService {
 		RegisteredUser registeredUser = (RegisteredUser)userService.findById(registeredUserId);
 		schedulingAppointment.setRegisteredUser(registeredUser);
 		appointmentRepository.save(schedulingAppointment);
+		//emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
 		return schedulingAppointment;
 	}
 	
@@ -127,5 +129,22 @@ public class AppointmentService implements IAppointmentService {
 		return appointments;
 	}
 	
+	public List<Appointment> findAllByRegisteredUserId(Long id) {
+		return appointmentRepository.findAppointmentsByRegisteredUserUserId(id);
+	}
+
+	@Override
+	public Appointment findById(Long appointmentId) {
+		return appointmentRepository.findByAppointmentId(appointmentId);
+	}
+
+	@Override
+	public Appointment cancelScheduledAppointment(Long appointmentId) {
+		Appointment cancelingAppointment = appointmentRepository.findByAppointmentId(appointmentId);
+		cancelingAppointment.setIsAvailable(true);
+		cancelingAppointment.setIsCancelled(true);
+		appointmentRepository.save(cancelingAppointment);
+		return cancelingAppointment;
+	}
 
 }

@@ -1,4 +1,3 @@
-
 <mat-card fxFlex class="content">
     
     <mat-card-title>
@@ -6,17 +5,6 @@
     </mat-card-title>
    
     <mat-card-content>
-        <div class="div1">
-            <p class="ml2">Sort predefined appointments:</p>
-            <select [(ngModel)]="selectedOption" class="btn dropdown-toggle ml3" (change)="changeSorting()">
-                <option [ngValue]=0 disabled selected>Sorting</option>
-                <option [ngValue]=1>Sort by date asc</option>
-                <option [ngValue]=2>Sort by time asc</option>
-                <option [ngValue]=3>Sort by date desc</option>
-                <option [ngValue]=4>Sort by time desc</option>
-            </select>
-        
-        </div>
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef class="cell-center"> Date </th>
@@ -33,11 +21,11 @@
                 <td mat-cell *matCellDef="let appointment" class="cell-center">{{appointment.duration}}</td>
             </ng-container>
             <ng-container matColumnDef="schedule">
-                <th mat-header-cell *matHeaderCellDef class="cell-center"> Schedule an appointment</th>
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Cancel an appointment</th>
                 <td mat-cell *matCellDef="let appointment" class="cell-center">
                     <button color="primary" mat-raised-button type="submit"
-                        (click)="schedulePredefinedAppointment(appointment.appointmentId)">
-                        Schedule
+                        (click)="cancelScheduledAppointment(appointment.appointmentId)">
+                        Cancel
                     </button>
                 </td>
             </ng-container>

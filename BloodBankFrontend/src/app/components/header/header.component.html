@@ -12,6 +12,9 @@
     <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/registered-user-appointment">
       <span>Schedule appointment</span>
     </button>
+    <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/scheduled-appointments">
+      <span>My appointments</span>
+    </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-medical-cenntar">
       <span>Update Center</span>
     </button>
@@ -26,6 +29,9 @@
     </button>
     <button *ngIf="isSystemAdmin" mat-button mat-ripple routerLink="/create-center-admin">
       <span>Register Center Admin</span>
+    </button>
+    <button *ngIf="isHeadSystemAdmin" mat-button mat-ripple routerLink="/create-system-admin">
+      <span>Register System Admin</span>
     </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/predefined-appointment">
       <span>Make Appointments</span>

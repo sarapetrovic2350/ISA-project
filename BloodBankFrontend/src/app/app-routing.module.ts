@@ -11,12 +11,14 @@ import { ShowUsersComponent } from './components/show-users/show-users.component
 import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
+import { CreateSystemAdminComponent } from './components/create-system-admin/create-system-admin.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 import {CreateReportComponent} from './components/create-report/create-report.component';
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
 import { RegisteredUserAppointmentComponent } from './components/registered-user-appointment/registered-user-appointment.component';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 const routes: Routes = [
   {
@@ -84,12 +86,20 @@ const routes: Routes = [
     component: ConfirmRegistrationComponent
   },
   {
+    path: 'create-system-admin',
+    component: CreateSystemAdminComponent
+  },
+  {
     path: 'predefined-appointments/:id',
     component: PredefinedAppointmentsForCenterComponent
   },
   {
     path: 'registered-user-appointment',
     component: RegisteredUserAppointmentComponent
+  },
+  {
+    path: 'scheduled-appointments',
+    component: ScheduledAppointmentsComponent
   }
 ];
 
