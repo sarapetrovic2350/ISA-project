@@ -30,6 +30,15 @@
                     <h2>{{title}}</h2>
                 </mat-card-title>
                 <mat-card-content>
+                    <div class="div1">
+                        <p class="ml2">Sort medical centers:</p>
+                        <select [(ngModel)]="selectedOption" class="btn dropdown-toggle ml3" (change)="changeSorting()">
+                            <option [ngValue]=0 disabled selected>Sorting</option>
+                            <option [ngValue]=1>Sort by grade asc</option>
+                            <option [ngValue]=2>Sort by grade desc</option>
+                        </select>
+                    
+                    </div>
                     <table mat-table [dataSource]="dataSource">
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
