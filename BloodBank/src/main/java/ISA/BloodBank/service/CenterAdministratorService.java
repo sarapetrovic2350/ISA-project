@@ -14,6 +14,7 @@ import ISA.BloodBank.dto.CenterAdministratorRegistrationDTO;
 import ISA.BloodBank.dto.CenterAdministratorUpdateDTO;
 import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.iservice.ICenterAdministratorService;
+import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.Authority;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.MedicalCenter;
@@ -30,11 +31,15 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	
 	private MedicalCenterService medicalCenterService;
 	
+	private AppointmentService appointmentService;
+	
 	@Autowired
-	public CenterAdministratorService(ICenterAdministratorRepository centerAdministratorRepository, AuthorityService authorityService, MedicalCenterService medicalCenterService) {
+	public CenterAdministratorService(ICenterAdministratorRepository centerAdministratorRepository, AuthorityService authorityService,
+			MedicalCenterService medicalCenterService, AppointmentService appointmentService) {
 		this.centerAdministratorRepository = centerAdministratorRepository;
 		this.authorityService = authorityService;
 		this.medicalCenterService = medicalCenterService;
+		this.appointmentService = appointmentService;
 	}
 
 	@Override
@@ -178,12 +183,19 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		return BCrypt.checkpw(password, hash);
 	}
 	
-	public List<CenterAdministrator>GetFreeCenterAdministartior(Long medicalCenterId){
-		 List<CenterAdministrator> administartors = getAllCenterAdministrator();
+	public List<CenterAdministrator>GetFreeCenterAdministartior(Long medicalCenterId, String date, String time){
+		 List<CenterAdministrator> administartors = centerAdministratorRepository.findCenterAdministratorsByMedicalCenterCenterId(medicalCenterId);
+		 List<Appointment> appointments = appointmentService.getAllAppointmentsByMedicalCenterIdAndDate(medicalCenterId, date, time);
 		 List<CenterAdministrator> centerAdministartors = new ArrayList<CenterAdministrator>();
 		 for(CenterAdministrator centerAdministrator : administartors) {
-			 if(centerAdministrator.getMedicalCenter().getCenterId() == medicalCenterId) {
+			 if(appointments.isEmpty()) {
 				 centerAdministartors.add(centerAdministrator);
+			 }else {
+				 for(Appointment appointment : appointments) {
+					 if(centerAdministrator.getUserId() != appointment.getCenterAdministrator().getUserId()) {
+						 centerAdministartors.add(centerAdministrator);
+					 }
+				 }
 			 }
 		 }
 		 return centerAdministartors;
