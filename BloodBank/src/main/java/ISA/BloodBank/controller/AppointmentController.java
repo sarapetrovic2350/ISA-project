@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,7 @@ public class AppointmentController {
 		this.donorQuestionnaireService = donorQuestionnaireService;
 	}
 
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
 	@PostMapping(value = "/createPredefinedAppointment")
 	public ResponseEntity<?> createPredefinedAppointment(@RequestBody AppointmentDTO appointmentDTO,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -55,7 +57,8 @@ public class AppointmentController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@PostMapping(value = "/createAppointmentRegisteredUser")
 	public ResponseEntity<?> createAppointmentRegisteredUser(
 			@RequestBody AppointmentRegisteredUserDTO appointmentRegisteredUserDTO,
@@ -78,7 +81,8 @@ public class AppointmentController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@PutMapping(value = "/schedulePredefinedAppointment/{appointmentId}/{registeredUserId}")
 	public ResponseEntity<?> schedulePredefinedAppointment(@PathVariable Long appointmentId,
 			@PathVariable Long registeredUserId, UriComponentsBuilder uriComponentsBuilder) {
@@ -108,6 +112,7 @@ public class AppointmentController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@GetMapping(value = "/findPredefinedAppointmentsForMedicalCenter/{id}")
 	public ResponseEntity<List<PredefinedAppointmentDTO>> findPredefinedAppointmentsForMedicalCenter(
 			@PathVariable Long id) {
@@ -130,6 +135,7 @@ public class AppointmentController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@GetMapping(value = "/findScheduledAppointmentsForRegisteredUser/{id}")
 	public ResponseEntity<List<ScheduledAppointmentDTO>> findScheduledAppointmentsForRegisteredUser(
 			@PathVariable Long id) {
@@ -154,6 +160,7 @@ public class AppointmentController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@PutMapping(value = "/cancelScheduledAppointment/{appointmentId}")
 	public ResponseEntity<?> cancelScheduledAppointment(@PathVariable Long appointmentId,
 			UriComponentsBuilder uriComponentsBuilder) {

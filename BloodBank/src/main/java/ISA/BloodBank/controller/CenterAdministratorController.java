@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,8 @@ public class CenterAdministratorController {
 		super();
 		this.centerAdministratorService = centerAdministratorService;
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_SYSTEM_ADMINISTRATOR')")
 	@PostMapping(value = "/registerCenterAdministrator")
 	public ResponseEntity<?> registerCenterAdministrator(
 			@RequestBody CenterAdministratorRegistrationDTO centerAdministratorRegistrationDTO,
@@ -59,6 +61,7 @@ public class CenterAdministratorController {
 				HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
 	@RequestMapping(value="/update", method = RequestMethod.PUT)
 	 public @ResponseBody CenterAdministratorUpdateDTO update(@RequestBody CenterAdministratorUpdateDTO c) {
 		 System.out.println(c);

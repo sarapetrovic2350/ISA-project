@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +34,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
 import { RegisteredUserAppointmentComponent } from './components/registered-user-appointment/registered-user-appointment.component';
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
+import {AuthService} from './service/auth.service';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { AuthGuardService } from './service/auth-guard.service';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +64,8 @@ import { ScheduledAppointmentsComponent } from './components/scheduled-appointme
     RegisteredUserAppointmentComponent,
     CreateSystemAdminComponent,
     PredefinedAppointmentsForCenterComponent,
-    ScheduledAppointmentsComponent
+    ScheduledAppointmentsComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +85,17 @@ import { ScheduledAppointmentsComponent } from './components/scheduled-appointme
       positionClass: 'toast-top-right',
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    AuthService,
+    AuthGuardService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

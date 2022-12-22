@@ -26,6 +26,8 @@ export class AuthService {
     this.user = data.user;
     this.jwt = data.accessToken;
     this.expiresIn = data.expiresIn;
+    localStorage.setItem('jwt', this.jwt);
+    localStorage.setItem('refreshToken', JSON.stringify(this.expiresIn));
     localStorage.setItem('currentUser', JSON.stringify(this.user));
     localStorage.setItem('role', data.user.authority.name);
     console.log(localStorage.getItem('role'));
