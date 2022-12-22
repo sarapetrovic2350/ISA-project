@@ -36,7 +36,7 @@ public class EmailService {
 		mail.setTo(registeredUserEmail);
 		mail.setFrom(env.getProperty("spring.mail.username"));
 		mail.setSubject("New scheduled appointment");
-		mail.setText("Your appointment is scheduled for: " + appointment.getDate() + "\nDuration in minutes: " + appointment.getDuration());
+		mail.setText("Your appointment is scheduled for: " + appointment.getDate() + "\nDuration in minutes: " + appointment.getDuration() + "\nMedical Center: " + appointment.getMedicalCenter().getName());
 		javaMailSender.send(mail);
 		System.out.println("Email successfully sent!");
 	}

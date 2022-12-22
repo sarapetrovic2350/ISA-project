@@ -104,7 +104,7 @@ public class AppointmentService implements IAppointmentService {
 		RegisteredUser registeredUser = (RegisteredUser)userService.findById(registeredUserId);
 		schedulingAppointment.setRegisteredUser(registeredUser);
 		appointmentRepository.save(schedulingAppointment);
-		//emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
+		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
 		return schedulingAppointment;
 	}
 	

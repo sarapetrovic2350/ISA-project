@@ -33,13 +33,13 @@ INSERT INTO public.user (dtype, user_id, jmbg, name, surname, password, salt, ge
 
 INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-12 12:05:00', '10', '4', '1', '1',false, false); 
 INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-12 12:20:00', '10', '4', '1', '1', false, false); 
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 12:10:00', '10', '4', null, '2', true, false); 
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:10:00', '10', '4', null, '2', true, false); 
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:20:00', '10', '4', null, '3', true, false); 
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:30:00', '10', '4', null, '6', true, false);
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 12:10:00', '10', '4', null, '1', true, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:10:00', '10', '4', null, '1', true, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:20:00', '10', '4', null, '1', true, false); 
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-26 13:30:00', '10', '4', null, '1', true, false);
 INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-28 15:20:00', '10', '4', null, '1', true, false);
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-29 11:40:00', '10', '5', null, '4', true, false);
-INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-29 11:50:00', '10', '5', null, '4', true, false);
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-29 11:40:00', '10', '5', null, '3', true, false);
+INSERT INTO public.appointment (appointment_id, date, duration, center_admin_id, user_id, center_id, is_available, is_cancelled) VALUES (default,'2022-12-29 11:50:00', '10', '5', null, '3', true, false);
 
 INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-10-10 12:05:00','neki tekst', 'neki tekst', '1', null, '1', '3' ); 
 INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, user_id, center_admin_id, medical_center_id, system_admin_id) VALUES (default, '2022-11-11 12:05:00', 'neki tekst', 'neki tekst', '1', '4', null, '3'); 
