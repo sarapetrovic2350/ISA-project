@@ -24,6 +24,9 @@
     <button *ngIf="isSystemAdmin" mat-button mat-ripple routerLink="/create-center-admin">
       <span>Register Center Admin</span>
     </button>
+    <button *ngIf="isHeadSystemAdmin" mat-button mat-ripple routerLink="/create-system-admin">
+      <span>Register System Admin</span>
+    </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/predefined-appointment">
       <span>Make Appointments</span>
     </button>

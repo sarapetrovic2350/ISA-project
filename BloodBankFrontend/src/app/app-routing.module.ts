@@ -11,6 +11,7 @@ import { ShowUsersComponent } from './components/show-users/show-users.component
 import { RegisterMedicalCenterComponent } from './components/register-medical-center/register-medical-center.component';
 import { ChangePasswordPageComponent } from './components/change-password-page/change-password-page.component';
 import { CreateCenterAdminComponent } from './components/create-center-admin/create-center-admin.component';
+import { CreateSystemAdminComponent } from './components/create-system-admin/create-system-admin.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { PredefinedAppointmentComponent } from './components/predefined-appointment/predefined-appointment.component';
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'confirm-registration/:id',
     component: ConfirmRegistrationComponent
+  },
+  {
+    path: 'create-system-admin',
+    component: CreateSystemAdminComponent
   }
 ];
 
