@@ -30,4 +30,8 @@ export class AppointmentService {
   findScheduledAppointmentsForRegisteredUser(registeredUserId: number): Observable<ScheduledAppointment[]> {
     return this.http.get<ScheduledAppointment[]>(this.apiHost + 'appointment/findScheduledAppointmentsForRegisteredUser/' + registeredUserId);
   }
+
+  cancelScheduledAppointment(appointmentId: number): Observable<any> {
+    return this.http.put<any>(this.apiHost + 'appointment/cancelScheduledAppointment/' + appointmentId, {heaaders: this.headers});
+  }
 }

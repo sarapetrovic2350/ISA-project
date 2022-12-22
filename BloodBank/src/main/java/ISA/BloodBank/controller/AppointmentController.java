@@ -78,22 +78,27 @@ public class AppointmentController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PutMapping(value = "/schedulePredefinedAppointment/{appointmentId}/{registeredUserId}")
-	public ResponseEntity<?> schedulePredefinedAppointment(
-			@PathVariable Long appointmentId,
-			@PathVariable Long registeredUserId,
-			UriComponentsBuilder uriComponentsBuilder) {
+	public ResponseEntity<?> schedulePredefinedAppointment(@PathVariable Long appointmentId,
+			@PathVariable Long registeredUserId, UriComponentsBuilder uriComponentsBuilder) {
 		try {
-			System.out.println(registeredUserId);
-			DonorQuestionnaire donorQuestionnaire = donorQuestionnaireService
-					.getQuestionnareByUserId(registeredUserId);
-			System.out.println(donorQuestionnaire.getQuestionnaireId());
+			DonorQuestionnaire donorQuestionnaire = donorQuestionnaireService.getQuestionnareByUserId(registeredUserId);
+			Appointment schedulingAppointment = appointmentService.findById(appointmentId);
 			if (donorQuestionnaire.getQuestionnaireId() != null) {
 				if (donorQuestionnaire.getRecentlyDonatedBlood() == false) {
-					return new ResponseEntity<>(appointmentService.schedulePredefinedAppointment(appointmentId, registeredUserId), HttpStatus.CREATED);
+					if (schedulingAppointment.getIsCancelled()
+							&& schedulingAppointment.getRegisteredUser().getUserId() == registeredUserId) {
+						throw new ResourceConflictException(appointmentId.toString(),
+								"Can not schedule appointment that you have cancelled.");
+					} else {
+						return new ResponseEntity<>(
+								appointmentService.schedulePredefinedAppointment(appointmentId, registeredUserId),
+								HttpStatus.CREATED);
+					}
 				} else {
-					throw new ResourceConflictException(registeredUserId.toString(), "Six months have not passed since the last blood donation!");
+					throw new ResourceConflictException(registeredUserId.toString(),
+							"Six months have not passed since the last blood donation!");
 				}
 			} else {
 				throw new ResourceConflictException(registeredUserId.toString(), "Please fill the donor questionnaire");
@@ -102,15 +107,15 @@ public class AppointmentController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
 
 	@GetMapping(value = "/findPredefinedAppointmentsForMedicalCenter/{id}")
-	public ResponseEntity<List<PredefinedAppointmentDTO>> findPredefinedAppointmentsForMedicalCenter(@PathVariable Long id) {
+	public ResponseEntity<List<PredefinedAppointmentDTO>> findPredefinedAppointmentsForMedicalCenter(
+			@PathVariable Long id) {
 		try {
 			List<PredefinedAppointmentDTO> predefinedAppointmentDTOs = new ArrayList<PredefinedAppointmentDTO>();
 			List<Appointment> appointmentsForCenter = appointmentService.findAllByCenterId(id);
 			for (Appointment a : appointmentsForCenter) {
-				if (a.getIsAvailable() && a.getRegisteredUser() == null) {
+				if (a.getIsAvailable()) {
 					PredefinedAppointmentDTO predefinedAppointmentDTO = new PredefinedAppointmentDTO();
 					predefinedAppointmentDTO.setAppointmentId(a.getAppointmentId());
 					predefinedAppointmentDTO.setDate(a.getDate().toLocalDate().toString());
@@ -124,14 +129,15 @@ public class AppointmentController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@GetMapping(value = "/findScheduledAppointmentsForRegisteredUser/{id}")
-	public ResponseEntity<List<ScheduledAppointmentDTO>> findScheduledAppointmentsForRegisteredUser(@PathVariable Long id) {
+	public ResponseEntity<List<ScheduledAppointmentDTO>> findScheduledAppointmentsForRegisteredUser(
+			@PathVariable Long id) {
 		try {
 			List<ScheduledAppointmentDTO> scheduledAppointmentDTOs = new ArrayList<ScheduledAppointmentDTO>();
 			List<Appointment> appointmentsForUser = appointmentService.findAllByRegisteredUserId(id);
 			for (Appointment a : appointmentsForUser) {
-				if (a.getDate().compareTo(LocalDateTime.now()) > 0) {
+				if (a.getIsAvailable() == false && a.getDate().compareTo(LocalDateTime.now()) > 0) {
 					ScheduledAppointmentDTO scheduledAppointmentDTO = new ScheduledAppointmentDTO();
 					scheduledAppointmentDTO.setAppointmentId(a.getAppointmentId());
 					scheduledAppointmentDTO.setRegisteredUserId(id);
@@ -144,6 +150,27 @@ public class AppointmentController {
 			return new ResponseEntity<List<ScheduledAppointmentDTO>>(scheduledAppointmentDTOs, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PutMapping(value = "/cancelScheduledAppointment/{appointmentId}")
+	public ResponseEntity<?> cancelScheduledAppointment(@PathVariable Long appointmentId,
+			UriComponentsBuilder uriComponentsBuilder) {
+		try {
+			Appointment cancelingAppointment = appointmentService.findById(appointmentId);
+			if (cancelingAppointment != null) {
+				if (cancelingAppointment.getDate().compareTo(LocalDateTime.now().plusHours(24)) > 0) {
+					return new ResponseEntity<>(appointmentService.cancelScheduledAppointment(appointmentId),
+							HttpStatus.CREATED);
+				} else {
+					throw new ResourceConflictException(appointmentId.toString(),
+							"Can not cancel the appointment! There are less than 24 hours left until the appointment.");
+				}
+			} else {
+				throw new ResourceConflictException(appointmentId.toString(), "Appointment does not exist.");
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 

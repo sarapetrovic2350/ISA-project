@@ -88,7 +88,7 @@ const routes: Routes = [
     component: PredefinedAppointmentsForCenterComponent
   },
   {
-    path: 'scheduled-appointments/:id',
+    path: 'scheduled-appointments',
     component: ScheduledAppointmentsComponent
   }
 ];

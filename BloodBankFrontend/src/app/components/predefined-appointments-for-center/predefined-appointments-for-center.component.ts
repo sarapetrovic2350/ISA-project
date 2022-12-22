@@ -37,7 +37,7 @@ export class PredefinedAppointmentsForCenterComponent implements OnInit {
     console.log(registeredUserId);
     this.appointmentService.schedulePredefinedAppointment(id, registeredUserId).subscribe({
       next: (res) => {
-        this.router.navigate(['scheduled-appointments/' + registeredUserId]);
+        this.router.navigate(['scheduled-appointments']);
         Swal.fire({
           icon: 'success',
           title: 'Success!',

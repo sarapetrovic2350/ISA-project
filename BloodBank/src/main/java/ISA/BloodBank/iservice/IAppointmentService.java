@@ -20,4 +20,8 @@ public interface IAppointmentService {
 	List<Appointment> findAllByRegisteredUserId(Long id);
 
 	Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId);
+	
+	Appointment findById(Long appointmentId);
+	
+	Appointment cancelScheduledAppointment(Long appointmentId);
 }
