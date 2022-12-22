@@ -31,6 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
+import { RegisteredUserAppointmentComponent } from './components/registered-user-appointment/registered-user-appointment.component';
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 
@@ -53,6 +54,8 @@ import { ScheduledAppointmentsComponent } from './components/scheduled-appointme
     PredefinedAppointmentComponent,
     CreateReportComponent,
     ConfirmRegistrationComponent,
+    PredefinedAppointmentsForCenterComponent,
+    RegisteredUserAppointmentComponent,
     CreateSystemAdminComponent,
     PredefinedAppointmentsForCenterComponent,
     ScheduledAppointmentsComponent

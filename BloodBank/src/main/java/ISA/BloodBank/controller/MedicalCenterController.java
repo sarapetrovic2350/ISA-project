@@ -182,4 +182,9 @@ public class MedicalCenterController {
 			return new ResponseEntity<>(response, HttpStatus.OK);	
 		 
 		}
+	 @GetMapping(value = "/medicalCentersWithAvailableAppointment")
+		public ResponseEntity<List<MedicalCenter>> getMedicalCentersWithAvailableAppointment(@RequestParam String date,@RequestParam String time){
+		 	return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.GetMedicalCentersWithAvailableAppointment(date, time), HttpStatus.OK);	
+		 
+		}
 }

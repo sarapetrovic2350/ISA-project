@@ -69,10 +69,10 @@ public class AppointmentController {
 							appointmentService.createAppointmentRegisteredUser(appointmentRegisteredUserDTO),
 							HttpStatus.CREATED);
 				} else {
-					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+					throw new ResourceConflictException(appointmentRegisteredUserDTO.getRegisteredUserID(), "Six months have not passed since the last blood donation!");
 				}
 			} else {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				throw new ResourceConflictException(appointmentRegisteredUserDTO.getRegisteredUserID(), "Please fill the donor questionnaire");
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

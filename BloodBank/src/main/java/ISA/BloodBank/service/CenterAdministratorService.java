@@ -177,4 +177,15 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	public boolean verifyHash(String password, String hash) {
 		return BCrypt.checkpw(password, hash);
 	}
+	
+	public List<CenterAdministrator>GetFreeCenterAdministartior(Long medicalCenterId){
+		 List<CenterAdministrator> administartors = getAllCenterAdministrator();
+		 List<CenterAdministrator> centerAdministartors = new ArrayList<CenterAdministrator>();
+		 for(CenterAdministrator centerAdministrator : administartors) {
+			 if(centerAdministrator.getMedicalCenter().getCenterId() == medicalCenterId) {
+				 centerAdministartors.add(centerAdministrator);
+			 }
+		 }
+		 return centerAdministartors;
+	}
 }

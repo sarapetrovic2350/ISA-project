@@ -30,6 +30,7 @@ export class PredefinedAppointmentComponent implements OnInit {
     this.appointment.administratorCenterID = this.user.userId;
     this.appointment.date = this.date;
     this.appointment.time = this.time;
+    console.log(this.date);
     console.log(this.appointment);
 
     this.appointmentService.createPredefinedAppointment(this.appointment).subscribe( 
@@ -38,7 +39,7 @@ export class PredefinedAppointmentComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Success!',
-            text: 'Sucessfully updated!',
+            text: 'Sucessfully created predefined appointment!',
           })  
       },
       error: (e) => {
