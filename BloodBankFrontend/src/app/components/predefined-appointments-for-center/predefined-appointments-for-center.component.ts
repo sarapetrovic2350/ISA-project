@@ -25,12 +25,12 @@ export class PredefinedAppointmentsForCenterComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       console.log(params['id']);
       this.appointmentService.findPredefinedAppointmentsForMedicalCenter(params['id']).subscribe(res => {
-    
-         this.predefinedAppointments = res; 
-         console.log(this.predefinedAppointments); 
-         this.dataSource.data = this.predefinedAppointments;
-       })
-     });
+
+        this.predefinedAppointments = res;
+        console.log(this.predefinedAppointments);
+        this.dataSource.data = this.predefinedAppointments;
+      })
+    });
   }
   schedulePredefinedAppointment(id: number) {
     let registeredUserId = parseInt(this.authService.getCurrentUser().userId);
@@ -57,18 +57,29 @@ export class PredefinedAppointmentsForCenterComponent implements OnInit {
   changeSorting() {
     console.log(this.selectedOption);
     if (this.selectedOption == '1') {
-      console.log(this.predefinedAppointments);
-      
-      return this.predefinedAppointments.sort((a, b) =>  new Date(b.date).getTime() - new Date(a.date).getTime());
-      
+      this.predefinedAppointments.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      return this.dataSource.data = this.predefinedAppointments;
     }
 
     else if (this.selectedOption == '2') {
-      return this.predefinedAppointments.sort((a, b) => b.time.localeCompare(a.time));
+      this.predefinedAppointments.sort(({ time: a }, { time: b }) => this.getNumber(a) - this.getNumber(b));
+      return this.dataSource.data = this.predefinedAppointments;
+    }
+    else if (this.selectedOption == '3') {
+      this.predefinedAppointments.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      return this.dataSource.data = this.predefinedAppointments;
+    }
+    else if (this.selectedOption == '4') {
+      this.predefinedAppointments.sort(({ time: a }, { time: b }) => this.getNumber(b) - this.getNumber(a));
+      return this.dataSource.data = this.predefinedAppointments;
     }
     else {
       return null;
     }
+  }
+
+  getNumber(t: string) {
+    return +t.replace(/:/g, '');
   }
 
 

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./scheduled-appointments.component.css']
 })
 export class ScheduledAppointmentsComponent implements OnInit {
-  title = "Your scheduled appointments";
+  title = "Upcoming scheduled appointments";
   public dataSource = new MatTableDataSource<ScheduledAppointment>();
   public displayedColumns = ['date', 'time', 'duration', 'schedule'];
   public scheduledAppointments: ScheduledAppointment[] = [];
