@@ -10,12 +10,14 @@ import ISA.BloodBank.model.Appointment;
 
 @Service
 public interface IAppointmentService {
-	
+
 	Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO);
-	
+
 	Appointment createAppointmentRegisteredUser(AppointmentRegisteredUserDTO appointmentRegisteredUserDTO);
 
 	List<Appointment> findAllByCenterId(Long id);
-	
+
+	List<Appointment> findAllByRegisteredUserId(Long id);
+
 	Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId);
 }

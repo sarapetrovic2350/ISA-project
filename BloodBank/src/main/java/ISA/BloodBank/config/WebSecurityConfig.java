@@ -87,6 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/medicalCenter/findAllSortedByCityName",
 				"/blood/getAll",
 				"/appointment/findPredefinedAppointmentsForMedicalCenter/{id}",
+				"/appointment/findScheduledAppointmentsForRegisteredUser/{id}",
 				"/report/getAll",
 				"/user/checkPenalties/{id}/{present}",
 				"/donorQuestionnaire/checkQuestionnaire/{userId}",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PredefAppointment } from 'src/app/model/predef-appointment.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -19,7 +19,7 @@ export class PredefinedAppointmentsForCenterComponent implements OnInit {
   public predefinedAppointments: PredefAppointment[] = [];
   public selectedOption: string = "";
 
-  constructor(private route: ActivatedRoute, private appointmentService: AppointmentService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private appointmentService: AppointmentService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -37,6 +37,7 @@ export class PredefinedAppointmentsForCenterComponent implements OnInit {
     console.log(registeredUserId);
     this.appointmentService.schedulePredefinedAppointment(id, registeredUserId).subscribe({
       next: (res) => {
+        this.router.navigate(['scheduled-appointments/' + registeredUserId]);
         Swal.fire({
           icon: 'success',
           title: 'Success!',

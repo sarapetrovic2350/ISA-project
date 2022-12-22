@@ -1,5 +1,6 @@
 package ISA.BloodBank.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ISA.BloodBank.dto.AppointmentDTO;
 import ISA.BloodBank.dto.AppointmentRegisteredUserDTO;
 import ISA.BloodBank.dto.PredefinedAppointmentDTO;
+import ISA.BloodBank.dto.ScheduledAppointmentDTO;
 import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.DonorQuestionnaire;
@@ -118,6 +120,28 @@ public class AppointmentController {
 				}
 			}
 			return new ResponseEntity<List<PredefinedAppointmentDTO>>(predefinedAppointmentDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/findScheduledAppointmentsForRegisteredUser/{id}")
+	public ResponseEntity<List<ScheduledAppointmentDTO>> findScheduledAppointmentsForRegisteredUser(@PathVariable Long id) {
+		try {
+			List<ScheduledAppointmentDTO> scheduledAppointmentDTOs = new ArrayList<ScheduledAppointmentDTO>();
+			List<Appointment> appointmentsForUser = appointmentService.findAllByRegisteredUserId(id);
+			for (Appointment a : appointmentsForUser) {
+				if (a.getDate().compareTo(LocalDateTime.now()) > 0) {
+					ScheduledAppointmentDTO scheduledAppointmentDTO = new ScheduledAppointmentDTO();
+					scheduledAppointmentDTO.setAppointmentId(a.getAppointmentId());
+					scheduledAppointmentDTO.setRegisteredUserId(id);
+					scheduledAppointmentDTO.setDate(a.getDate().toLocalDate().toString());
+					scheduledAppointmentDTO.setTime(a.getDate().toLocalTime().toString());
+					scheduledAppointmentDTO.setDuration(a.getDuration());
+					scheduledAppointmentDTOs.add(scheduledAppointmentDTO);
+				}
+			}
+			return new ResponseEntity<List<ScheduledAppointmentDTO>>(scheduledAppointmentDTOs, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

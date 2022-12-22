@@ -96,5 +96,10 @@ public class AppointmentService implements IAppointmentService {
 		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
 		return schedulingAppointment;
 	}
+	
+	@Override
+	public List<Appointment> findAllByRegisteredUserId(Long id) {
+		return appointmentRepository.findAppointmentsByRegisteredUserUserId(id);
+	}
 
 }

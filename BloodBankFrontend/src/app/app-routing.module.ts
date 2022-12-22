@@ -16,6 +16,7 @@ import { PredefinedAppointmentComponent } from './components/predefined-appointm
 import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 import {CreateReportComponent} from './components/create-report/create-report.component';
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
+import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
   {
     path: 'predefined-appointments/:id',
     component: PredefinedAppointmentsForCenterComponent
+  },
+  {
+    path: 'scheduled-appointments/:id',
+    component: ScheduledAppointmentsComponent
   }
 ];
 
