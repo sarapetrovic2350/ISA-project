@@ -19,16 +19,10 @@ import {CreateReportComponent} from './components/create-report/create-report.co
 import { PredefinedAppointmentsForCenterComponent } from './components/predefined-appointments-for-center/predefined-appointments-for-center.component';
 import { RegisteredUserAppointmentComponent } from './components/registered-user-appointment/registered-user-appointment.component';
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
+import { RoleGuardService } from './service/role-guard.service';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 const routes: Routes = [
-  {
-    path:'report/:id/search', 
-    component: CreateReportComponent
-  },
-  {
-    path:'create-report', 
-    component: CreateReportComponent
-  }, 
   {
     path:'',
     component: HomeComponent
@@ -43,15 +37,27 @@ const routes: Routes = [
   },
   {
     path: 'update-user',
-    component: UpdateUserComponent
+    component: UpdateUserComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_REGISTERED_USER'
+    }
   },
   {
     path: 'update-medical-cenntar',
-    component: UpdateMedicalCenntarComponent
+    component: UpdateMedicalCenntarComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   },
   {
     path: 'update-cent-administrator',
-    component: UpdateCentAdministratorComponent
+    component: UpdateCentAdministratorComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   },
   {
     path: 'medical-centers',
@@ -63,7 +69,11 @@ const routes: Routes = [
   },
   {
     path: 'create-medical-cenntar',
-    component: RegisterMedicalCenterComponent
+    component: RegisterMedicalCenterComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_SYSTEM_ADMINISTRATOR'
+    }
   }, 
   {
     path: 'change-password-page',
@@ -71,15 +81,27 @@ const routes: Routes = [
   }, 
   {
     path: 'create-center-admin',
-    component: CreateCenterAdminComponent
+    component: CreateCenterAdminComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_SYSTEM_ADMINISTRATOR'
+    }
   },
   {
     path: 'questionnaire',
-    component: QuestionnaireComponent
+    component: QuestionnaireComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_REGISTERED_USER'
+    }
   },
   {
     path: 'predefined-appointment',
-    component: PredefinedAppointmentComponent
+    component: PredefinedAppointmentComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   }, 
   {
     path: 'confirm-registration/:id',
@@ -87,19 +109,47 @@ const routes: Routes = [
   },
   {
     path: 'create-system-admin',
-    component: CreateSystemAdminComponent
+    component: CreateSystemAdminComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_SYSTEM_ADMINISTRATOR'
+    }
   },
   {
     path: 'predefined-appointments/:id',
-    component: PredefinedAppointmentsForCenterComponent
+    component: PredefinedAppointmentsForCenterComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_REGISTERED_USER'
+    }
   },
   {
     path: 'registered-user-appointment',
-    component: RegisteredUserAppointmentComponent
+    component: RegisteredUserAppointmentComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_REGISTERED_USER'
+    }
   },
   {
     path: 'scheduled-appointments',
-    component: ScheduledAppointmentsComponent
+    component: ScheduledAppointmentsComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_REGISTERED_USER'
+    }
+  },
+  {
+    path:'report/:id/search', 
+    component: CreateReportComponent
+  },
+  {
+    path:'create-report', 
+    component: CreateReportComponent
+  }, 
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent
   }
 ];
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,56 +58,60 @@ public class UserController {
 	public ResponseEntity<List<User>> findAll() {
 		return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/getAllRegistredUsers")
 	public ResponseEntity<List<User>> findAllRegistredUsers() {
 		return new ResponseEntity<List<User>>(userService.getAllRegistredUsers(), HttpStatus.OK);
 	}
-	
-	 @PutMapping(value="/update")
-	 public @ResponseBody UserUpdateDTO update(@RequestBody UserUpdateDTO u) {
-		 return userService.updateUser(u);
-	 }
-	 
-	 @GetMapping(value="/getUserById/{userId}")
-	 public User loadById(@PathVariable Long userId) {
+
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
+	@PutMapping(value = "/update")
+	public @ResponseBody UserUpdateDTO update(@RequestBody UserUpdateDTO u) {
+		return userService.updateUser(u);
+	}
+
+	@GetMapping(value = "/getUserById/{userId}")
+	public User loadById(@PathVariable Long userId) {
 		return this.userService.findById(userId);
-	 }
-	 
-	 @GetMapping(value="/getUserByEmail/{email}")
-	 public User findById(@PathVariable String email) {
+	}
+
+	@GetMapping(value = "/getUserByEmail/{email}")
+	public User findById(@PathVariable String email) {
 		return this.userService.findByEmail(email);
-	 }
-	 
-	 @RequestMapping(value="/changePassword", method = RequestMethod.PUT)
-	    public @ResponseBody User changePassword(@RequestBody ChangePasswordDTO dto) {
-		 return userService.changePassword(dto);
-	    }
-	 
-	 @GetMapping(value = "/findUserByNameAndSurnameForSystemAdmin/{name}/{surname}")
-		public ResponseEntity<List<User>> findUserByNameAndSurname(@PathVariable String name,@PathVariable String surname){
-			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForSystemAdmin(name, surname), HttpStatus.OK);
-		}
-	 
-	 @GetMapping(value = "/findUserByNameAndSurnameForCenterAdmin/{name}/{surname}")
-		public ResponseEntity<List<User>> findUserByNameAndSurnameForCenterAdmin(@PathVariable String name,@PathVariable String surname){
-			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname), HttpStatus.OK);
-		}
-	 
-	 @GetMapping(value = "/checkPenalties/{id}/{present}")
-		public ResponseEntity<?> checkPenalties(@PathVariable Long id,@PathVariable String present){
+	}
+
+	@RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
+	public @ResponseBody User changePassword(@RequestBody ChangePasswordDTO dto) {
+		return userService.changePassword(dto);
+	}
+
+	@GetMapping(value = "/findUserByNameAndSurnameForSystemAdmin/{name}/{surname}")
+	public ResponseEntity<List<User>> findUserByNameAndSurname(@PathVariable String name,
+			@PathVariable String surname) {
+		return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForSystemAdmin(name, surname),
+				HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/findUserByNameAndSurnameForCenterAdmin/{name}/{surname}")
+	public ResponseEntity<List<User>> findUserByNameAndSurnameForCenterAdmin(@PathVariable String name,
+			@PathVariable String surname) {
+		return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname),
+				HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/checkPenalties/{id}/{present}")
+	public ResponseEntity<?> checkPenalties(@PathVariable Long id, @PathVariable String present) {
 //			return new ResponseEntity<List<User>>(userService.findUserByNameAndSurnameForCenterAdmin(name, surname), HttpStatus.OK);
-		 String comp = "NO"; 
-		 if(present.equals(comp)) {
-			 // ovde nije dosao 
-			 	userService.updatePenal(id); 
-				String ret = "Penalties well refreshed!"; 
-				return new ResponseEntity<>(ret, HttpStatus.BAD_REQUEST);
-		 }else 
-		 {
-			 
-			 return new ResponseEntity<>(HttpStatus.OK);
-		 }
-	 }
-	
+		String comp = "NO";
+		if (present.equals(comp)) {
+			// ovde nije dosao
+			userService.updatePenal(id);
+			String ret = "Penalties well refreshed!";
+			return new ResponseEntity<>(ret, HttpStatus.BAD_REQUEST);
+		} else {
+
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	}
+
 }

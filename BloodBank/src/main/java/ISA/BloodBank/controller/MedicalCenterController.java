@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,8 @@ public class MedicalCenterController {
 		super();
 		this.medicalCenterService = medicalCenterService;
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_SYSTEM_ADMINISTRATOR')")
 	@PostMapping(value = "/createCenter")
 	public ResponseEntity<?> createCenter(@RequestBody MedicalCenter medicalCenter,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -148,6 +150,7 @@ public class MedicalCenterController {
 	    }
 	  }
 
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
 	 @RequestMapping(value="/updateCenter", method = RequestMethod.PUT)
 	 public @ResponseBody MedicalCenter update(@RequestBody MedicalCenter medCenterDto) { 
 		 System.out.println(medCenterDto); 
