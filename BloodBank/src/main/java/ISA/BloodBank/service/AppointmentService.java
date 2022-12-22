@@ -42,6 +42,7 @@ public class AppointmentService implements IAppointmentService {
 		centerAdministrator = centerAdministaratorService.findById(Long.parseLong(appointmentDTO.getAdministratorCenterID()));
 		appointment.setCenterAdministrator(centerAdministrator);
 		appointment.setIsAvailable(true);
+		appointment.setIsCancelled(false);
 		appointment.setRegisteredUser(null);
 		appointment.setDuration(appointmentDTO.getDuration());
 		String time = appointmentDTO.getTime();
@@ -65,6 +66,7 @@ public class AppointmentService implements IAppointmentService {
 		centerAdministrator = centerAdministaratorService.findById(Long.parseLong(appointmentRegisteredUserDTO.getAdministratorCenterID()));
 		appointment.setCenterAdministrator(centerAdministrator);
 		appointment.setIsAvailable(false);
+		appointment.setIsCancelled(false);
 		registeredUser = (RegisteredUser)userService.findById(Long.parseLong(appointmentRegisteredUserDTO.getRegisteredUserID()));
 		appointment.setRegisteredUser(registeredUser);
 		appointment.setDuration(appointmentRegisteredUserDTO.getDuration());
