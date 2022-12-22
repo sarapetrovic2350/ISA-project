@@ -52,7 +52,7 @@ public class DonorQuestionnaireController {
 		if(donorQuestionnaireService.checkQuestionnare(userId) == true ) {
 			return new ResponseEntity<DonorQuestionnaire>(donorQuestionnaireService.getQuestionnareByUserId(userId), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DonorQuestionnaire>(HttpStatus.OK);
+			return new ResponseEntity<DonorQuestionnaire>(HttpStatus.NOT_FOUND);
 		}	
 	}
 	
