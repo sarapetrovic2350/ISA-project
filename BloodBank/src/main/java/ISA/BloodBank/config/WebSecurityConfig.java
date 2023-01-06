@@ -108,6 +108,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/centerAdministrator/getMedicalCenterByAdminEmail/{email}",
 				"/centerAdministrator/getCenterAdministratorsByCenterId/{centerId}",
 				"/blood/getAll",
+				"/blood/getBloodByCenterId/{centerId}",
 				"/report/getAll",
 				"/user/checkPenalties/{id}/{present}",
 				"/medicalCenter/medicalCentersWithAvailableAppointment",

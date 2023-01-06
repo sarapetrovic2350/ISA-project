@@ -61,7 +61,7 @@ public class ReportController {
 			
 			if(report.getReportStatus() == ReportStatus.ACCEPTED) {
 				CenterAdministrator admin = centerAdministratorService.findByEmail(report.getAdministratorEmail());
-				AddingBloodDTO bloodDto = new AddingBloodDTO(report.getBloodId(), report.getQuantaty());  
+				AddingBloodDTO bloodDto = new AddingBloodDTO(report.getBloodType(), admin.getMedicalCenter().getCenterId(), report.getQuantaty());  
 				bloodService.addingBlood(bloodDto); 
 				equipmentStorageService.updateQuantaty(admin.getMedicalCenter().getCenterId(), report.getEquipmentQuantaty()); 
 			}

@@ -32,7 +32,7 @@ export class CreateReportComponent implements OnInit {
   idUser = 2; 
 
   blodId: number = 0; 
-
+  blodType: string = ''; 
   addReason: boolean = false; 
 
   firstStep : boolean = true
@@ -201,7 +201,7 @@ export class CreateReportComponent implements OnInit {
     this.report.customerId = Number(this.patient.userId); 
     this.report.administratorEmail = this.administrator.email; 
     //this.report.bloodId = this.formGroupBlood.value.bloodIdd; 
-    this.report.bloodId = this.blodId
+    //this.report.bloodId = this.blodId
     this.report.weight = this.formGroupReport.value.weight; 
     this.report.haemoglobinValue = this.formGroupReport.value.haemoglobinValue;
     this.report.heart =this.formGroupReport.value.heart;
@@ -213,6 +213,7 @@ export class CreateReportComponent implements OnInit {
     this.report.reason= "Dobro je"; 
     this.report. equipmentQuantaty=this.formGroupBlood.value.equipment; 
     this.report.present = this.formGroupPresent.value.present; 
+    this.report.bloodType = this.blodType; 
     this.reportService.createReport(this.report).subscribe( 
       {next: (res) => {
         this.router.navigate(['/medical-centers']);

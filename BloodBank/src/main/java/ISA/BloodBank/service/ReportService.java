@@ -30,15 +30,17 @@ public class ReportService implements IReportService{
 	private ICenterAdministratorRepository centerAdministratorRepository; 
 	private IBloodRepository bloodRepository; 
 	private IAppointmentRepository appointmentsRepository; 
+	private BloodService bloodService; 
 	
 	@Autowired
 	public ReportService(IReportRepository reportRepository, IUserRepository userRepository, ICenterAdministratorRepository centerAdministratorRepository, 
-			IBloodRepository bloodRepository, IAppointmentRepository appointmentsRepository) {
+			IBloodRepository bloodRepository, IAppointmentRepository appointmentsRepository, BloodService bloodService) {
 		this.reportRepository = reportRepository;
 		this.userRepository = userRepository; 
 		this.centerAdministratorRepository = centerAdministratorRepository; 
 		this.bloodRepository = bloodRepository; 
 		this.appointmentsRepository = appointmentsRepository; 
+		this.bloodService = bloodService; 
 	}
 
 	@Override
@@ -68,7 +70,7 @@ public class ReportService implements IReportService{
 		rep.setReportStatus(report.getReportStatus());  
 		
 		if(report.getReportStatus() == ReportStatus.ACCEPTED ) {	
-			Blood blood = bloodRepository.findById(report.getBloodId()).get(); 
+			Blood blood = bloodService.findBloodByTypeCenterId(report.getBloodType(), centAdmi.getMedicalCenter().getCenterId()); 
 			rep.setBlood(blood); 
 			rep.setQuantaty(report.getQuantaty());
 			rep.setReasonForDenying("Krv je primljena"); 

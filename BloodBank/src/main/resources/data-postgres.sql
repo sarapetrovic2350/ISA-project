@@ -47,14 +47,22 @@ INSERT INTO public.complaint (complaint_id, date, text_complaint, text_answer, u
 
 INSERT INTO public.donor_questionnaire (id, age, general_good_health, has_period, normal_blood_pressure, recently_donated_blood, visited_dentist, skin_disorders, symptoms_of_illness, tattoo_or_piercing, under_medication, weight, user_id ) VALUES (default, '22', true, false, true, false, false, false, false, false, false, '56', '2' ); 
 
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'A_POSITIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'A_NEGATIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'B_POSITIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'B_NEGATIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'ZERO_POSITIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'ZERO_NEGATIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_POSITIVE', 1000);
-INSERT INTO public.bloods (blood_id, blood_type, quantaty) VALUES (default, 'AB_NEGATIVE', 1000);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'A_POSITIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'A_NEGATIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'B_POSITIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'B_NEGATIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'ZERO_POSITIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'ZERO_NEGATIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'AB_POSITIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'AB_NEGATIVE', 1000, 1);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'A_POSITIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'A_NEGATIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'B_POSITIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'B_NEGATIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'ZERO_POSITIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'ZERO_NEGATIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'AB_POSITIVE', 1000, 2);
+INSERT INTO public.bloods (blood_id, blood_type, quantaty, medical_center_id) VALUES (default, 'AB_NEGATIVE', 1000, 2);
 
 --INSERT INTO public.report (id, blood_preasure, date, haemoglobin_value, heart, height, lungs, quantaty, reason, status, weight, appointment_id, blood_id, center_admin_id, user_id) VALUES (default, 100, '2022-12-12 12:05:00', 10, 'dobro je', 180, 'dobro je', 400, 'Primljeno je', 'ACCEPTED', 70, 1, 5, 4, 1); 
 
