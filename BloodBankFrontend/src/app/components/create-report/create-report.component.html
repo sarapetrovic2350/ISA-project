@@ -69,15 +69,15 @@
              
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Blood Type</mat-label>
-                        <mat-select name="bloodType" [(value)]="blodId" matNativeControl required>
-                            <mat-option [value]="7">AB+</mat-option>
-                            <mat-option [value]="1">A+</mat-option>
-                            <mat-option [value]="3">B+</mat-option>
-                            <mat-option [value]="5">0+</mat-option>
-                            <mat-option [value]="8">AB-</mat-option>
-                            <mat-option [value]="2">A-</mat-option>
-                            <mat-option [value]="4">B-</mat-option>
-                            <mat-option [value]="6">0-</mat-option>
+                        <mat-select name="bloodType" [(value)]="blodType" matNativeControl required>
+                            <mat-option value="AB_POSITIVE">AB+</mat-option>
+                            <mat-option value="A_POSITIVE">A+</mat-option>
+                            <mat-option value="B_POSITIVE">B+</mat-option>
+                            <mat-option value="ZERO_POSITIVE">0+</mat-option>
+                            <mat-option value="AB_NEGATIVE">AB-</mat-option>
+                            <mat-option value="A_NEGATIVE">A-</mat-option>
+                            <mat-option value="B_NEGATIVE">B-</mat-option>
+                            <mat-option value="ZERO_NEGATIVE">0-</mat-option>
                         </mat-select >
                     </mat-form-field>
                     <mat-form-field appearance="outline" color="primary" class="form-field">

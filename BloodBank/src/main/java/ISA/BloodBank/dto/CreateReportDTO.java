@@ -2,6 +2,7 @@ package ISA.BloodBank.dto;
 
 import javax.persistence.Column;
 
+import ISA.BloodBank.model.BloodType;
 import ISA.BloodBank.model.ReportStatus;
 
 public class CreateReportDTO {
@@ -22,13 +23,14 @@ public class CreateReportDTO {
 	private String date; 
 	private Boolean present;
 	private Double equipmentQuantaty; 
+	private BloodType bloodType; 
 	
 	CreateReportDTO(){}
 
 	public CreateReportDTO(String administratorEmail, Long customerId, Long bloodId, Long appointmentId,
 			Double haemoglobinValue, String heart, String lungs, Double weight, Double height, Double bloodPreasure,
 			ReportStatus reportStatus, Double quantaty, String reason, String date, Boolean present,
-			Double equipmentQuantaty) {
+			Double equipmentQuantaty, BloodType bloodType) {
 		super();
 		this.administratorEmail = administratorEmail;
 		this.customerId = customerId;
@@ -46,9 +48,8 @@ public class CreateReportDTO {
 		this.date = date;
 		this.present = present;
 		this.equipmentQuantaty = equipmentQuantaty;
+		this.bloodType = bloodType;
 	}
-
-
 
 	public String getAdministratorEmail() {
 		return administratorEmail;
@@ -176,6 +177,14 @@ public class CreateReportDTO {
 
 	public void setEquipmentQuantaty(Double equipmentQuantaty) {
 		this.equipmentQuantaty = equipmentQuantaty;
+	}
+
+	public BloodType getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(BloodType bloodType) {
+		this.bloodType = bloodType;
 	}
 	
 }

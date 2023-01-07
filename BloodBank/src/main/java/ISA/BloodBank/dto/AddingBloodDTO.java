@@ -1,24 +1,28 @@
 package ISA.BloodBank.dto;
 
+import ISA.BloodBank.model.BloodType;
+
 public class AddingBloodDTO {
 	
-	private Long bloodId; 
+	private BloodType bloodType; 
+	private Long centerId; 
 	private Double quantaty; 
 	
 	public AddingBloodDTO() {}
 
-	public AddingBloodDTO(Long bloodId, Double quantaty) {
+	public AddingBloodDTO(BloodType bloodType, Long centerId, Double quantaty) {
 		super();
-		this.bloodId = bloodId;
+		this.bloodType = bloodType;
+		this.centerId = centerId;
 		this.quantaty = quantaty;
 	}
 
-	public Long getBloodId() {
-		return bloodId;
+	public BloodType getBloodType() {
+		return bloodType;
 	}
 
-	public void setBloodId(Long bloodId) {
-		this.bloodId = bloodId;
+	public void setBloodType(BloodType bloodType) {
+		this.bloodType = bloodType;
 	}
 
 	public Double getQuantaty() {
@@ -28,6 +32,13 @@ public class AddingBloodDTO {
 	public void setQuantaty(Double quantaty) {
 		this.quantaty = quantaty;
 	}
-	
+
+	public Long getCenterId() {
+		return centerId;
+	}
+
+	public void setCenterId(Long centerId) {
+		this.centerId = centerId;
+	}
 	
 }

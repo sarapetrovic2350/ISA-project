@@ -15,6 +15,7 @@ export class Report {
         public reason: string='', 
         public date: string='', 
         public equipmentQuantaty: number = 0, 
-        public present: string=''
+        public present: string='',
+        public bloodType: string=''
       ) {}
 }
