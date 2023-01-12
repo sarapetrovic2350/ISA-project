@@ -21,6 +21,7 @@ import { RegisteredUserAppointmentComponent } from './components/registered-user
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 import { RoleGuardService } from './service/role-guard.service';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ShowBloodComponent } from './components/show-blood/show-blood.component'
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'medical-centers',
     component: MedicalCentersComponent
+  },
+  {
+    path: 'show-blood',
+    component: ShowBloodComponent
   },
   {
     path: 'show-users',

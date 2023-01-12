@@ -93,6 +93,10 @@ export class UpdateMedicalCenntarComponent implements OnInit {
     });
   }
 
+  public gotoBloods(){
+    this.router.navigate(['/show-blood']);
+  }
+
   showSuccess() {
    // this.toastr.success('Successfully updated!', 'Blood Blank App');
    this.submitted = false;
