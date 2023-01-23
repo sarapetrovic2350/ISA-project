@@ -26,8 +26,10 @@ import ISA.BloodBank.dto.ScheduledAppointmentDTO;
 import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.DonorQuestionnaire;
+import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.service.AppointmentService;
 import ISA.BloodBank.service.DonorQuestionnaireService;
+import ISA.BloodBank.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -37,13 +39,15 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 	private DonorQuestionnaireService donorQuestionnaireService;
+	private UserService userService;
 
 	@Autowired
 	public AppointmentController(AppointmentService appointmentService,
-			DonorQuestionnaireService donorQuestionnaireService) {
+			DonorQuestionnaireService donorQuestionnaireService, UserService userService) {
 		super();
 		this.appointmentService = appointmentService;
 		this.donorQuestionnaireService = donorQuestionnaireService;
+		this.userService = userService;
 	}
 
 	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
@@ -57,7 +61,7 @@ public class AppointmentController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@PostMapping(value = "/createAppointmentRegisteredUser")
 	public ResponseEntity<?> createAppointmentRegisteredUser(
@@ -72,16 +76,18 @@ public class AppointmentController {
 							appointmentService.createAppointmentRegisteredUser(appointmentRegisteredUserDTO),
 							HttpStatus.CREATED);
 				} else {
-					throw new ResourceConflictException(appointmentRegisteredUserDTO.getRegisteredUserID(), "Six months have not passed since the last blood donation!");
+					throw new ResourceConflictException(appointmentRegisteredUserDTO.getRegisteredUserID(),
+							"Six months have not passed since the last blood donation!");
 				}
 			} else {
-				throw new ResourceConflictException(appointmentRegisteredUserDTO.getRegisteredUserID(), "Please fill the donor questionnaire");
+				throw new ResourceConflictException(appointmentRegisteredUserDTO.getRegisteredUserID(),
+						"Please fill the donor questionnaire");
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@PutMapping(value = "/schedulePredefinedAppointment/{appointmentId}/{registeredUserId}")
 	public ResponseEntity<?> schedulePredefinedAppointment(@PathVariable Long appointmentId,
@@ -89,7 +95,12 @@ public class AppointmentController {
 		try {
 			DonorQuestionnaire donorQuestionnaire = donorQuestionnaireService.getQuestionnareByUserId(registeredUserId);
 			Appointment schedulingAppointment = appointmentService.findById(appointmentId);
-			if (donorQuestionnaire.getQuestionnaireId() != null) {
+			RegisteredUser registeredUser = (RegisteredUser) userService.findById(registeredUserId);
+			// userService.checkDateToClearPenalties(registeredUserId);
+			if (registeredUser.getPenalties() == 3) {
+				throw new ResourceConflictException(appointmentId.toString(),
+						"Can not schedule appointment, you have 3 penalties!");
+			} else if (donorQuestionnaire.getQuestionnaireId() != null) {
 				if (donorQuestionnaire.getRecentlyDonatedBlood() == false) {
 					if (schedulingAppointment.getIsCancelled()
 							&& schedulingAppointment.getRegisteredUser().getUserId() == registeredUserId) {
@@ -106,10 +117,12 @@ public class AppointmentController {
 				}
 			} else {
 				throw new ResourceConflictException(registeredUserId.toString(), "Please fill the donor questionnaire");
+
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+
 	}
 
 	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")

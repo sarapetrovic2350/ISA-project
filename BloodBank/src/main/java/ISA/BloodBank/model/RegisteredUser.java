@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 
 @Entity
 public class RegisteredUser extends User {
-
+	
+	private static final long serialVersionUID = 8416309346478992571L;
+	
 	@Column(name = "penalties")
 	private Integer penalties = 0;
 
