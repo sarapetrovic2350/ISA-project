@@ -28,7 +28,12 @@ public class DonorQuestionnaireService implements IDonorQuestionnaireService{
 	public DonorQuestionnaire saveQuestionnaire(DonorQuestionnaireDTO questionnaireDTO) {
 		DonorQuestionnaire questionnaire = new DonorQuestionnaire();
 		RegisteredUser u = (RegisteredUser) userRepository.findByEmail(questionnaireDTO.getUserEmail());
+		DonorQuestionnaire existingQuestionnaireForUser = donorQuestionnaireRepository.findByRegisteredUserUserId(u.getUserId());
+		if(existingQuestionnaireForUser != null) {
+			questionnaire = existingQuestionnaireForUser;
+		}
 		questionnaire.setRegisteredUser(u);
+		System.out.println(questionnaire.getRegisteredUser().getSurname().toString());
 		questionnaire.setWeight(questionnaireDTO.getWeight());
 		questionnaire.setAge(questionnaireDTO.getAge());
 		questionnaire.setGeneralGoodHealth(questionnaireDTO.getGeneralGoodHealth());
@@ -40,6 +45,7 @@ public class DonorQuestionnaireService implements IDonorQuestionnaireService{
 		questionnaire.setRecentlyVisitedDentist(questionnaireDTO.getRecentlyVisitedDentist());
 		questionnaire.setRecentlyDonatedBlood(questionnaireDTO.getRecentlyDonatedBlood());
 		questionnaire.setHasPeriod(questionnaireDTO.getHasPeriod());
+
 		return donorQuestionnaireRepository.save(questionnaire);
 	}
 
