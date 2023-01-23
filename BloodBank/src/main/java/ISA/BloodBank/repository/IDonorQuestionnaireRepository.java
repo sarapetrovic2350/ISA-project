@@ -7,5 +7,6 @@ import ISA.BloodBank.model.DonorQuestionnaire;
 
 @Repository
 public interface IDonorQuestionnaireRepository extends JpaRepository<DonorQuestionnaire, Long> {
-
+	
+	DonorQuestionnaire findByRegisteredUserUserId(Long userId);
 }
