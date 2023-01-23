@@ -144,6 +144,7 @@ public class AppointmentService implements IAppointmentService {
 		cancelingAppointment.setIsAvailable(true);
 		cancelingAppointment.setIsCancelled(true);
 		appointmentRepository.save(cancelingAppointment);
+		userService.updatePenal(cancelingAppointment.getRegisteredUser().getUserId());
 		return cancelingAppointment;
 	}
 

@@ -6,6 +6,8 @@ import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -25,30 +27,32 @@ import ISA.BloodBank.repository.IUserRepository;
 import ISA.BloodBank.repository.RegisteredUserRepository;
 
 @Service
-public class UserService implements IUserService{
-	
+@EnableScheduling
+public class UserService implements IUserService {
+
 	private IUserRepository userRepository;
-	
+
 	private AuthorityService authorityService;
-	
+
 	private ConfirmationTokenService confirmationTokenService;
-	
+
 	private EmailService emailService;
-	
-	private RegisteredUserRepository registeredUserRepository; 
-	
+
+	private RegisteredUserRepository registeredUserRepository;
+
 	@Autowired
 	public UserService(IUserRepository userRepository, AuthorityService authorityService,
-			ConfirmationTokenService confirmationTokenService, EmailService emailService, RegisteredUserRepository registeredUserRepository) {
+			ConfirmationTokenService confirmationTokenService, EmailService emailService,
+			RegisteredUserRepository registeredUserRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.authorityService = authorityService;
 		this.confirmationTokenService = confirmationTokenService;
 		this.emailService = emailService;
-		this.registeredUserRepository = registeredUserRepository;  
+		this.registeredUserRepository = registeredUserRepository;
 
 	}
-	
+
 	@Override
 	public User registerUser(UserRegistrationDTO userRegistrationDTO) {
 		RegisteredUser registeredUser = new RegisteredUser();
@@ -76,7 +80,7 @@ public class UserService implements IUserService{
 		ConfirmationToken confirmationToken = confirmationTokenService.saveConfirmationToken(registeredUser);
 		sendConfirmationEmail(registeredUser, confirmationToken);
 		return registeredUser;
-		
+
 	}
 
 	@Override
@@ -89,7 +93,7 @@ public class UserService implements IUserService{
 
 		return null;
 	}
-	
+
 	private static byte[] generateSalt() {
 		SecureRandom random = new SecureRandom();
 		byte[] genSalt = new byte[16];
@@ -112,30 +116,29 @@ public class UserService implements IUserService{
 		return BCrypt.checkpw(password, hash);
 	}
 
-	
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
-	
+
 	public List<User> getAllRegistredUsers() {
-		
-		List<User > allUsers = userRepository.findAll();
+
+		List<User> allUsers = userRepository.findAll();
 		List<User> newUsers = new ArrayList<>();
-		for(User user:allUsers) {
-			if(user.getUserType().equals(UserType.REGISTERED_USER)) {
+		for (User user : allUsers) {
+			if (user.getUserType().equals(UserType.REGISTERED_USER)) {
 				newUsers.add(user);
 			}
 		}
-		
+
 		return newUsers;
 	}
-	
+
 	public User findById(Long id) throws AccessDeniedException {
 		User u = userRepository.findById(id).orElseGet(null);
 		return u;
 	}
-	
+
 	public UserUpdateDTO updateUser(UserUpdateDTO user) {
 		RegisteredUser u = (RegisteredUser) userRepository.findById(user.getUserId()).get();
 		u.setName(user.getName());
@@ -151,8 +154,8 @@ public class UserService implements IUserService{
 		u.setPenalties(user.getPenalties());
 		u = this.userRepository.save(u);
 		return user;
-    }
-	
+	}
+
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
@@ -162,14 +165,14 @@ public class UserService implements IUserService{
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return userRepository.findByUserId(user.getUserId());
 	}
-	
+
 	public User changePassword(ChangePasswordDTO newPassword) {
-		User user = findByEmail(newPassword.getEmail()); 	
+		User user = findByEmail(newPassword.getEmail());
 		checkInput(newPassword, user);
 		generateNewSecurePassword(newPassword, user);
 		return userRepository.save(user);
 	}
-	
+
 	private void checkInput(ChangePasswordDTO changePasswordDTO, User user) {
 		if (changePasswordDTO.getPassword().equals(changePasswordDTO.getOldPassword())) {
 			throw new IllegalArgumentException("Password can not be the same as the old one.");
@@ -181,14 +184,13 @@ public class UserService implements IUserService{
 				|| changePasswordDTO.getOldPassword().isEmpty()) {
 			throw new IllegalArgumentException("Fill all the required fields!");
 		}
-		
-		
+
 		String oldPassword = generatePasswordWithSalt(changePasswordDTO.getOldPassword(), user.getSalt());
-		if(!verifyHash(oldPassword, user.getPassword())) {
+		if (!verifyHash(oldPassword, user.getPassword())) {
 			throw new IllegalArgumentException("Old password isn't correct!");
 		}
 	}
-	
+
 	private void generateNewSecurePassword(ChangePasswordDTO changePasswordDTO, User user) {
 		byte[] salt = generateSalt();
 		String encodedSalt = Base64.getEncoder().encodeToString(salt);
@@ -197,47 +199,68 @@ public class UserService implements IUserService{
 		String newSecurePassword = hashPassword(passwordWithSalt);
 		user.setPassword(newSecurePassword);
 	}
-	
-	public List<User> findUserByNameAndSurnameForSystemAdmin(String name, String surname) {	
+
+	public List<User> findUserByNameAndSurnameForSystemAdmin(String name, String surname) {
 		List<User> usersFind = new ArrayList<User>();
 		List<User> users = getAllUsers();
 		for (User user : users) {
-			if(name.equals("null") || surname.equals("null")) {
-				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) || user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+			if (name.equals("null") || surname.equals("null")) {
+				if (user.getName().toLowerCase().contains(name.toLowerCase().trim())
+						|| user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
 					usersFind.add(user);
-			}else {
-				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) && user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+			} else {
+				if (user.getName().toLowerCase().contains(name.toLowerCase().trim())
+						&& user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
 					usersFind.add(user);
 			}
 		}
 		return usersFind;
 	}
-	
-	public List<User> findUserByNameAndSurnameForCenterAdmin(String name, String surname) {	
+
+	public List<User> findUserByNameAndSurnameForCenterAdmin(String name, String surname) {
 		List<User> usersFind = new ArrayList<User>();
 		List<User> users = getAllRegistredUsers();
 		for (User user : users) {
-			if(name.equals("null") || surname.equals("null")) {
-				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) || user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+			if (name.equals("null") || surname.equals("null")) {
+				if (user.getName().toLowerCase().contains(name.toLowerCase().trim())
+						|| user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
 					usersFind.add(user);
-			}else {
-				if(user.getName().toLowerCase().contains(name.toLowerCase().trim()) && user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
+			} else {
+				if (user.getName().toLowerCase().contains(name.toLowerCase().trim())
+						&& user.getSurname().toLowerCase().contains(surname.toLowerCase().trim()))
 					usersFind.add(user);
 			}
 		}
 		return usersFind;
 	}
-	
+
 	public void updatePenal(Long id) {
-		
-		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get(); 
-		Integer pen = user.getPenalties(); 
-		Integer penal = pen + 1; 
-		user.setPenalties(penal); 
-		registeredUserRepository.save(user); 
-		
+
+		RegisteredUser user = (RegisteredUser) registeredUserRepository.findById(id).get();
+		Integer pen = user.getPenalties();
+		Integer penal = pen + 1;
+		user.setPenalties(penal);
+		registeredUserRepository.save(user);
+
 	}
 
+	@Scheduled(cron = "0 0 0 1 * ?")
+	public void clearPenalties() {
+		for (RegisteredUser registeredUser : registeredUserRepository.findAll()) {
+			registeredUser.setPenalties(0);
+			userRepository.save(registeredUser);
+		}
+	}
+
+	/*
+	 * public void checkDateToClearPenalties(Long registeredUserId) { //LocalDate
+	 * startOfNextMonth = DateUtility.getStartOfNextMonth(); //LocalDate dt1 =
+	 * LocalDate.parse("2023-02-04"); //if
+	 * (LocalDate.now().compareTo(startOfNextMonth) < 0) { //return false; //}
+	 * //RegisteredUser user = (RegisteredUser)
+	 * registeredUserRepository.findById(id).get(); //user.setPenalties(0);
+	 * //registeredUserRepository.save(user); //return true; }
+	 */
 
 	@Override
 	public void sendConfirmationEmail(User user, ConfirmationToken confirmationToken) {
@@ -254,10 +277,11 @@ public class UserService implements IUserService{
 		}
 
 	}
+
 	public void activateAccount(User user) {
 		User existingUser = userRepository.findById(user.getUserId()).orElse(null);
 		existingUser.setEnabled(true);
 		userRepository.save(existingUser);
 	}
-	
+
 }
