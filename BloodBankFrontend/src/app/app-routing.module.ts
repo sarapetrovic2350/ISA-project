@@ -66,7 +66,11 @@ const routes: Routes = [
   },
   {
     path: 'show-blood',
-    component: ShowBloodComponent
+    component: ShowBloodComponent, 
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   },
   {
     path: 'show-users',
@@ -146,11 +150,19 @@ const routes: Routes = [
   },
   {
     path:'report/:id/search', 
-    component: CreateReportComponent
+    component: CreateReportComponent, 
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   },
   {
     path:'create-report', 
-    component: CreateReportComponent
+    component: CreateReportComponent, 
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   }, 
   {
     path: 'forbidden',
