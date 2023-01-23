@@ -75,6 +75,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/medicalCenter/updateCenter", "/medicalCenter/createCenter", "/medicalCenter/findAll", "/medicalCenter/getAll", "/medicalCenter/findAllSortedByName","/medicalCenter/findAllSortedByAverageGrade","/medicalCenter/findAllSortedByCityName").permitAll()
 		.antMatchers("/centerAdministrator/update", "/centerAdministrator/registerCenterAdministrator").permitAll()
 		.antMatchers("/systemAdministrator/*").permitAll()
+		.antMatchers("/blood/*").permitAll()
+		.antMatchers("/report/*").permitAll()
 		// za svaki drugi zahtev korisnik mora biti autentifikovan
 		.anyRequest().authenticated().and().httpBasic().and().cors().and()
 		
@@ -93,9 +95,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Zahtevi koji se mecuju za web.ignoring().antMatchers() nemaju pristup SecurityContext-u
 		// Dozvoljena POST metoda na ruti /auth/login, za svaki drugi tip HTTP metode greska je 401 Unauthorized
 		
-		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser",
-				"/report/createReport" );
-		web.ignoring().antMatchers(HttpMethod.PUT, "/centerAdministrator/changePassword", "/user/changePassword", "/blood/addBlood", "/auth/activate-account/* ");
+		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser" );
+		web.ignoring().antMatchers(HttpMethod.PUT, "/centerAdministrator/changePassword", "/user/changePassword", "/auth/activate-account/* ");
 		web.ignoring().antMatchers(HttpMethod.GET, "/", "/user/getAll", "/user/getAllRegistredUsers", 
 				"/centerAdministrator/getAll", "/user/getUserById/{userId}","/user//getUserByEmail/{email}",
 				"/medicalCenter/getMedicalCenterById/{centerId}", 
@@ -106,10 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/centerAdministrator/getCenterAdministratorById/{adminId}",
 				"/centerAdministrator/getCenterAdministratorByEmail/{email}",
 				"/centerAdministrator/getMedicalCenterByAdminEmail/{email}",
-				"/centerAdministrator/getCenterAdministratorsByCenterId/{centerId}",
-				"/blood/getAll",
-				"/blood/getBloodByCenterId/{centerId}",
-				"/report/getAll",
+				"/centerAdministrator/getCenterAdministratorsByCenterId/{centerId}", 
 				"/user/checkPenalties/{id}/{present}",
 				"/medicalCenter/medicalCentersWithAvailableAppointment",
 				"/webjars/**", "/*.html", "/favicon.ico",

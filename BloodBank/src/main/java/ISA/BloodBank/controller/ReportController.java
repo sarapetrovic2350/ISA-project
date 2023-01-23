@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,7 @@ public class ReportController {
 		this.centerAdministratorService = centerAdministratorService; 
 	}
 	
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
 	@PostMapping(value = "/createReport")
 	public ResponseEntity<?> createReport(@RequestBody CreateReportDTO report,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -72,6 +74,7 @@ public class ReportController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public ResponseEntity<List<Report>> findAll() {
 		return new ResponseEntity<List<Report>>(reportService.getAll(), HttpStatus.OK);
