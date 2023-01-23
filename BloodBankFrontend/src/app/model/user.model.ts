@@ -4,6 +4,7 @@ export class User {
     constructor(
         public userId: string = '',
         public email: string = '',
+        public penalties: number = 0,
         public password: string = '',
         public passwordConfirm: string = '',
         public name: string = '',
