@@ -2,6 +2,21 @@
     <div class="table-header">
         <p class="table-title">Report History</p>
     </div>
+    <div class="div1">
+        <p class="ml2">Sort visits:</p>
+        <select [(ngModel)]="selectedOption" class="btn dropdown-toggle ml3" (change)="changeSorting()">
+            <option [ngValue]=0 disabled selected>Sorting</option>
+            <option [ngValue]=1>Sort by date asc</option>
+            <option [ngValue]=3>Sort by date desc</option>
+            <option [ngValue]=2>Sort by patient name acs</option>
+            <option [ngValue]=4>Sort by patient name desc</option>
+            <option [ngValue]=5>Sort by patient surname asc</option>
+            <option [ngValue]=6>Sort by patient surname desc</option>
+            <option [ngValue]=7>Sort by blood quantity asc</option>
+            <option [ngValue]=8>Sort by blood quantity desc</option>
+        </select>
+    
+    </div>
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="Date">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Date </th>

@@ -24,6 +24,7 @@ export class HistoryReportComponent implements OnInit {
   public medCenter: medicalCenter = new medicalCenter();
   public administrator: CenterAdministrator | undefined = undefined;
   public centerAdministrators: CenterAdministrator[] = [];
+  public selectedOption: string = "";
 
   constructor(private reportService: ReportService,private centerAdministratorService: CenterAdministratorService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { }
 
@@ -52,6 +53,42 @@ export class HistoryReportComponent implements OnInit {
       })
     
 
+  }
+
+  changeSorting() {
+    console.log(this.selectedOption);
+    if (this.selectedOption == '1') {
+      this.reports.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      return this.dataSource.data = this.reports;
+    }
+    else if (this.selectedOption == '3') {
+      this.reports.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      return this.dataSource.data = this.reports;
+    
+    } else if (this.selectedOption == '2') {
+      this.reports.sort((a, b) => a.patientName.localeCompare(b.patientName));
+      return this.dataSource.data = this.reports;
+    }
+    else if (this.selectedOption == '4') {
+      this.reports.sort((a, b) => b.patientName.localeCompare(a.patientName));
+      return this.dataSource.data = this.reports;
+    }else if(this.selectedOption == '5'){
+      this.reports.sort((a, b) => a.patientSurname.localeCompare(b.patientSurname));
+      return this.dataSource.data = this.reports;
+    }else if(this.selectedOption == '6') {
+      this.reports.sort((a, b) => b.patientSurname.localeCompare(a.patientSurname));
+      return this.dataSource.data = this.reports;
+    }else if(this.selectedOption == '7'){
+      this.reports.sort(function (a, b) {
+        return (b.quantaty) - (a.quantaty)
+      })
+      return this.dataSource.data = this.reports;
+    }else {
+      this.reports.sort(function (a, b) {
+        return (a.quantaty) - (b.quantaty)
+      })
+      return this.dataSource.data = this.reports;
+    }
   }
 
 }
