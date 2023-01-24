@@ -15,6 +15,9 @@
     <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/scheduled-appointments">
       <span>My appointments</span>
     </button>
+    <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/history-of-visits">
+      <span>History of visits</span>
+    </button>
     <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/update-medical-cenntar">
       <span>Update Center</span>
     </button>
