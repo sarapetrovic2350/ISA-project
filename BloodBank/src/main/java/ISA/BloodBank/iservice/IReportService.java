@@ -12,4 +12,5 @@ public interface IReportService {
 	
 	Report save(CreateReportDTO report); 
 	List<Report> getAll();
+	List<Report> getAllReportsByMedicalCenterId(Long id); 
 }

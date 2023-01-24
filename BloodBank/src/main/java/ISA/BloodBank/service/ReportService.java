@@ -2,6 +2,7 @@ package ISA.BloodBank.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,19 @@ public class ReportService implements IReportService{
 	@Override
 	public List<Report> getAll() {
 		return reportRepository.findAll();
+	}
+
+	@Override
+	public List<Report> getAllReportsByMedicalCenterId(Long id) {
+		List<Report> listReports = new ArrayList<Report>(); 
+		listReports = getAll(); 
+		List<Report> retVal = new ArrayList<Report>();
+		for(Report report : listReports) {
+			if(report.getCenterAdministrator().getMedicalCenter().getCenterId().equals(id)) {
+				retVal.add(report); 
+			}
+		}
+		return retVal;
 	}
 	
 	public List<Report> findAllByRegisteredUserId(Long id) {

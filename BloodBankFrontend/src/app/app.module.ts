@@ -41,7 +41,9 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { AuthGuardService } from './service/auth-guard.service';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ShowBloodComponent } from './components/show-blood/show-blood.component';
+import { HistoryReportComponent } from './components/history-report/history-report.component'
 import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component'
+
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import { HistoryOfVisitsComponent } from './components/history-of-visits/history
     ScheduledAppointmentsComponent,
     ForbiddenComponent,
     ShowBloodComponent,
+    HistoryReportComponent,
     HistoryOfVisitsComponent
   ],
   imports: [

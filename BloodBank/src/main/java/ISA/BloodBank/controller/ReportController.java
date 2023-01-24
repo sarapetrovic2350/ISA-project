@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ISA.BloodBank.dto.AddingBloodDTO;
 import ISA.BloodBank.dto.CreateReportDTO;
+import ISA.BloodBank.dto.ReportCenterDTO;
 import ISA.BloodBank.dto.HistoryOfVisitsDTO;
 import ISA.BloodBank.model.BloodType;
 import ISA.BloodBank.model.CenterAdministrator;
@@ -85,6 +87,40 @@ public class ReportController {
 		return new ResponseEntity<List<Report>>(reportService.getAll(), HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
+	@RequestMapping(value = "/getAllByMedicalCenterId/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<ReportCenterDTO>> findAllByMeidicalCenterId(@PathVariable Long id) {
+		List<ReportCenterDTO> retVal = new ArrayList<ReportCenterDTO>(); 
+		List<Report> reportList = reportService.getAllReportsByMedicalCenterId(id); 
+		for(Report report: reportList) {
+			ReportCenterDTO rep = new ReportCenterDTO(); 
+			rep.setPatientId(report.getRegisteredUser().getUserId());
+			rep.setPatientName(report.getRegisteredUser().getName());
+			rep.setPatientSurname(report.getRegisteredUser().getSurname()); 
+			rep.setQuantaty(report.getQuantaty());
+			if(report.getBlood().getBloodType().equals(BloodType.A_POSITIVE)) {
+				rep.setBlood("A+");
+			}else if(report.getBlood().getBloodType().equals(BloodType.A_NEGATIVE)) {
+				rep.setBlood("A-");
+			}else if(report.getBlood().getBloodType().equals(BloodType.B_POSITIVE)) {
+				rep.setBlood("B+");
+			}else if(report.getBlood().getBloodType().equals(BloodType.B_NEGATIVE)) {
+				rep.setBlood("B-");
+			}else if(report.getBlood().getBloodType().equals(BloodType.ZERO_POSITIVE)) {
+				rep.setBlood("0+");
+			}else if(report.getBlood().getBloodType().equals(BloodType.ZERO_NEGATIVE)) {
+				rep.setBlood("0-");
+			}else if(report.getBlood().getBloodType().equals(BloodType.AB_POSITIVE)) {
+				rep.setBlood("AB+");
+			}else{
+				rep.setBlood("AB-");
+			}
+			rep.setDate(report.getDate().toLocalDate().toString()); 
+			retVal.add(rep); 
+		}
+		return new ResponseEntity<List<ReportCenterDTO>>(retVal, HttpStatus.OK);
+	}
+
 	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
 	@GetMapping(value = "/findHistoryOfVisitsForUser/{id}")
 	public ResponseEntity<List<HistoryOfVisitsDTO>> findHistoryOfVisitsForUser(

@@ -21,7 +21,8 @@ import { RegisteredUserAppointmentComponent } from './components/registered-user
 import { ScheduledAppointmentsComponent } from './components/scheduled-appointments/scheduled-appointments.component';
 import { RoleGuardService } from './service/role-guard.service';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
-import { ShowBloodComponent } from './components/show-blood/show-blood.component'
+import { ShowBloodComponent } from './components/show-blood/show-blood.component'; 
+import { HistoryReportComponent } from './components/history-report/history-report.component';
 import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component';
 
 const routes: Routes = [
@@ -176,6 +177,14 @@ const routes: Routes = [
   {
     path: 'forbidden',
     component: ForbiddenComponent
+  }, 
+  {
+    path: 'history-report',
+    component: HistoryReportComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
   }
 ];
 
