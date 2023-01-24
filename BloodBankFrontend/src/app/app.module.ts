@@ -40,7 +40,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { AuthGuardService } from './service/auth-guard.service';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
-import { ShowBloodComponent } from './components/show-blood/show-blood.component'
+import { ShowBloodComponent } from './components/show-blood/show-blood.component';
+import { HistoryReportComponent } from './components/history-report/history-report.component'
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ShowBloodComponent } from './components/show-blood/show-blood.component
     PredefinedAppointmentsForCenterComponent,
     ScheduledAppointmentsComponent,
     ForbiddenComponent,
-    ShowBloodComponent
+    ShowBloodComponent,
+    HistoryReportComponent
   ],
   imports: [
     BrowserModule,

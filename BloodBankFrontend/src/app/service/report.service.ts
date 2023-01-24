@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Report } from '../model/report.model';
+import { ShowReport } from '../model/show-report.model'
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +18,7 @@ export class ReportService {
     return this.http.post<any>(this.apiHost + 'report/createReport', report, {headers: this.headers});
   }
 
+  getAllByMedicalCenterId(id: number):  Observable<ShowReport[]> {
+    return this.http.get<ShowReport[]>(this.apiHost + 'report/getAllByMedicalCenterId/' + id,  {headers: this.headers});
+  }
 }
