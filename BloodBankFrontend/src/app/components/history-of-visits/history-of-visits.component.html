@@ -1,0 +1,44 @@
+
+<mat-card fxFlex class="content">
+    
+    <mat-card-title>
+        <h2>{{title}}</h2>
+    </mat-card-title>
+   
+    <mat-card-content>
+        <div class="div1">
+            <p class="ml2">Sort visits:</p>
+            <select [(ngModel)]="selectedOption" class="btn dropdown-toggle ml3" (change)="changeSorting()">
+                <option [ngValue]=0 disabled selected>Sorting</option>
+                <option [ngValue]=1>Sort by date asc</option>
+                <option [ngValue]=3>Sort by date desc</option>
+                <option [ngValue]=2>Sort by center name</option>
+                <option [ngValue]=4>Sort by blood quantity</option>
+            </select>
+        
+        </div>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Date </th>
+                <td mat-cell *matCellDef="let historyOfVisit" class="cell-center">
+                    {{historyOfVisit.date}}</td>
+            </ng-container>
+            <ng-container matColumnDef="donatedBlood">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Donated blood quantity </th>
+                <td mat-cell *matCellDef="let historyOfVisit" class="cell-center">
+                    {{historyOfVisit.donatedBloodQuantity}}</td>
+            </ng-container>
+            <ng-container matColumnDef="bloodType">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Blood type </th>
+                <td mat-cell *matCellDef="let historyOfVisit" class="cell-center">{{historyOfVisit.bloodType}}</td>
+            </ng-container>
+            <ng-container matColumnDef="centerName">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Medical Center </th>
+                <td mat-cell *matCellDef="let historyOfVisit" class="cell-center">{{historyOfVisit.medicalCenterName}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>

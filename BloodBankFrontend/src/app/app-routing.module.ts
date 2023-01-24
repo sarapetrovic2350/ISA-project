@@ -22,6 +22,7 @@ import { ScheduledAppointmentsComponent } from './components/scheduled-appointme
 import { RoleGuardService } from './service/role-guard.service';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ShowBloodComponent } from './components/show-blood/show-blood.component'
+import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component';
 
 const routes: Routes = [
   {
@@ -162,6 +163,14 @@ const routes: Routes = [
     canActivate: [RoleGuardService],
     data: {
       expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
+  },
+  {
+    path: 'history-of-visits',
+    component: HistoryOfVisitsComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_REGISTERED_USER'
     }
   }, 
   {

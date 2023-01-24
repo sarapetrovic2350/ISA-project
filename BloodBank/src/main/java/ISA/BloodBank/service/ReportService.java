@@ -91,5 +91,8 @@ public class ReportService implements IReportService{
 		return reportRepository.findAll();
 	}
 	
+	public List<Report> findAllByRegisteredUserId(Long id) {
+		return reportRepository.findReportsByRegisteredUserUserId(id);
+	} 
 	
 }
