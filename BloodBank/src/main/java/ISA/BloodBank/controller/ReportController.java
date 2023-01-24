@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ISA.BloodBank.dto.AddingBloodDTO;
 import ISA.BloodBank.dto.CreateReportDTO;
 import ISA.BloodBank.dto.ReportCenterDTO;
+import ISA.BloodBank.dto.HistoryOfVisitsDTO;
 import ISA.BloodBank.model.BloodType;
 import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.Report;
@@ -116,5 +119,45 @@ public class ReportController {
 			retVal.add(rep); 
 		}
 		return new ResponseEntity<List<ReportCenterDTO>>(retVal, HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
+	@GetMapping(value = "/findHistoryOfVisitsForUser/{id}")
+	public ResponseEntity<List<HistoryOfVisitsDTO>> findHistoryOfVisitsForUser(
+			@PathVariable Long id) {
+		try {
+			List<HistoryOfVisitsDTO> historyOfVisitsDTOs = new ArrayList<HistoryOfVisitsDTO>();
+			List<Report> reportsForUser = reportService.findAllByRegisteredUserId(id);
+			for (Report r : reportsForUser) {
+				if (r.getReportStatus().equals(ReportStatus.ACCEPTED)) {
+					HistoryOfVisitsDTO historyOfVisitsDTO = new HistoryOfVisitsDTO();
+					historyOfVisitsDTO.setReportId(r.getReportId());
+					historyOfVisitsDTO.setDate(r.getDate().toLocalDate().toString());
+					historyOfVisitsDTO.setDonatedBloodQuantity(r.getQuantaty().toString());
+					if(r.getBlood().getBloodType().equals(BloodType.A_POSITIVE)) {
+						historyOfVisitsDTO.setBloodType("A+");
+					}else if(r.getBlood().getBloodType().equals(BloodType.A_NEGATIVE)) {
+						historyOfVisitsDTO.setBloodType("A-");
+					}else if(r.getBlood().getBloodType().equals(BloodType.B_POSITIVE)) {
+						historyOfVisitsDTO.setBloodType("B+");
+					}else if(r.getBlood().getBloodType().equals(BloodType.B_NEGATIVE)) {
+						historyOfVisitsDTO.setBloodType("B-");
+					}else if(r.getBlood().getBloodType().equals(BloodType.ZERO_POSITIVE)) {
+						historyOfVisitsDTO.setBloodType("0+");
+					}else if(r.getBlood().getBloodType().equals(BloodType.ZERO_NEGATIVE)) {
+						historyOfVisitsDTO.setBloodType("0-");
+					}else if(r.getBlood().getBloodType().equals(BloodType.AB_POSITIVE)) {
+						historyOfVisitsDTO.setBloodType("AB+");
+					}else{
+						historyOfVisitsDTO.setBloodType("AB-");
+					}
+					historyOfVisitsDTO.setMedicalCenterName(r.getCenterAdministrator().getMedicalCenter().getName());
+					historyOfVisitsDTOs.add(historyOfVisitsDTO);
+				}
+			}
+			return new ResponseEntity<List<HistoryOfVisitsDTO>>(historyOfVisitsDTOs, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
