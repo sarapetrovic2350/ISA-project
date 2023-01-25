@@ -205,11 +205,11 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 		 return centerAdministartors;
 	}
 	
-	public User changePasswordFirstLogin(ChangePasswordDTO changePasswordDTO) {
-		CenterAdministrator existingSystemAdministrator = (CenterAdministrator)userRepository.findByEmail(changePasswordDTO.getEmail());
-		checkInput(changePasswordDTO, existingSystemAdministrator);
-		generateNewSecurePassword(changePasswordDTO, existingSystemAdministrator);
-		existingSystemAdministrator.setFirstLoginChangePassword(true);
-		return userRepository.save(existingSystemAdministrator);
-	}
+//	public User changePasswordFirstLogin(ChangePasswordDTO changePasswordDTO) {
+//		CenterAdministrator existingSystemAdministrator = (CenterAdministrator)userRepository.findByEmail(changePasswordDTO.getEmail());
+//		checkInput(changePasswordDTO, existingSystemAdministrator);
+//		generateNewSecurePassword(changePasswordDTO, existingSystemAdministrator);
+//		existingSystemAdministrator.setFirstLoginChangePassword(true);
+//		return userRepository.save(existingSystemAdministrator);
+//	}
 }

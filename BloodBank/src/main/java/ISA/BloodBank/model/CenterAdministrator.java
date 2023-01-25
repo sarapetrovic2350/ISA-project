@@ -17,20 +17,20 @@ public class CenterAdministrator extends User {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private MedicalCenter medicalCenter;
 	
-	@Column(name = "firstLoginChangePassword")
-	private Boolean firstLoginChangePassword;
+//	@Column(name = "firstLoginChangePassword")
+//	private Boolean firstLoginChangePassword;
 
 	public CenterAdministrator() {
 		super();
 	}
 	
-	public Boolean getFirstLoginChangePassword() {
-		return firstLoginChangePassword;
-	}
-
-	public void setFirstLoginChangePassword(Boolean firstLoginChangePassword) {
-		this.firstLoginChangePassword = firstLoginChangePassword;
-	}
+//	public Boolean getFirstLoginChangePassword() {
+//		return firstLoginChangePassword;
+//	}
+//
+//	public void setFirstLoginChangePassword(Boolean firstLoginChangePassword) {
+//		this.firstLoginChangePassword = firstLoginChangePassword;
+//	}
 
 	public MedicalCenter getMedicalCenter() {
 		return medicalCenter;
