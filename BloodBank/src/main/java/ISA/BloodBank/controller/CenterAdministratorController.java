@@ -100,5 +100,11 @@ public class CenterAdministratorController {
 	        return centerAdministratorService.changePassword(dto);
 	        
 	    }
+	 
+	 @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR)")
+	 @PostMapping(value = "/changePasswordFirstLogin")
+		public ResponseEntity<User> changePasswordFirstLogin(@RequestBody ChangePasswordDTO changePasswordDTO) {
+			return new ResponseEntity<User>(centerAdministratorService.changePasswordFirstLogin(changePasswordDTO), HttpStatus.OK);
+		}
 
 }

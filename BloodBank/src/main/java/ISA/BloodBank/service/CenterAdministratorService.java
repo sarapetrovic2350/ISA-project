@@ -21,6 +21,7 @@ import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.model.User;
 import ISA.BloodBank.model.UserType;
 import ISA.BloodBank.repository.ICenterAdministratorRepository;
+import ISA.BloodBank.repository.IUserRepository;
 
 @Service
 public class CenterAdministratorService implements ICenterAdministratorService{
@@ -33,13 +34,16 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 	
 	private AppointmentService appointmentService;
 	
+	private IUserRepository userRepository; 
+	
 	@Autowired
 	public CenterAdministratorService(ICenterAdministratorRepository centerAdministratorRepository, AuthorityService authorityService,
-			MedicalCenterService medicalCenterService, AppointmentService appointmentService) {
+			MedicalCenterService medicalCenterService, AppointmentService appointmentService, IUserRepository userRepository) {
 		this.centerAdministratorRepository = centerAdministratorRepository;
 		this.authorityService = authorityService;
 		this.medicalCenterService = medicalCenterService;
 		this.appointmentService = appointmentService;
+		this.userRepository = userRepository; 
 	}
 
 	@Override
@@ -199,5 +203,13 @@ public class CenterAdministratorService implements ICenterAdministratorService{
 			 }
 		 }
 		 return centerAdministartors;
+	}
+	
+	public User changePasswordFirstLogin(ChangePasswordDTO changePasswordDTO) {
+		CenterAdministrator existingSystemAdministrator = (CenterAdministrator)userRepository.findByEmail(changePasswordDTO.getEmail());
+		checkInput(changePasswordDTO, existingSystemAdministrator);
+		generateNewSecurePassword(changePasswordDTO, existingSystemAdministrator);
+		existingSystemAdministrator.setFirstLoginChangePassword(true);
+		return userRepository.save(existingSystemAdministrator);
 	}
 }

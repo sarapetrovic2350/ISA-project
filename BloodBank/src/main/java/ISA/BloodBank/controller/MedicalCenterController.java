@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ISA.BloodBank.dto.ChangePasswordDTO;
 import ISA.BloodBank.model.MedicalCenter;
+import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.MedicalCenterService;
 
 @RestController
@@ -193,4 +195,6 @@ public class MedicalCenterController {
 		 	return new ResponseEntity<List<MedicalCenter>>(medicalCenterService.GetMedicalCentersWithAvailableAppointment(date, time), HttpStatus.OK);	
 		 
 		}
+	 
+	 
 }
