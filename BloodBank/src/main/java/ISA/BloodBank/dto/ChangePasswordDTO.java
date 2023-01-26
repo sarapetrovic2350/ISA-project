@@ -1,13 +1,23 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class ChangePasswordDTO {
 
+	@NotBlank
 	private String email;
-    private String oldPassword;
-    private String password;
-    private String passwordRepeated;
-	
-	public ChangePasswordDTO() {}
+
+	@NotBlank
+	private String oldPassword;
+
+	@NotBlank
+	private String password;
+
+	@NotBlank
+	private String passwordRepeated;
+
+	public ChangePasswordDTO() {
+	}
 
 	public ChangePasswordDTO(String email, String oldPassword, String password, String passwordRepeated) {
 		super();
@@ -48,5 +58,5 @@ public class ChangePasswordDTO {
 	public void setPasswordRepeated(String passwordRepeated) {
 		this.passwordRepeated = passwordRepeated;
 	}
-	
+
 }

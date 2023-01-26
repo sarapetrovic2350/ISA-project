@@ -1,10 +1,20 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class PredefinedAppointmentDTO {
 	
+	@NotNull
 	private Long appointmentId;
+	
+	@NotBlank
 	private String date;
+	
+	@NotBlank
 	private String time;
+	
+	@NotBlank
 	private String duration;
 	
 	public PredefinedAppointmentDTO() {}

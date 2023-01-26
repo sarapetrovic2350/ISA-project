@@ -1,19 +1,33 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ScheduledAppointmentDTO {
 
+	@NotNull
 	private Long appointmentId;
+
+	@NotBlank
 	private Long registeredUserId;
+
+	@NotBlank
 	private String date;
+
+	@NotBlank
 	private String time;
+
+	@NotBlank
 	private String duration;
+
+	@NotBlank
 	private String medicalCenterName;
 
 	public ScheduledAppointmentDTO() {
 	}
 
-	public ScheduledAppointmentDTO(Long appointmentId, Long registeredUserId, String date, String time,
-			String duration, String medicalCenterName) {
+	public ScheduledAppointmentDTO(Long appointmentId, Long registeredUserId, String date, String time, String duration,
+			String medicalCenterName) {
 		super();
 		this.appointmentId = appointmentId;
 		this.registeredUserId = registeredUserId;
@@ -70,5 +84,5 @@ public class ScheduledAppointmentDTO {
 	public void setMedicalCenterName(String medicalCenterName) {
 		this.medicalCenterName = medicalCenterName;
 	}
-	
+
 }

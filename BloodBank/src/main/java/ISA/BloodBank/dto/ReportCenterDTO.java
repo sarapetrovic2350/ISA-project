@@ -1,15 +1,30 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ReportCenterDTO {
-	
-	private Long patientId; 
+
+	@NotNull
+	private Long patientId;
+
+	@NotBlank
 	private String patientName;
-	private String patientSurname; 
-	private double quantaty; 
+
+	@NotBlank
+	private String patientSurname;
+
+	@NotBlank
+	private double quantaty;
+
+	@NotBlank
 	private String blood;
-	private String date; 
-	
-	public ReportCenterDTO(){}
+
+	@NotBlank
+	private String date;
+
+	public ReportCenterDTO() {
+	}
 
 	public ReportCenterDTO(Long patientId, String patientName, String patientSurname, double quantaty, String blood,
 			String date) {
@@ -69,5 +84,5 @@ public class ReportCenterDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
 }

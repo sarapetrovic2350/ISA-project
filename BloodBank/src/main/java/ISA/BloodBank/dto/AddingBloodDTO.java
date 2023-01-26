@@ -1,14 +1,23 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import ISA.BloodBank.model.BloodType;
 
 public class AddingBloodDTO {
-	
-	private BloodType bloodType; 
-	private Long centerId; 
-	private Double quantaty; 
-	
-	public AddingBloodDTO() {}
+
+	@NotBlank
+	private BloodType bloodType;
+
+	@NotNull
+	private Long centerId;
+
+	@NotBlank
+	private Double quantaty;
+
+	public AddingBloodDTO() {
+	}
 
 	public AddingBloodDTO(BloodType bloodType, Long centerId, Double quantaty) {
 		super();
@@ -40,5 +49,5 @@ public class AddingBloodDTO {
 	public void setCenterId(Long centerId) {
 		this.centerId = centerId;
 	}
-	
+
 }

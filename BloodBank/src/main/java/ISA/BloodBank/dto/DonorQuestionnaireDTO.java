@@ -1,29 +1,43 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class DonorQuestionnaireDTO {
-	
+
+	@NotBlank
 	private String userEmail;
-	
+
+	@NotBlank
 	private Integer weight;
-	
+
+	@NotBlank
 	private Integer age;
-	
+
+	@NotBlank
 	private Boolean generalGoodHealth;
-	
+
+	@NotBlank
 	private Boolean symptomsOfIllness;
 
+	@NotBlank
 	private Boolean underMedication;
-	
+
+	@NotBlank
 	private Boolean normalBloodPressure;
-	
+
+	@NotBlank
 	private Boolean skinDisorders;
-	
+
+	@NotBlank
 	private Boolean tattooOrPiercing;
-	
+
+	@NotBlank
 	private Boolean recentlyVisitedDentist;
-	
+
+	@NotBlank
 	private Boolean recentlyDonatedBlood;
-	
+
+	@NotBlank
 	private Boolean hasPeriod;
 
 	public DonorQuestionnaireDTO() {
@@ -144,6 +158,5 @@ public class DonorQuestionnaireDTO {
 	public void setHasPeriod(Boolean hasPeriod) {
 		this.hasPeriod = hasPeriod;
 	}
- 
 
 }
