@@ -68,7 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 		
 		// svim korisnicima dopusti da pristupe sledecim putanjama:
-		.authorizeRequests().antMatchers("/auth/*").permitAll()
+		.authorizeRequests()
+		.antMatchers("/auth/*").permitAll() 
 		.antMatchers("/donorQuestionnaire/*").permitAll()
 		.antMatchers("/appointment/*").permitAll()
 		.antMatchers("/user/update").permitAll()
@@ -95,10 +96,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Zahtevi koji se mecuju za web.ignoring().antMatchers() nemaju pristup SecurityContext-u
 		// Dozvoljena POST metoda na ruti /auth/login, za svaki drugi tip HTTP metode greska je 401 Unauthorized
 		
-		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser" );
-		web.ignoring().antMatchers(HttpMethod.PUT, "/centerAdministrator/changePassword", "/user/changePassword", "/auth/activate-account/* ");
-		web.ignoring().antMatchers(HttpMethod.GET, "/", "/user/getAll", "/user/getAllRegistredUsers", 
-				"/centerAdministrator/getAll", "/user/getUserById/{userId}","/user//getUserByEmail/{email}",
+		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login", "/user/registerUser");
+		web.ignoring().antMatchers(HttpMethod.PUT, "/centerAdministrator/changePassword", "/user/changePassword", "/auth/activate-account/*");
+		web.ignoring().antMatchers(HttpMethod.GET, "/user/getAll", "/user/getAllRegistredUsers", 
+				"/centerAdministrator/getAll", "/user/getUserById/{userId}","/user/getUserByEmail/{email}",
 				"/medicalCenter/getMedicalCenterById/{centerId}", 
 				"/medicalCenter/searchMedicalCenterByNameAndPlace/{name}/{place}",
 				"/user/findUserByNameAndSurnameForSystemAdmin/{name}/{surname}",
