@@ -21,13 +21,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ISA.BloodBank.dto.AppointmentDTO;
 import ISA.BloodBank.dto.AppointmentRegisteredUserDTO;
+import ISA.BloodBank.dto.AppointmentsShowDTO;
 import ISA.BloodBank.dto.PredefinedAppointmentDTO;
 import ISA.BloodBank.dto.ScheduledAppointmentDTO;
 import ISA.BloodBank.exception.ResourceConflictException;
 import ISA.BloodBank.model.Appointment;
+import ISA.BloodBank.model.Blood;
+import ISA.BloodBank.model.CenterAdministrator;
 import ISA.BloodBank.model.DonorQuestionnaire;
 import ISA.BloodBank.model.RegisteredUser;
+import ISA.BloodBank.model.User;
 import ISA.BloodBank.service.AppointmentService;
+import ISA.BloodBank.service.CenterAdministratorService;
 import ISA.BloodBank.service.DonorQuestionnaireService;
 import ISA.BloodBank.service.UserService;
 
@@ -40,14 +45,17 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 	private DonorQuestionnaireService donorQuestionnaireService;
 	private UserService userService;
+	private CenterAdministratorService centerAdministratorService; 
 
 	@Autowired
 	public AppointmentController(AppointmentService appointmentService,
-			DonorQuestionnaireService donorQuestionnaireService, UserService userService) {
+			DonorQuestionnaireService donorQuestionnaireService, UserService userService, 
+			CenterAdministratorService centerAdministratorService) {
 		super();
 		this.appointmentService = appointmentService;
 		this.donorQuestionnaireService = donorQuestionnaireService;
 		this.userService = userService;
+		this.centerAdministratorService = centerAdministratorService; 
 	}
 
 	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
@@ -194,5 +202,34 @@ public class AppointmentController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
+	@GetMapping(value="/getAppointmentByCenterAdministratorId/{email}")
+	 public ResponseEntity<List<AppointmentsShowDTO>> getBloodsByCenterId(@PathVariable String email) {
+		List<Appointment> listAppointment = new ArrayList<Appointment>(); 
+		CenterAdministrator admin = new CenterAdministrator(); 
+		admin = centerAdministratorService.findByEmail(email); 
+		listAppointment = appointmentService.getAllAppointmentsByAdministratorId(admin.getUserId()); 
+		List<AppointmentsShowDTO> retVal = new ArrayList<AppointmentsShowDTO>(); 
+		
+		for(Appointment app: listAppointment) {
+			AppointmentsShowDTO ret = new AppointmentsShowDTO(); 
+			User user = userService.findById(app.getRegisteredUser().getUserId());
+			ret.setUserId(user.getUserId()); 
+			ret.setUserName(user.getName()); 
+			ret.setUserSurname(user.getSurname()); 
+			ret.setDate(app.getDate().toLocalDate().toString()); 
+			ret.setTime(app.getDate().toLocalTime().toString()); 
+			if(app.getIsAvailable() == true) {
+				ret.setStatus("Regular");
+			}else {
+				ret.setStatus("Canceled"); 
+			}
+			
+			retVal.add(ret);
+		}
+		
+		return new ResponseEntity<List<AppointmentsShowDTO>>(retVal, HttpStatus.OK);
+	 }
 
 }

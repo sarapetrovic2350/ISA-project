@@ -49,23 +49,9 @@ p {
 }
 
 button {
-    background-color: #04AA6D;
-    border: none;
-    color: white;
-    text-transform: uppercase;
+    margin: 10px 20px 10px 10px;
+    color: black;
+    background-color: #edece5;
+    float: right;
 }
-
-.btn {
-    background-color: #f44336;
-    border: none;
-    color: white;
-    padding: 5px 5px;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 26%;
-    max-width: 26%;
-    min-width: 26%;
-}
-
 

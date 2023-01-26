@@ -42,7 +42,8 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ShowBloodComponent } from './components/show-blood/show-blood.component';
 import { HistoryReportComponent } from './components/history-report/history-report.component'
-import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component'
+import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component';
+import { ShowAppointmentsComponent } from './components/show-appointments/show-appointments.component'
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { HistoryOfVisitsComponent } from './components/history-of-visits/history
     ForbiddenComponent,
     ShowBloodComponent,
     HistoryReportComponent,
-    HistoryOfVisitsComponent
+    HistoryOfVisitsComponent,
+    ShowAppointmentsComponent
   ],
   imports: [
     BrowserModule,

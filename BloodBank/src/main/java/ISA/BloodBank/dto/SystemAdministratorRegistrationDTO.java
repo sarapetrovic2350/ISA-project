@@ -1,29 +1,41 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import ISA.BloodBank.model.Address;
 import ISA.BloodBank.model.Gender;
 import ISA.BloodBank.model.Occupation;
 
 public class SystemAdministratorRegistrationDTO {
 	
+	@NotBlank
 	private String email;
 
+	@NotBlank
 	private String password;
 
+	@NotBlank
 	private String name;
 
+	@NotBlank
 	private String surname;
 
+	@NotBlank
 	private Address address;
 
+	@NotBlank
 	private String phoneNumber;
 
+	@NotBlank
 	private Gender gender;
 
+	@NotBlank
 	private Long jmbg;
 
+	@NotBlank
 	private Occupation occupation;
 
+	@NotBlank
 	private String occupationInfo;
 	
 	public SystemAdministratorRegistrationDTO() {
