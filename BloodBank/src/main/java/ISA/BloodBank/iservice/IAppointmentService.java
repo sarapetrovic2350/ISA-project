@@ -11,7 +11,7 @@ import ISA.BloodBank.model.Appointment;
 @Service
 public interface IAppointmentService {
 
-	Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO);
+	Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO) throws InterruptedException ;
 
 	Appointment createAppointmentRegisteredUser(AppointmentRegisteredUserDTO appointmentRegisteredUserDTO);
 
