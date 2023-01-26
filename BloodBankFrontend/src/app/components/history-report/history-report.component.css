@@ -55,3 +55,17 @@ button {
     text-transform: uppercase;
 }
 
+.btn {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 26%;
+    max-width: 26%;
+    min-width: 26%;
+}
+
+

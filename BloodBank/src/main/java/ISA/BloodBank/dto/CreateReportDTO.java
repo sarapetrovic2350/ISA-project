@@ -1,31 +1,66 @@
 package ISA.BloodBank.dto;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 
 import ISA.BloodBank.model.BloodType;
 import ISA.BloodBank.model.ReportStatus;
 
 public class CreateReportDTO {
 
-	private String administratorEmail; 
-	private Long customerId; 
-	private Long bloodId; 
-	private Long appointmentId; 
+	@NotBlank
+	private String administratorEmail;
+
+	@NotBlank
+	private Long customerId;
+
+	@NotBlank
+	private Long bloodId;
+
+	@NotBlank
+	private Long appointmentId;
+
+	@NotBlank
 	private Double haemoglobinValue;
+
+	@NotBlank
 	private String heart;
+
+	@NotBlank
 	private String lungs;
+
+	@NotBlank
 	private Double weight;
+
+	@NotBlank
 	private Double height;
+
+	@NotBlank
 	private Double bloodPreasure;
+
+	@NotBlank
 	private ReportStatus reportStatus;
-	private Double quantaty; 
-	private String reason; 
-	private String date; 
+
+	@NotBlank
+	private Double quantaty;
+
+	@NotBlank
+	private String reason;
+
+	@NotBlank
+	private String date;
+
+	@NotBlank
 	private Boolean present;
-	private Double equipmentQuantaty; 
-	private BloodType bloodType; 
-	
-	CreateReportDTO(){}
+
+	@NotBlank
+	private Double equipmentQuantaty;
+
+	@NotBlank
+	private BloodType bloodType;
+
+	CreateReportDTO() {
+	}
 
 	public CreateReportDTO(String administratorEmail, Long customerId, Long bloodId, Long appointmentId,
 			Double haemoglobinValue, String heart, String lungs, Double weight, Double height, Double bloodPreasure,
@@ -186,5 +221,5 @@ public class CreateReportDTO {
 	public void setBloodType(BloodType bloodType) {
 		this.bloodType = bloodType;
 	}
-	
+
 }

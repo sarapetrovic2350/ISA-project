@@ -2,23 +2,31 @@ package ISA.BloodBank.dto;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import ISA.BloodBank.model.Address;
 import ISA.BloodBank.model.Gender;
 import ISA.BloodBank.model.Occupation;
 
 public class AppointmentDTO {
 
+	@NotBlank
 	private String duration;
 
+	@NotBlank
 	private String date;
-	
-	private String time;
-	
-	private String administratorCenterID;
-	
-	public AppointmentDTO() {}
 
-	public AppointmentDTO(String duration, String date, String time,String administratorCenterID) {
+	@NotBlank
+	private String time;
+
+	@NotNull
+	private String administratorCenterID;
+
+	public AppointmentDTO() {
+	}
+
+	public AppointmentDTO(String duration, String date, String time, String administratorCenterID) {
 		super();
 		this.duration = duration;
 		this.date = date;
@@ -57,8 +65,5 @@ public class AppointmentDTO {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	
-	
 
-	
 }

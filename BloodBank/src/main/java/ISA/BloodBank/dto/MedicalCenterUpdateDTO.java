@@ -1,13 +1,25 @@
 package ISA.BloodBank.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import ISA.BloodBank.model.Address;
 
 public class MedicalCenterUpdateDTO {
 
+	@NotNull
 	private long centerId;
+
+	@NotBlank
 	private String name;
+
+	@NotBlank
 	private String description;
+
+	@NotBlank
 	private Double averageGrade;
+
+	@NotBlank
 	private Address adress;
 
 	public MedicalCenterUpdateDTO() {
