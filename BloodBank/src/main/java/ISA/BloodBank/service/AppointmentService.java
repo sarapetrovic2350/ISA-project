@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import ISA.BloodBank.repository.IAppointmentRepository;
 @Transactional
 public class AppointmentService implements IAppointmentService {
 	
+	private static ReentrantLock lock = new ReentrantLock();
 	private IAppointmentRepository appointmentRepository;
 	
 	private CenterAdministratorService centerAdministaratorService;
@@ -45,28 +47,37 @@ public class AppointmentService implements IAppointmentService {
 	}
 	
 	@Override
-	public Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO) {
-		Appointment appointment = new Appointment();
-		CenterAdministrator centerAdministrator = new CenterAdministrator();
-		centerAdministrator = centerAdministaratorService.findById(Long.parseLong(appointmentDTO.getAdministratorCenterID()));
-		appointment.setCenterAdministrator(centerAdministrator);
-		MedicalCenter medicalCenter = centerAdministrator.getMedicalCenter();
-		appointment.setMedicalCenter(medicalCenter);
-		appointment.setIsAvailable(true);
-		appointment.setIsCancelled(false);
-		appointment.setRegisteredUser(null);
-		appointment.setDuration(appointmentDTO.getDuration());
-		String time = appointmentDTO.getTime();
-		String date = appointmentDTO.getDate();
-		String dateParts[] = date.split("T");
-		String dateAndTime = dateParts[0] + ' ' + time;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
-		appointment.setDate(dateTime);
-		appointmentRepository.save(appointment);
-		
-		return appointment;
-		
+	public Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO) throws InterruptedException {
+		if(lock.isLocked())
+	            throw new InterruptedException();
+	        lock.lock();
+	    try {
+			Appointment appointment = new Appointment();
+			CenterAdministrator centerAdministrator = new CenterAdministrator();
+			centerAdministrator = centerAdministaratorService.findById(Long.parseLong(appointmentDTO.getAdministratorCenterID()));
+			appointment.setCenterAdministrator(centerAdministrator);
+			MedicalCenter medicalCenter = centerAdministrator.getMedicalCenter();
+			appointment.setMedicalCenter(medicalCenter);
+			appointment.setIsAvailable(true);
+			appointment.setIsCancelled(false);
+			appointment.setRegisteredUser(null);
+			appointment.setDuration(appointmentDTO.getDuration());
+			String time = appointmentDTO.getTime();
+			String date = appointmentDTO.getDate();
+			String dateParts[] = date.split("T");
+			String dateAndTime = dateParts[0] + ' ' + time;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+			appointment.setDate(dateTime);
+			appointmentRepository.save(appointment);
+			Thread.sleep(10000);
+			return appointment;
+	    }catch (Exception ex){
+	    	throw new InterruptedException("Appointment already scheduled!") ; 
+	    }
+	    finally {
+            lock.unlock();
+        }
 	}
 	
 	@Override
