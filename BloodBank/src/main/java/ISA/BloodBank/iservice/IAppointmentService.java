@@ -11,7 +11,7 @@ import ISA.BloodBank.model.Appointment;
 @Service
 public interface IAppointmentService {
 
-	Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO);
+	Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO) throws InterruptedException ;
 
 	Appointment createAppointmentRegisteredUser(AppointmentRegisteredUserDTO appointmentRegisteredUserDTO);
 
@@ -19,7 +19,7 @@ public interface IAppointmentService {
 
 	List<Appointment> findAllByRegisteredUserId(Long id);
 
-	Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId);
+	//Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId);
 	
 	List<Appointment> getAll();
 	

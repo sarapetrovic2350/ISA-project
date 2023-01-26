@@ -1,13 +1,17 @@
 package ISA.BloodBank.repository;
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import ISA.BloodBank.model.Appointment;
-import ISA.BloodBank.model.MedicalCenter;
 
 @Repository
 public interface IAppointmentRepository extends JpaRepository<Appointment, Long>{
@@ -17,4 +21,9 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Long>
 	Appointment findByAppointmentId(Long appointmentId);
 	List<Appointment> findAll();
 	List<Appointment> findAppointmentsByMedicalCenterCenterId(Long id);
+	
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select a from Appointment a where a.id = :id")
+    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
+    public Appointment findOneById(@Param("id")Long id);
 }
