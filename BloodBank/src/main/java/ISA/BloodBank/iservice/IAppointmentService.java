@@ -19,7 +19,7 @@ public interface IAppointmentService {
 
 	List<Appointment> findAllByRegisteredUserId(Long id);
 
-	Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId);
+	//Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId);
 	
 	List<Appointment> getAll();
 	
