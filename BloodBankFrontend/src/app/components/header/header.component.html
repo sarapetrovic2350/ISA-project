@@ -6,6 +6,9 @@
     <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/update-user">
       <span>My informations</span>
     </button>
+    <button *ngIf="isCenterAdministrator" mat-button mat-ripple routerLink="/show-appointments">
+      <span>My Appointments</span>
+    </button>
     <button *ngIf="isRegisteredUser" mat-button mat-ripple routerLink="/questionnaire">
       <span>Fill donor questionnaire</span>
     </button>
