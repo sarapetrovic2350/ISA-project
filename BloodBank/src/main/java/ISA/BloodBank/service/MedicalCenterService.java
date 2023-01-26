@@ -7,10 +7,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ISA.BloodBank.iservice.IMedicalCenterService;
 import ISA.BloodBank.model.Appointment;
@@ -18,6 +20,7 @@ import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.repository.IMedicalCenterRepository;
 
 @Service
+@Transactional
 public class MedicalCenterService implements IMedicalCenterService{
 
 private IMedicalCenterRepository medicalCenterRepository;
@@ -52,21 +55,30 @@ private AppointmentService appointmentService;
 		return medicalCenterRepository.findAll();
 	}
 
+	@Transactional
 	public MedicalCenter update(MedicalCenter medCenterDto) {
+		try {
+			MedicalCenter medCenter = (MedicalCenter) medicalCenterRepository.findOneById(medCenterDto.getCenterId());
+			if(medCenter == null) {
+				return null; 
+			}
 		
-		MedicalCenter medCenter = (MedicalCenter) medicalCenterRepository.findById(medCenterDto.getCenterId()).get();
-		medCenter.setCenterId(medCenterDto.getCenterId()); 
-		medCenter.setName(medCenterDto.getName());
-		medCenter.setDescription(medCenterDto.getDescription());
-		medCenter.setAverageGrade(medCenterDto.getAverageGrade());
-		medCenter.setName(medCenterDto.getName());
-		//System.out.println(medCenterDto.getAdress());
-		medCenter.setAddress(medCenterDto.getAddress());
-		//System.out.println(medCenter.getAddress()); 
-		//medCenter.setCenterAdministrators(medCenterDto.getCenterAdministrators());
-		medicalCenterRepository.save(medCenter);
-		
-		return medCenterDto; 
+			medCenter.setCenterId(medCenterDto.getCenterId()); 
+			medCenter.setName(medCenterDto.getName());
+			medCenter.setDescription(medCenterDto.getDescription());
+			medCenter.setAverageGrade(medCenterDto.getAverageGrade());
+			medCenter.setName(medCenterDto.getName());
+			//System.out.println(medCenterDto.getAdress());
+			medCenter.setAddress(medCenterDto.getAddress());
+			//System.out.println(medCenter.getAddress()); 
+			//medCenter.setCenterAdministrators(medCenterDto.getCenterAdministrators());
+			medicalCenterRepository.save(medCenter);
+			
+			return medCenterDto;
+		}catch(PessimisticLockingFailureException ex) {
+			throw new PessimisticLockingFailureException("Can not update!");
+		}
+		 
 	}
 
 	 public List<MedicalCenter> findMedicalCenterByNameAndPlace(String name, String place) {	
@@ -105,6 +117,7 @@ private AppointmentService appointmentService;
 		 
 	 }
 	
+	//@Transactional
 	public MedicalCenter findById(Long id) throws AccessDeniedException {
 		MedicalCenter u = medicalCenterRepository.findById(id).orElseGet(null);
 		return u;
