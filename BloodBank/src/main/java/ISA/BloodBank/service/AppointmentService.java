@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import ISA.BloodBank.dto.AppointmentDTO;
@@ -19,6 +21,7 @@ import ISA.BloodBank.model.RegisteredUser;
 import ISA.BloodBank.repository.IAppointmentRepository;
 
 @Service
+@Transactional
 public class AppointmentService implements IAppointmentService {
 	
 	private IAppointmentRepository appointmentRepository;
@@ -97,15 +100,26 @@ public class AppointmentService implements IAppointmentService {
 		return appointmentRepository.findAppointmentsByCenterAdministratorMedicalCenterCenterId(id);
 	}
 
-	@Override
-	public Appointment schedulePredefinedAppointment(Long appointmentId, Long registeredUserId) {
-		Appointment schedulingAppointment = appointmentRepository.findByAppointmentId(appointmentId);
-		schedulingAppointment.setIsAvailable(false);
+	@Transactional
+	public boolean schedulePredefinedAppointment(Long appointmentId, Long registeredUserId) {
 		RegisteredUser registeredUser = (RegisteredUser)userService.findById(registeredUserId);
-		schedulingAppointment.setRegisteredUser(registeredUser);
-		appointmentRepository.save(schedulingAppointment);
-		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
-		return schedulingAppointment;
+		if(registeredUser == null || registeredUser.getPenalties() >= 3) {
+			return false;
+		}
+		try {
+			Appointment schedulingAppointment = appointmentRepository.findOneById(appointmentId);
+			 if (schedulingAppointment == null || !schedulingAppointment.getIsAvailable()) {
+	                return false;
+	         }
+			 schedulingAppointment.setIsAvailable(false);
+			 schedulingAppointment.setRegisteredUser(registeredUser);
+			 appointmentRepository.save(schedulingAppointment);
+			 emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
+			 return true;
+			
+		} catch(PessimisticLockingFailureException ex) {
+			throw new PessimisticLockingFailureException("Appointment already scheduled!");
+		}
 	}
 	
 	@Override
