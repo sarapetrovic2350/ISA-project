@@ -1,0 +1,32 @@
+<mat-card elevation="5" fxFlex class="content" >
+    <mat-card-title>
+        <h2>{{title}}</h2> 
+    </mat-card-title>
+    <mat-card-content>
+        <p></p>
+        <form (ngSubmit)="cretePredefinedAppointment()" *ngIf="!submitted">
+            <div class="row" *ngIf="appointment">
+                <div>
+                    <mat-form-field>
+                        <label>Date: </label>
+                        <input matInput [matDatepicker]="startDate" [(ngModel)]="date" name="date">
+                        <mat-datepicker-toggle [for]="startDate" matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #startDate></mat-datepicker>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <label>Time: </label>
+                        <input name ="time" [(ngModel)]="time" matInput required>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <label>Duration: </label>
+                        <input name ="duration" [(ngModel)]="appointment.duration" matInput required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <label *ngIf="message != ''" style="color: red;">{{message}}</label>
+            <br><br>
+            <button color="primary" style="width: 86%; margin-left: 7%;"  mat-raised-button type="submit">Submit</button>
+        </form> 
+        <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+    </mat-card-content>       
+</mat-card>

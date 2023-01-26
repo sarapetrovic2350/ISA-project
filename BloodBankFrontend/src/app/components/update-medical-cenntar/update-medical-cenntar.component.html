@@ -1,0 +1,54 @@
+<mat-card elevation="5" fxFlex class="content" >
+    <mat-card-title>
+        <h2>{{title}}</h2> 
+    </mat-card-title>
+    <mat-card-content>
+        <p></p>
+        <form>
+            <div class="row" *ngIf="medCenter">
+                <div>
+                    <mat-form-field>
+                        <label>Name: </label>
+                        <input name ="name" [(ngModel)]="medCenter.name" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Description of the Medical Center: </label>
+                        <input name ="descritpion" [(ngModel)]="medCenter.description" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Average Grade: </label>
+                        <input name ="averageGrade" [(ngModel)]="medCenter.averageGrade" matInput required>
+                    </mat-form-field> 
+                    <br>
+                        <label text-align: right>Administrators:</label>
+                         <ul *ngFor="let group of centerAdministrators">
+                            <li>{{ group.name }} {{ group.surname }}</li>
+                        </ul>      
+                </div>
+                <div>
+                    <mat-form-field>
+                        <label>Street: </label>
+                        <input name ="street" [(ngModel)]="medCenter.address.street" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Street number: </label>
+                        <input name ="streetNumber" [(ngModel)]="medCenter.address.streetNumber" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>City: </label>
+                        <input name ="city" [(ngModel)]="medCenter.address.city" matInput required>
+                    </mat-form-field>  
+                    <mat-form-field>
+                        <label>Country: </label>
+                        <input name ="country" [(ngModel)]="medCenter.address.country" matInput required>
+                    </mat-form-field>
+                </div>
+                   
+            </div><br>
+
+            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="updateMedicalCenter()" mat-raised-button type="submit">Submit</button>
+        </form> 
+        <br>
+        <label *ngIf="message != ''" style="color: red;">{{message}}</label>
+    </mat-card-content>       
+</mat-card>

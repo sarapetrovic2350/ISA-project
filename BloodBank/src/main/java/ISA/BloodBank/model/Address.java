@@ -1,14 +1,19 @@
 package ISA.BloodBank.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.OneToMany;
+
 
 @Entity
+@Table(name="Address")
 public class Address {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "addressId", unique = true, nullable = false)
@@ -31,7 +36,7 @@ public class Address {
 
 	@Column(name = "latitude")
 	private Double latitude;
-	
+
 	public Address() {
 	}
 
@@ -55,7 +60,7 @@ public class Address {
 
 	public String getStreet() {
 		return street;
-		
+
 	}
 
 	public void setStreet(String street) {

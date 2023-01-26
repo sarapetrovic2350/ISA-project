@@ -1,0 +1,48 @@
+<mat-card elevation="5" fxFlex class="content" >
+    <mat-card-title>
+        <h2>{{title}}</h2> 
+    </mat-card-title>
+    <mat-card-content>
+        <p></p>
+        <form>
+            <div class="row" *ngIf="medicalCenter">
+                <div>
+                    <mat-form-field>
+                        <label>Name: </label>
+                        <input name ="name" [(ngModel)]="medicalCenter.name" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Description of the Medical Center: </label>
+                        <input name ="descritpion" [(ngModel)]="medicalCenter.description" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Average Grade: </label>
+                        <input name ="averageGrade" [(ngModel)]="medicalCenter.averageGrade" matInput required>
+                    </mat-form-field> 
+                </div>
+                <div>
+                    <mat-form-field>
+                        <label>Street: </label>
+                        <input name ="street" [(ngModel)]="medicalCenter.address.street" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>Street number: </label>
+                        <input name ="streetNumber" [(ngModel)]="medicalCenter.address.streetNumber" matInput required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <label>City: </label>
+                        <input name ="city" [(ngModel)]="medicalCenter.address.city" matInput required>
+                    </mat-form-field>  
+                    <mat-form-field>
+                        <label>Country: </label>
+                        <input name ="country" [(ngModel)]="medicalCenter.address.country" matInput required>
+                    </mat-form-field>
+                </div>
+                   
+            </div><br>
+
+            <button color="primary" style="width: 86%; margin-left: 7%;" (click)="onSubmit()" mat-raised-button type="submit">Submit</button>
+        </form> 
+        <label *ngIf="message != ''" style="color: red;">{{message}}</label>
+    </mat-card-content>       
+</mat-card>

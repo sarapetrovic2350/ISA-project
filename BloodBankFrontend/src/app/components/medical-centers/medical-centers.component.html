@@ -1,0 +1,74 @@
+<div class="div1">
+  <mat-form-field class="fieldd ml4">
+    <input [(ngModel)]="name" matInput placeholder="Search by name...">
+  </mat-form-field>
+  <mat-form-field class="fieldd ml2">
+    <input [(ngModel)]="place" matInput placeholder="Search by place...">
+  </mat-form-field>
+  <button color="primary" class="search" (click)="searchMediclaCenter()" mat-raised-button type="search">Search</button>
+  <button *ngIf="isSearched == true" color="primary" class="search" (click)="cancelSearch()" mat-raised-button
+    type="cancel">Cancel</button>
+</div>
+<div *ngIf="isSearched == true" style=" margin-left:1%; margin-top: 2%;">
+  <div style=" margin-left:5%; margin-top: 1%;"><b>Filter medical centers:</b></div>
+  <select [(ngModel)]="filterOption" class="btn dropdown-toggle ml4" (change)="filterMedicalCenters()">
+    <option [ngValue]=0 disabled selected>By grade</option>
+    <option [ngValue]=1>1-2</option>
+    <option [ngValue]=2>2-3</option>
+    <option [ngValue]=3>3-4</option>
+    <option [ngValue]=4>4-5</option>
+
+  </select>
+
+</div>
+<div class="div1">
+  <div style=" margin-left:5%; margin-top: 1%;"><b>Sort medical centers:</b></div>
+  <select [(ngModel)]="selectedOption" class="btn dropdown-toggle ml4" (change)="changeSorting()">
+    <option [ngValue]=0 disabled selected>Sorting</option>
+    <option [ngValue]=1>By name</option>
+    <option [ngValue]=2>By city</option>
+    <option [ngValue]=3>By grade</option>
+  </select>
+
+</div>
+
+<div>
+  <div class="row">
+    <div class="card" *ngFor="let mc of medicalCenters | paginate : {
+      itemsPerPage: pageSize,
+      currentPage: page,
+      totalItems: count}">
+      <img :src="../assets/images/{{mc.image}}" class="card-img-top" sty alt="Missing image">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item ">
+          <strong>Name: </strong><br>{{mc.name}}
+        </li>
+        <li class="list-group-item height"><strong>Address:</strong><br>
+          {{mc.address.street}} {{mc.address.streetNumber}}<br>
+          {{mc.address.city}}, {{mc.address.country}}
+        </li>
+        <li *ngIf="mc.averageGrade != 0.0" class="list-group-item"><strong>Average grade:</strong><br>
+          {{mc.averageGrade}}</li>
+        <li *ngIf="mc.averageGrade == 0.0" class="list-group-item">The medical center currently does not have any
+          ratings.</li>
+        <li *ngIf="mc.description !== null" class="list-group-item height"><strong>Description:</strong><br>
+          {{mc.description}}</li>
+        <li *ngIf="mc.description == null" class="list-group-item height">The medical center currently does not have
+          decription.</li>
+        <p *ngIf="loggedInRegisteredUser" class="list-group-item">Want to schedule appointment?</p>
+        <button *ngIf="loggedInRegisteredUser" color="primary" mat-raised-button type="submit"
+          (click)="viewAppointments(mc.centerId)">View predefined appointments</button>
+      </ul>
+
+    </div>
+  </div>
+  <div class="footer">
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)"
+      [responsive]="true"></pagination-controls>
+  </div>
+  <br><br>
+
+
+
+
+</div>

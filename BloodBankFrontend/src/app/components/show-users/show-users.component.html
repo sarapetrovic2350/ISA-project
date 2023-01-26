@@ -1,0 +1,52 @@
+<div>
+    <input type="text" placeholder="Enter name or surname" [(ngModel)]="filteredString">
+    <a mat-button class="searchBtns" (click)="search(filteredString)">Search</a>
+    <a mat-button class="searchBtns" (click)="cancelSearch()">Cancel</a>
+</div>
+
+<div class="div1">
+    <mat-form-field class="fieldd ml4">
+      <input [(ngModel)]="name" matInput placeholder="Search by name...">
+    </mat-form-field>
+    <mat-form-field class="fieldd ml2">
+      <input [(ngModel)]="surname" matInput placeholder="Search by surname...">
+    </mat-form-field>
+    <button color="primary" class="search" (click)="searchUser()" mat-raised-button type="search">Search</button>
+    <button *ngIf="isSearched == true" color="primary" class="search" (click)="cancelSearch()" mat-raised-button
+      type="cancel">Cancel</button>
+  </div>
+
+<div>
+    <table class="container" >
+        <thead>
+            <tr>
+                <th class="cell-center">Name</th>
+                <th class="cell-center">Surname</th>
+                <th class="cell-center">Gender</th>
+                <th class="cell-center">Address</th>
+                <th class="cell-center">Phone number</th>
+                <th class="cell-center">Occupation</th>
+                <th class="cell-center">Occupation Info</th>
+                <th class="cell-center">User Type</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td class="cell-center">{{user.name}}</td>
+                <td class="cell-center">{{user.surname}}</td>
+                <td class="cell-center">{{user.gender}}</td>
+                <td class="cell-center">{{user.address.street}} {{user.address.streetNumber}},
+                    {{user.address.city}}<br>
+                    {{user.address.country}}
+                </td>
+                <td class="cell-center">{{user.phoneNumber}}</td>
+                <td class="cell-center">{{user.occupation}}</td>
+                <td class="cell-center">{{user.occupationInfo}}</td>
+                <td class="cell-center">{{user.userType}}</td>
+                <td><button class="editbtn" (click)="report(user.userId)">exam report</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

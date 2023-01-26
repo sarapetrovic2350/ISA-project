@@ -20,8 +20,14 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@auth0/angular-jwt": "^5.1.2",
+    "angular-jwt": "^0.1.11",
+    "ngx-pagination": "^6.0.3",
+    "ngx-toastr": "^15.2.1",
     "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
+    "rxjs-observable": "^0.0.7",
+    "sweetalert2": "^11.6.8",
+    "tslib": "^2.4.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

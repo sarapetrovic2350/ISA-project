@@ -1,0 +1,73 @@
+<h1 mat-dialog-title align="center">Schedule Appointment</h1>
+<div mat-dialog-content align="center">
+    <mat-horizontal-stepper linear>
+         <!-- Step1 -->
+        <mat-step label="Choose date and time" completed={{firstStep}}>
+            <form [formGroup]="formGroupAppointment">
+                <div class="row">
+                    <div>
+                        <mat-form-field>
+                            <label>Date: </label>
+                            <input matInput formControlName="date" (dateChange)=getValidDate(date) [matDatepicker]="startDate"   [(ngModel)]="date" name="date">
+                            <mat-datepicker-toggle [for]="startDate" matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #startDate></mat-datepicker>
+                        </mat-form-field><br>
+                        <mat-form-field>
+                            <label>Time: </label>
+                            <input formControlName="time" name ="time"  [(ngModel)]="time" matInput required>
+                        </mat-form-field><br>
+                    </div>
+                </div>
+                <div>
+                    <button [disabled]="!formGroupAppointment.valid" class="continueBtn" mat-raised-button matStepperNext (click)="showMedicalCenters()">Continue</button>
+                </div>
+            </form>
+        </mat-step>
+         <!-- Step2  -->
+        <mat-step label="Schedule" completed={{secondStep}}>
+            <mat-card fxFlex class="content">
+                <mat-card-title>
+                    <h2>{{title}}</h2>
+                </mat-card-title>
+                <mat-card-content>
+                    <div class="div1">
+                        <p class="ml2">Sort medical centers:</p>
+                        <select [(ngModel)]="selectedOption" class="btn dropdown-toggle ml3" (change)="changeSorting()">
+                            <option [ngValue]=0 disabled selected>Sorting</option>
+                            <option [ngValue]=1>Sort by grade asc</option>
+                            <option [ngValue]=2>Sort by grade desc</option>
+                        </select>
+                    
+                    </div>
+                    <table mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
+                            <td mat-cell *matCellDef="let madicalCenter" class="cell-center">
+                                {{madicalCenter.name}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="address">
+                            <th mat-header-cell *matHeaderCellDef class="cell-center"> Address </th>
+                            <td mat-cell *matCellDef="let madicalCenter" class="cell-center">
+                                {{madicalCenter.address.country + " " + madicalCenter.address.city + " " + madicalCenter.address.street + " " + madicalCenter.address.streetNumber}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="grade">
+                            <th mat-header-cell *matHeaderCellDef class="cell-center"> Grade</th>
+                            <td mat-cell *matCellDef="let madicalCenter" class="cell-center">{{madicalCenter.averageGrade}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="schedule">
+                            <th mat-header-cell *matHeaderCellDef class="cell-center"> Schedule an appointment</th>
+                            <td mat-cell *matCellDef="let madicalCenter" class="cell-center">
+                                <button color="primary"  mat-raised-button type="submit" (click)="scheduleAppointment(madicalCenter.centerId)">
+                                   Schedule
+                                </button>
+                            </td>
+                        </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

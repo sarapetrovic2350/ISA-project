@@ -7,31 +7,33 @@ import ISA.BloodBank.model.Occupation;
 public class UserRegistrationDTO {
 
 	private String email;
-	
+
 	private String password;
-	
-	private String name; 
-	
+
+	private String name;
+
 	private String surname;
-	
+
 	private Address address;
-	
+
 	private String phoneNumber;
-	
+
 	private Gender gender;
-	
+
 	private Long jmbg;
-	
+
 	private Occupation occupation;
-	
+
 	private String occupationInfo;
+	
+	private String centerId;
 
 	public UserRegistrationDTO() {
 
 	}
 
 	public UserRegistrationDTO(String email, String password, String name, String surname, Address address,
-			String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo) {
+			String phoneNumber, Gender gender, Long jmbg, Occupation occupation, String occupationInfo,String centerId) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -43,6 +45,15 @@ public class UserRegistrationDTO {
 		this.jmbg = jmbg;
 		this.occupation = occupation;
 		this.occupationInfo = occupationInfo;
+		this.centerId = centerId;
+	}
+
+	public String getCenterId() {
+		return centerId;
+	}
+
+	public void setCenterId(String centerId) {
+		this.centerId = centerId;
 	}
 
 	public String getEmail() {
