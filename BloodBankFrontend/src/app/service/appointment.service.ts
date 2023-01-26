@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PredefAppointment } from '../model/predef-appointment.model';
 import { PredefinedAppointment } from '../model/predefined-appointment.model';
 import { ScheduledAppointment } from '../model/scheduled-appointment.model';
+import {ShowAppointments} from '../model/show-appointments.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,9 @@ export class AppointmentService {
   cancelScheduledAppointment(appointmentId: number): Observable<any> {
     return this.http.put<any>(this.apiHost + 'appointment/cancelScheduledAppointment/' + appointmentId, {heaaders: this.headers});
   }
+
+  getAllAppointmentsByCenterAdministrator(email: string): Observable<ShowAppointments[]> {
+    return this.http.get<ShowAppointments[]>(this.apiHost + 'appointment/getAppointmentByCenterAdministratorId/' + email);
+  }
+
 }

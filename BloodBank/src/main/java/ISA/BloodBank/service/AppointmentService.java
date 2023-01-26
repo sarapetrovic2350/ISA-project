@@ -173,4 +173,17 @@ public class AppointmentService implements IAppointmentService {
 		return cancelingAppointment;
 	}
 
+	@Override
+	public List<Appointment> getAllAppointmentsByAdministratorId(Long centerAdministratorId) {
+		List<Appointment> listAppointments = new ArrayList<Appointment>(); 
+		listAppointments = getAll(); 
+		List<Appointment> retVal = new ArrayList<Appointment>(); 
+		for(Appointment app: listAppointments) {
+			if(app.getCenterAdministrator().getUserId().equals(centerAdministratorId) && app.getRegisteredUser() != null) {
+				retVal.add(app); 
+			}
+		}
+		return retVal;
+	}
+
 }
