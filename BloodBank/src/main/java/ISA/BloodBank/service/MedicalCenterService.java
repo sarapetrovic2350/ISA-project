@@ -18,12 +18,14 @@ import ISA.BloodBank.iservice.IMedicalCenterService;
 import ISA.BloodBank.model.Appointment;
 import ISA.BloodBank.model.MedicalCenter;
 import ISA.BloodBank.repository.IMedicalCenterRepository;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+
 
 @Service
 @Transactional
 public class MedicalCenterService implements IMedicalCenterService{
 
-private IMedicalCenterRepository medicalCenterRepository;
+private IMedicalCenterRepository  medicalCenterRepository;
 
 private AppointmentService appointmentService;
 	
@@ -50,6 +52,7 @@ private AppointmentService appointmentService;
 	}
 
 	@Override
+	@RateLimiter(name = "standard", fallbackMethod = "standardFallback")
 	public List<MedicalCenter> getAll() {
 
 		return medicalCenterRepository.findAll();

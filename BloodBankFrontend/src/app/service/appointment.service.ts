@@ -43,5 +43,6 @@ export class AppointmentService {
   getAllAppointmentsByCenterAdministrator(email: string): Observable<ShowAppointments[]> {
     return this.http.get<ShowAppointments[]>(this.apiHost + 'appointment/getAppointmentByCenterAdministratorId/' + email);
   }
+  
 
 }

@@ -24,20 +24,20 @@ import ISA.BloodBank.repository.IAppointmentRepository;
 @Service
 @Transactional
 public class AppointmentService implements IAppointmentService {
-	
+
 	private static ReentrantLock lock = new ReentrantLock();
 	private IAppointmentRepository appointmentRepository;
-	
+
 	private CenterAdministratorService centerAdministaratorService;
-	
+
 	private MedicalCenterService medicalCenterService;
-	
+
 	private UserService userService;
 	private EmailService emailService;
-	
+
 	@Autowired
 	public AppointmentService(IAppointmentRepository appointmentRepository, @Lazy CenterAdministratorService centerAdministaratorService,
-			UserService userService, MedicalCenterService medicalCenterService, EmailService emailService) {
+							  UserService userService, MedicalCenterService medicalCenterService, EmailService emailService) {
 		super();
 		this.appointmentRepository = appointmentRepository;
 		this.centerAdministaratorService = centerAdministaratorService;
@@ -45,13 +45,13 @@ public class AppointmentService implements IAppointmentService {
 		this.medicalCenterService = medicalCenterService;
 		this.emailService = emailService;
 	}
-	
+
 	@Override
 	public Appointment createPredefinedAppointment(AppointmentDTO appointmentDTO) throws InterruptedException {
 		if(lock.isLocked())
-	            throw new InterruptedException();
-	        lock.lock();
-	    try {
+			throw new InterruptedException();
+		lock.lock();
+		try {
 			Appointment appointment = new Appointment();
 			CenterAdministrator centerAdministrator = new CenterAdministrator();
 			centerAdministrator = centerAdministaratorService.findById(Long.parseLong(appointmentDTO.getAdministratorCenterID()));
@@ -72,14 +72,13 @@ public class AppointmentService implements IAppointmentService {
 			appointmentRepository.save(appointment);
 			Thread.sleep(10000);
 			return appointment;
-	    }catch (Exception ex){
-	    	throw new InterruptedException("Appointment already scheduled!") ; 
-	    }
-	    finally {
+		}catch (Exception ex){
+			throw new InterruptedException("Appointment already scheduled!") ;
+		} finally {
             lock.unlock();
         }
 	}
-	
+
 	@Override
 	public Appointment createAppointmentRegisteredUser(AppointmentRegisteredUserDTO appointmentRegisteredUserDTO) {
 		Appointment appointment = new Appointment();
@@ -103,7 +102,7 @@ public class AppointmentService implements IAppointmentService {
 		appointmentRepository.save(appointment);
 		emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), appointment);
 		return appointment;
-		
+
 	}
 
 	@Override
@@ -119,25 +118,25 @@ public class AppointmentService implements IAppointmentService {
 		}
 		try {
 			Appointment schedulingAppointment = appointmentRepository.findOneById(appointmentId);
-			 if (schedulingAppointment == null || !schedulingAppointment.getIsAvailable()) {
-	                return false;
-	         }
-			 schedulingAppointment.setIsAvailable(false);
-			 schedulingAppointment.setRegisteredUser(registeredUser);
-			 appointmentRepository.save(schedulingAppointment);
-			 emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
-			 return true;
-			
+			if (schedulingAppointment == null || !schedulingAppointment.getIsAvailable()) {
+				return false;
+			}
+			schedulingAppointment.setIsAvailable(false);
+			schedulingAppointment.setRegisteredUser(registeredUser);
+			appointmentRepository.save(schedulingAppointment);
+			emailService.sendNotificationForScheduledAppointment(registeredUser.getEmail(), schedulingAppointment);
+			return true;
+
 		} catch(PessimisticLockingFailureException ex) {
 			throw new PessimisticLockingFailureException("Appointment already scheduled!");
 		}
 	}
-	
+
 	@Override
 	public List<Appointment> getAll() {
 		return appointmentRepository.findAll();
 	}
-	
+
 	public List<Appointment> getAllAppointmentsByMedicalCenterIdAndDate(Long id, String date, String time) {
 		List<Appointment> medCenterAppointments = appointmentRepository.findAppointmentsByMedicalCenterCenterId(id);
 		List<Appointment> appointments = new ArrayList<Appointment>();
@@ -147,13 +146,24 @@ public class AppointmentService implements IAppointmentService {
 		for(Appointment a : medCenterAppointments) {
 			if(a.getDate().isEqual(dateTime)) {
 				appointments.add(a);
-			}
-			else {continue;}
+			} else {continue;}
 		}
-		
+
 		return appointments;
 	}
-	
+
+	//za test
+	public List<Appointment> getAllAvailableAppointmentsByMedicalCenterId(Long id) {
+		List<Appointment> medCenterAppointments = appointmentRepository.findAppointmentsByMedicalCenterCenterId(id);
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		for(Appointment a : medCenterAppointments) {
+			if(a.getIsAvailable()) {
+				appointments.add(a);
+			} else {continue;}
+		}
+		return appointments;
+	}
+
 	public List<Appointment> findAllByRegisteredUserId(Long id) {
 		return appointmentRepository.findAppointmentsByRegisteredUserUserId(id);
 	}
@@ -166,21 +176,23 @@ public class AppointmentService implements IAppointmentService {
 	@Override
 	public Appointment cancelScheduledAppointment(Long appointmentId) {
 		Appointment cancelingAppointment = appointmentRepository.findByAppointmentId(appointmentId);
+
 		cancelingAppointment.setIsAvailable(true);
 		cancelingAppointment.setIsCancelled(true);
+
 		appointmentRepository.save(cancelingAppointment);
-		userService.updatePenal(cancelingAppointment.getRegisteredUser().getUserId());
+		//userService.updatePenal(cancelingAppointment.getRegisteredUser().getUserId());
 		return cancelingAppointment;
 	}
 
 	@Override
 	public List<Appointment> getAllAppointmentsByAdministratorId(Long centerAdministratorId) {
-		List<Appointment> listAppointments = new ArrayList<Appointment>(); 
-		listAppointments = getAll(); 
-		List<Appointment> retVal = new ArrayList<Appointment>(); 
+		List<Appointment> listAppointments = new ArrayList<Appointment>();
+		listAppointments = getAll();
+		List<Appointment> retVal = new ArrayList<Appointment>();
 		for(Appointment app: listAppointments) {
 			if(app.getCenterAdministrator().getUserId().equals(centerAdministratorId) && app.getRegisteredUser() != null) {
-				retVal.add(app); 
+				retVal.add(app);
 			}
 		}
 		return retVal;

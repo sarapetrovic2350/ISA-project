@@ -4,7 +4,7 @@ import { medicalCenter } from "./medicalCenter.model";
 export class CenterAdministrator {
     constructor(
         public email: string = '',
-        public password: string = '',
+        public password: string = '10',
         public name: string = '',
         public surname: string = '',  
         public phoneNumber: string = '',

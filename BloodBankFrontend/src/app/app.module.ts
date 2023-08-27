@@ -43,7 +43,10 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ShowBloodComponent } from './components/show-blood/show-blood.component';
 import { HistoryReportComponent } from './components/history-report/history-report.component'
 import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component';
-import { ShowAppointmentsComponent } from './components/show-appointments/show-appointments.component'
+import { ShowAppointmentsComponent } from './components/show-appointments/show-appointments.component';
+import { CalendarAppointmentsComponent } from './components/calendar-appointments/calendar-appointments.component';
+import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, MonthService } from '@syncfusion/ej2-angular-schedule'
+
 
 
 @NgModule({
@@ -74,7 +77,8 @@ import { ShowAppointmentsComponent } from './components/show-appointments/show-a
     ShowBloodComponent,
     HistoryReportComponent,
     HistoryOfVisitsComponent,
-    ShowAppointmentsComponent
+    ShowAppointmentsComponent,
+    CalendarAppointmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +97,7 @@ import { ShowAppointmentsComponent } from './components/show-appointments/show-a
       timeOut: 3000,
       positionClass: 'toast-top-right',
     }),
+    ScheduleModule, RecurrenceEditorModule,
   ],
   providers: [
     {
@@ -103,7 +108,8 @@ import { ShowAppointmentsComponent } from './components/show-appointments/show-a
     AuthService,
     AuthGuardService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
+    DayService, WeekService, MonthService
   ],
   bootstrap: [AppComponent]
 })

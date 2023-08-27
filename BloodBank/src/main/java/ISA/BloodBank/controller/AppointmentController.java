@@ -232,4 +232,13 @@ public class AppointmentController {
 		return new ResponseEntity<List<AppointmentsShowDTO>>(retVal, HttpStatus.OK);
 	 }
 
+	//@PreAuthorize("hasRole('ROLE_REGISTERED_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_REGISTERED_USER', 'ROLE_CENTER_ADMINISTRATOR', 'ROLE_SYSTEM_ADMINISTRATOR')")
+	@GetMapping(value="/getAllAvailableAppointmentsByMedicalCenterId/{centerId}")
+	public List<Appointment> getAllAvailableAppointmentsByMedicalCenterId(@PathVariable Long centerId){
+		List<Appointment> listAppointment = new ArrayList<Appointment>();
+		listAppointment = appointmentService.getAllAvailableAppointmentsByMedicalCenterId(centerId);
+		return listAppointment;
+	}
+
 }

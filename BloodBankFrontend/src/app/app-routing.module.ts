@@ -24,7 +24,8 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ShowBloodComponent } from './components/show-blood/show-blood.component'; 
 import { HistoryReportComponent } from './components/history-report/history-report.component';
 import { HistoryOfVisitsComponent } from './components/history-of-visits/history-of-visits.component';
-import { ShowAppointmentsComponent } from './components/show-appointments/show-appointments.component'; 
+import { ShowAppointmentsComponent } from './components/show-appointments/show-appointments.component';
+import { CalendarAppointmentsComponent } from './components/calendar-appointments/calendar-appointments.component';
 
 const routes: Routes = [
   {
@@ -194,7 +195,15 @@ const routes: Routes = [
     data: {
       expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
     }
-  }
+  },
+  {
+    path:'calendar-appointment',
+    component: CalendarAppointmentsComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ROLE_CENTER_ADMINISTRATOR'
+    }
+  },
 ];
 
 @NgModule({

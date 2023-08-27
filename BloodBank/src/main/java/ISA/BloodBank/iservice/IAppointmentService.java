@@ -27,6 +27,7 @@ public interface IAppointmentService {
 	
 	Appointment cancelScheduledAppointment(Long appointmentId);
 	
-	List<Appointment> getAllAppointmentsByAdministratorId(Long centerAdministratorId); 
+	List<Appointment> getAllAppointmentsByAdministratorId(Long centerAdministratorId);
 
+	List<Appointment> getAllAvailableAppointmentsByMedicalCenterId(Long id);
 }
